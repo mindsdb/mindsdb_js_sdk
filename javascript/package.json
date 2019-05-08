@@ -1,0 +1,44 @@
+{
+  "name": "mindsdb-js-sdk",
+  "version": "0.1.0",
+  "description": "js sdk for MindsDB",
+  "main": "src/index.js",
+  "unpkg": "dist/mindsdb.umd.min.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
+  "scripts": {
+    "dev": "webpack --config ./webpack.config.js --progress --colors",
+    "es": "BABEL_ENV=es babel src --out-dir es",
+    "build": "npm run es && npm run dev && webpack --config ./webpack.config.min.js --mode production --progress --colors",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mindsdb/mindsdb_sdks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mindsdb/mindsdb_sdks/issues"
+  },
+  "keywords": [
+    "MindsDB"
+  ],
+  "homepage": "https://github.com/mindsdb/mindsdb_sdks#readme",
+  "author": "MindsDB",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.4.4",
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.2"
+  }
+}
