@@ -1,11 +1,16 @@
 module.exports = {
-  "presets": [
-    ["@babel/preset-env", {
-      "targets": "> 1%, not dead, node > 10"
-    }]
-  ],
-  "plugins": [
-    ["@babel/plugin-proposal-class-properties", { "loose": true }],
-    "@babel/plugin-transform-runtime"
-  ]
-}
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            browsers: ['ie >= 11']
+          }
+        }
+      ]
+    ],
+    // "plugins": [
+    //   ["@babel/plugin-proposal-class-properties", { "loose": false }],
+    //   "@babel/plugin-transform-runtime"
+    // ]
+  }
