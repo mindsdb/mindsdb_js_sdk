@@ -145,7 +145,7 @@ class Predictor {
       }
     };
 
-    await connection.api.put(`/predictors/${this.name}/upload`, fd, config);
+    await connection.api.post('/predictors/upload', fd, config);
   };
 
   download = async () => {
