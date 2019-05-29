@@ -440,7 +440,7 @@ var Predictor = function Predictor(_data) {
                 }
               };
               _context9.next = 5;
-              return connection.api.put("/predictors/".concat(_this.name, "/upload"), fd, config);
+              return connection.api.post('/predictors/upload', fd, config);
 
             case 5:
             case "end":
