@@ -163,7 +163,6 @@ class DataSource {
   loaded = false;
 
   source_type = 'url';
-  source = '';
 
   name = '';
   source = '';
@@ -176,7 +175,6 @@ class DataSource {
   data = null;
   missedFileList = null;
 
-
   constructor(data) {
     Object.assign(this, data);
   }
@@ -187,7 +185,7 @@ class DataSource {
     return this;
   };
 
-  setSource = () => {};
+  // setSource = () => {};
 
   upload = async (file, onProgress) => {
     this.source_type = 'file';
