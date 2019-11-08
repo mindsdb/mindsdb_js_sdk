@@ -241,6 +241,19 @@ class DataSource {
     return this.data;
   };
 
+  loadDataQuality = async () => {
+    const response = await connection.api.get(`/predictors/wahtever/analyse_dataset?data_source_name=${this.name}`);
+    let data;
+    try {
+        data = response.data['data_analysis']['input_columns_metadata'];
+    } catch (error) {
+        data = null;
+    }
+    this.dataQuality = data;
+
+    return data;
+  };
+
   loadMissedFileList = async () => {
     const response = await connection.api.get(`/datasources/${this.name}/missed_files`);
     this.missedFileList = response.data;
