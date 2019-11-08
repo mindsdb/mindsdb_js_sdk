@@ -43,6 +43,6 @@
     "rollup-plugin-terser": "^4.0.4"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.1"
   }
 }
