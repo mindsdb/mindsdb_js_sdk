@@ -4,7 +4,7 @@ import axios from 'axios';
 const connection = {
   url: null,
   api: null,
-  version: 0.1
+  version: 0.2
 };
 
 const connect = (url) => {
