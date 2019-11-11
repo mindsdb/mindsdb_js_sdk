@@ -74,7 +74,7 @@ function _defineProperty(obj, key, value) {
 var connection = {
   url: null,
   api: null,
-  version: 0.1
+  version: 0.2
 };
 
 var connect = function connect(url) {
@@ -499,8 +499,6 @@ var DataSource = function DataSource(_data2) {
 
   _defineProperty(this, "source_type", 'url');
 
-  _defineProperty(this, "source", '');
-
   _defineProperty(this, "name", '');
 
   _defineProperty(this, "source", '');
@@ -544,8 +542,6 @@ var DataSource = function DataSource(_data2) {
       }
     }, _callee11);
   })));
-
-  _defineProperty(this, "setSource", function () {});
 
   _defineProperty(this, "upload",
   /*#__PURE__*/
@@ -702,25 +698,32 @@ var DataSource = function DataSource(_data2) {
     }, _callee16);
   })));
 
-  _defineProperty(this, "loadMissedFileList",
+  _defineProperty(this, "loadDataQuality",
   /*#__PURE__*/
   _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee17() {
-    var response;
+    var response, data;
     return regeneratorRuntime.wrap(function _callee17$(_context17) {
       while (1) {
         switch (_context17.prev = _context17.next) {
           case 0:
             _context17.next = 2;
-            return connection.api.get("/datasources/".concat(_this2.name, "/missed_files"));
+            return connection.api.get("/predictors/wahtever/analyse_dataset?data_source_name=".concat(_this2.name));
 
           case 2:
             response = _context17.sent;
-            _this2.missedFileList = response.data;
-            return _context17.abrupt("return", _this2.missedFileList);
 
-          case 5:
+            try {
+              data = response.data['data_analysis']['input_columns_metadata'];
+            } catch (error) {
+              data = null;
+            }
+
+            _this2.dataQuality = data;
+            return _context17.abrupt("return", data);
+
+          case 6:
           case "end":
             return _context17.stop();
         }
@@ -728,38 +731,64 @@ var DataSource = function DataSource(_data2) {
     }, _callee17);
   })));
 
+  _defineProperty(this, "loadMissedFileList",
+  /*#__PURE__*/
+  _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee18() {
+    var response;
+    return regeneratorRuntime.wrap(function _callee18$(_context18) {
+      while (1) {
+        switch (_context18.prev = _context18.next) {
+          case 0:
+            _context18.next = 2;
+            return connection.api.get("/datasources/".concat(_this2.name, "/missed_files"));
+
+          case 2:
+            response = _context18.sent;
+            _this2.missedFileList = response.data;
+            return _context18.abrupt("return", _this2.missedFileList);
+
+          case 5:
+          case "end":
+            return _context18.stop();
+        }
+      }
+    }, _callee18);
+  })));
+
   _defineProperty(this, "uploadFile",
   /*#__PURE__*/
   function () {
-    var _ref20 = _asyncToGenerator(
+    var _ref21 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee18(_ref19) {
+    regeneratorRuntime.mark(function _callee19(_ref20) {
       var column, rowIndex, extension, file, fd, response;
-      return regeneratorRuntime.wrap(function _callee18$(_context18) {
+      return regeneratorRuntime.wrap(function _callee19$(_context19) {
         while (1) {
-          switch (_context18.prev = _context18.next) {
+          switch (_context19.prev = _context19.next) {
             case 0:
-              column = _ref19.column, rowIndex = _ref19.rowIndex, extension = _ref19.extension, file = _ref19.file;
+              column = _ref20.column, rowIndex = _ref20.rowIndex, extension = _ref20.extension, file = _ref20.file;
               fd = new FormData();
               fd.append('file', file);
               fd.append('extension', extension);
-              _context18.next = 6;
+              _context19.next = 6;
               return connection.api.put("/datasources/".concat(_this2.name, "/files/").concat(column, ":").concat(rowIndex), fd);
 
             case 6:
-              response = _context18.sent;
-              return _context18.abrupt("return", response.status === 200);
+              response = _context19.sent;
+              return _context19.abrupt("return", response.status === 200);
 
             case 8:
             case "end":
-              return _context18.stop();
+              return _context19.stop();
           }
         }
-      }, _callee18);
+      }, _callee19);
     }));
 
     return function (_x8) {
-      return _ref20.apply(this, arguments);
+      return _ref21.apply(this, arguments);
     };
   }());
 

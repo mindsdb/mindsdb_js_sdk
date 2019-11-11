@@ -830,20 +830,9 @@ var bind = function bind(fn, thisArg) {
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
-var isBuffer_1 = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer);
+var isBuffer = function isBuffer(obj) {
+  return obj != null && obj.constructor != null && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj);
 };
-
-function isBuffer(obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj);
-} // For Node v0.10 support. Remove this eventually.
-
-
-function isSlowBuffer(obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0));
-}
 
 /*global toString:true*/
 // utils is a library of generic helper functions non-specific to axios
@@ -1146,7 +1135,7 @@ function extend(a, b, thisArg) {
 var utils = {
   isArray: isArray,
   isArrayBuffer: isArrayBuffer,
-  isBuffer: isBuffer_1,
+  isBuffer: isBuffer,
   isFormData: isFormData,
   isArrayBufferView: isArrayBufferView,
   isString: isString,
@@ -1395,40 +1384,6 @@ function nonStandardBrowserEnv() {
   };
 }();
 
-var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-
-function E() {
-  this.message = 'String contains an invalid character';
-}
-
-E.prototype = new Error();
-E.prototype.code = 5;
-E.prototype.name = 'InvalidCharacterError';
-
-function btoa(input) {
-  var str = String(input);
-  var output = '';
-
-  for ( // initialize result and counter
-  var block, charCode, idx = 0, map = chars; // if the next str index does not exist:
-  //   change the mapping table to "="
-  //   check if d has no fractional digits
-  str.charAt(idx | 0) || (map = '=', idx % 1); // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
-  output += map.charAt(63 & block >> 8 - idx % 1 * 8)) {
-    charCode = str.charCodeAt(idx += 3 / 4);
-
-    if (charCode > 0xFF) {
-      throw new E();
-    }
-
-    block = block << 8 | charCode;
-  }
-
-  return output;
-}
-
-var btoa_1 = btoa;
-
 var cookies = utils.isStandardBrowserEnv() ? // Standard browser envs support document.cookie
 function standardBrowserEnv() {
   return {
@@ -1473,8 +1428,6 @@ function nonStandardBrowserEnv() {
   };
 }();
 
-var btoa$1 = typeof window !== 'undefined' && window.btoa && window.btoa.bind(window) || btoa_1;
-
 var xhr = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
     var requestData = config.data;
@@ -1484,35 +1437,20 @@ var xhr = function xhrAdapter(config) {
       delete requestHeaders['Content-Type']; // Let the browser set it
     }
 
-    var request = new XMLHttpRequest();
-    var loadEvent = 'onreadystatechange';
-    var xDomain = false; // For IE 8/9 CORS support
-    // Only supports POST and GET calls and doesn't returns the response headers.
-    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-
-    if (typeof window !== 'undefined' && window.XDomainRequest && !('withCredentials' in request) && !isURLSameOrigin(config.url)) {
-      request = new window.XDomainRequest();
-      loadEvent = 'onload';
-      xDomain = true;
-
-      request.onprogress = function handleProgress() {};
-
-      request.ontimeout = function handleTimeout() {};
-    } // HTTP basic authentication
-
+    var request = new XMLHttpRequest(); // HTTP basic authentication
 
     if (config.auth) {
       var username = config.auth.username || '';
       var password = config.auth.password || '';
-      requestHeaders.Authorization = 'Basic ' + btoa$1(username + ':' + password);
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
     request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true); // Set the request timeout in MS
 
     request.timeout = config.timeout; // Listen for ready state
 
-    request[loadEvent] = function handleLoad() {
-      if (!request || request.readyState !== 4 && !xDomain) {
+    request.onreadystatechange = function handleLoad() {
+      if (!request || request.readyState !== 4) {
         return;
       } // The request errored out and we didn't get a response, this will be
       // handled by onerror instead
@@ -1529,9 +1467,8 @@ var xhr = function xhrAdapter(config) {
       var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
       var response = {
         data: responseData,
-        // IE sends 1223 instead of 204 (https://github.com/axios/axios/issues/201)
-        status: request.status === 1223 ? 204 : request.status,
-        statusText: request.status === 1223 ? 'No Content' : request.statusText,
+        status: request.status,
+        statusText: request.statusText,
         headers: responseHeaders,
         config: config,
         request: request
@@ -2097,7 +2034,7 @@ var axios$1 = axios_1;
 var connection = {
   url: null,
   api: null,
-  version: 0.1
+  version: 0.2
 };
 
 var connect = function connect(url) {
@@ -2522,8 +2459,6 @@ var DataSource = function DataSource(_data2) {
 
   defineProperty(this, "source_type", 'url');
 
-  defineProperty(this, "source", '');
-
   defineProperty(this, "name", '');
 
   defineProperty(this, "source", '');
@@ -2567,8 +2502,6 @@ var DataSource = function DataSource(_data2) {
       }
     }, _callee11);
   })));
-
-  defineProperty(this, "setSource", function () {});
 
   defineProperty(this, "upload",
   /*#__PURE__*/
@@ -2725,25 +2658,32 @@ var DataSource = function DataSource(_data2) {
     }, _callee16);
   })));
 
-  defineProperty(this, "loadMissedFileList",
+  defineProperty(this, "loadDataQuality",
   /*#__PURE__*/
   asyncToGenerator(
   /*#__PURE__*/
   regenerator.mark(function _callee17() {
-    var response;
+    var response, data;
     return regenerator.wrap(function _callee17$(_context17) {
       while (1) {
         switch (_context17.prev = _context17.next) {
           case 0:
             _context17.next = 2;
-            return connection.api.get("/datasources/".concat(_this2.name, "/missed_files"));
+            return connection.api.get("/predictors/wahtever/analyse_dataset?data_source_name=".concat(_this2.name));
 
           case 2:
             response = _context17.sent;
-            _this2.missedFileList = response.data;
-            return _context17.abrupt("return", _this2.missedFileList);
 
-          case 5:
+            try {
+              data = response.data['data_analysis']['input_columns_metadata'];
+            } catch (error) {
+              data = null;
+            }
+
+            _this2.dataQuality = data;
+            return _context17.abrupt("return", data);
+
+          case 6:
           case "end":
             return _context17.stop();
         }
@@ -2751,38 +2691,64 @@ var DataSource = function DataSource(_data2) {
     }, _callee17);
   })));
 
+  defineProperty(this, "loadMissedFileList",
+  /*#__PURE__*/
+  asyncToGenerator(
+  /*#__PURE__*/
+  regenerator.mark(function _callee18() {
+    var response;
+    return regenerator.wrap(function _callee18$(_context18) {
+      while (1) {
+        switch (_context18.prev = _context18.next) {
+          case 0:
+            _context18.next = 2;
+            return connection.api.get("/datasources/".concat(_this2.name, "/missed_files"));
+
+          case 2:
+            response = _context18.sent;
+            _this2.missedFileList = response.data;
+            return _context18.abrupt("return", _this2.missedFileList);
+
+          case 5:
+          case "end":
+            return _context18.stop();
+        }
+      }
+    }, _callee18);
+  })));
+
   defineProperty(this, "uploadFile",
   /*#__PURE__*/
   function () {
-    var _ref20 = asyncToGenerator(
+    var _ref21 = asyncToGenerator(
     /*#__PURE__*/
-    regenerator.mark(function _callee18(_ref19) {
+    regenerator.mark(function _callee19(_ref20) {
       var column, rowIndex, extension, file, fd, response;
-      return regenerator.wrap(function _callee18$(_context18) {
+      return regenerator.wrap(function _callee19$(_context19) {
         while (1) {
-          switch (_context18.prev = _context18.next) {
+          switch (_context19.prev = _context19.next) {
             case 0:
-              column = _ref19.column, rowIndex = _ref19.rowIndex, extension = _ref19.extension, file = _ref19.file;
+              column = _ref20.column, rowIndex = _ref20.rowIndex, extension = _ref20.extension, file = _ref20.file;
               fd = new FormData();
               fd.append('file', file);
               fd.append('extension', extension);
-              _context18.next = 6;
+              _context19.next = 6;
               return connection.api.put("/datasources/".concat(_this2.name, "/files/").concat(column, ":").concat(rowIndex), fd);
 
             case 6:
-              response = _context18.sent;
-              return _context18.abrupt("return", response.status === 200);
+              response = _context19.sent;
+              return _context19.abrupt("return", response.status === 200);
 
             case 8:
             case "end":
-              return _context18.stop();
+              return _context19.stop();
           }
         }
-      }, _callee18);
+      }, _callee19);
     }));
 
     return function (_x8) {
-      return _ref20.apply(this, arguments);
+      return _ref21.apply(this, arguments);
     };
   }());
 
