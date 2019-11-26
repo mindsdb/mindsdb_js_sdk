@@ -242,8 +242,7 @@ class DataSource {
   };
 
   loadDataQuality = async () => {
-    //@TODO: what wahtever means, shoudlnt' be datasource name ?
-    const response = await connection.api.get(`/datasources/analyze?data_source_name=${this.name}`);
+    const response = await connection.api.get(`/datasources/${this.name}/analyze?data_source_name=${this.name}`);
     let data;
     try {
         data = response.data['data_analysis']['input_columns_metadata'];
