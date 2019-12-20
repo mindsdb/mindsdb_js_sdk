@@ -1,9 +1,11 @@
 /* eslint-disable */
 import axios from 'axios';
+import { setQueryParams } from './utils';
 
 const connection = {
   url: null,
   api: null,
+  token: null,
   version: 0.2
 };
 
