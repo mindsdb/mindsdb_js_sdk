@@ -2038,18 +2038,10 @@ var setQueryParams = function setQueryParams(paramsObj, url) {
     paramsObj.forEach(function (item, i) {
       var key = encodeURIComponent(item.key);
       var value = encodeURIComponent(item.value);
-      var s = url;
       var kvp = key + '=' + value;
-      var r = new RegExp('(&|\\?)' + key + '=[^\&]*');
-      s = s.replace(r, '$1' + kvp);
-
-      if (!RegExp.$1) {
-        s += (i != 0 ? '&' : '?') + kvp;
-      }
-
-      params = params.concat(s);
+      params = params.concat(kvp);
     });
-    return params;
+    return url + '?' + params;
   }
 
   return url;
@@ -2063,6 +2055,9 @@ var connection = {
 };
 
 var connect = function connect(url, params) {
+  connection.token = params.find(function (param) {
+    return param.key === 'apiKey';
+  }).value;
   connection.url = setQueryParams(params, url);
   connection.api = axios$1.create({
     baseURL: url,
