@@ -23,8 +23,10 @@ const disconnect = () => {
   connection.api = null;
 };
 
-const ping = async () => {
-  const response = await connection.api.get('/util/ping');
+const ping = async (params = undefined) => {
+  const request = setQueryParams(params, '/util/ping');
+  const response = await connection.api.get(request);
+
   if (
     response.status === 200
     && typeof response.data === 'object'
@@ -36,15 +38,19 @@ const ping = async () => {
 const predictor = (opts) => new Predictor(opts);
 const dataSource = (opts) => new DataSource(opts);
 
-const predictors = async () => {
-  const response = await connection.api.get('/predictors/');
+const predictors = async (params = undefined) => {
+  const request = setQueryParams(params, '/predictors');
+  const response = await connection.api.get(request);
+
   const rawData = response.data || [];
   const predictorList = rawData.map(predictor);
   return predictorList;
 };
 
-const dataSources = async () => {
-  const response = await connection.api.get('/datasources/');
+const dataSources = async (params = undefined) => {
+  const request = setQueryParams(params, '/datasources');
+  const response = await connection.api.get(request);
+
   const rawData = response.data || [];
   const dataSourceList = rawData.map(dataSource);
   return dataSourceList;
@@ -100,19 +106,23 @@ class Predictor {
     Object.assign(this, data);
   }
 
-  load = async () => {
-    const response = await connection.api.get(`/predictors/${this.name}`);
+  load = async (params = undefined) => {
+    const request = setQueryParams(params, `/predictors/${this.name}`);
+    const response = await connection.api.get(request);
+
     Object.assign(this, response.data);
     return this;
   };
 
-  loadColumns = async () => {
-    const response = await connection.api.get(`/predictors/${this.name}/columns`);
+  loadColumns = async (params = undefined) => {
+    const request = setQueryParams(params, `/predictors/${this.name}/columns`);
+    const response = await connection.api.get(request);
+
     this.columns = response.data;
     return this;
   };
 
-  learn = async ({ dataSourceName, fromData, toPredict }) => {
+  learn = async ({ dataSourceName, fromData, toPredict }, params = undefined) => {
     const data = {
       to_predict: toPredict,
     };
@@ -121,20 +131,26 @@ class Predictor {
     } else if (fromData) {
       data.from_data = fromData;
     }
-    const response = await connection.api.put(`/predictors/${this.name}`, data);
+
+    const request = setQueryParams(params, `/predictors/${this.name}`);
+    const response = await connection.api.put(request, data);
+
     return response.data;
   };
 
-  queryPredict = async (when) => {
-    const response = await connection.api.post(`/predictors/${this.name}/predict`, { when });
+  queryPredict = async (when, params = undefined) => {
+    const request = setQueryParams(params, `/predictors/${this.name}/predict`);
+    const response = await connection.api.post(request, { when });
+
     return response.data;
   };
 
-  delete = async () => {
-    await connection.api.delete(`/predictors/${this.name}`);
+  delete = async (params = undefined) => {
+    const request = setQueryParams(params, `/predictors/${this.name}`);
+    await connection.api.delete(request);
   };
 
-  upload = async (file, onProgress) => {
+  upload = async (file, onProgress, params = undefined) => {
     const fd = new FormData();
     fd.append('file', file);
 
@@ -147,11 +163,13 @@ class Predictor {
       }
     };
 
-    await connection.api.post('/predictors/upload', fd, config);
+    const request = setQueryParams(params, '/predictors/upload');
+    await connection.api.post(request, fd, config);
   };
 
-  download = async () => {
-    const response = await connection.api.get(`/predictors/${this.name}/download`, {
+  download = async (params = undefined) => {
+    const request = setQueryParams(params, `/predictors/${this.name}/download`);
+    const response = await connection.api.get(request, {
       responseType: 'blob',
     });
     saveFile(response);
@@ -181,15 +199,16 @@ class DataSource {
     Object.assign(this, data);
   }
 
-  load = async () => {
-    const response = await connection.api.get(`/datasources/${this.name}`);
+  load = async (params = undefined) => {
+    const request = setQueryParams(params, `/datasources/${this.name}`);
+    const response = await connection.api.get(request);
     Object.assign(this, response.data);
     return this;
   };
 
   // setSource = () => {};
 
-  upload = async (file, onProgress) => {
+  upload = async (file, onProgress, params = undefined) => {
     this.source_type = 'file';
     this.source = file.name;
 
@@ -208,10 +227,11 @@ class DataSource {
       }
     };
 
-    await connection.api.put(`/datasources/${this.name}`, fd, config);
+    const request = setQueryParams(params, `/datasources/${this.name}`);
+    await connection.api.put(request, fd, config);
   };
 
-  uploadFromUrl = async (url) => {
+  uploadFromUrl = async (url, params = undefined) => {
     this.source_type = 'url';
     this.source = url;
     const data = {
@@ -219,12 +239,16 @@ class DataSource {
       source_type: this.source_type,
       source: this.source,
     };
-    await connection.api.put(`/datasources/${this.name}`, data);
+    
+    const request = setQueryParams(params, `/datasources/${this.name}`);
+    await connection.api.put(request, data);
   };
 
-  download = async () => {
+  download = async (params = undefined) => {
     const url = this.getDownloadUrl();
-    const response = await connection.api.get(url, {
+    const request = setQueryParams(params, url);
+
+    const response = await connection.api.get(request, {
       responseType: 'blob',
     });
     saveFile(response, this.source);
@@ -233,42 +257,51 @@ class DataSource {
 
   getDownloadUrl = () => this.source_type === 'url' ? this.source : `${connection.url}/datasources/${this.name}/download`
 
-  delete = async () => {
-    await connection.api.delete(`/datasources/${this.name}`);
+  delete = async (params = undefined) => {
+    const request = setQueryParams(params, `/datasources/${this.name}`);
+    await connection.api.delete(request);
   };
 
-  loadData = async () => {
+  loadData = async (params = undefined) => {
+    const request = setQueryParams(params, `/datasources/${this.name}/data`);
     const response = await connection.api.get(`/datasources/${this.name}/data`);
+
     this.data = response.data;
     return this.data;
   };
 
-  loadDataQuality = async () => {
-    const response = await connection.api.get(`/datasources/${this.name}/analyze`);
+  loadDataQuality = async (params = undefined) => {
+    const request = setQueryParams(params, `/datasources/${this.name}/analyze`);
+    const response = await connection.api.get(request);
+
     let data;
     try {
-        data = response.data['data_analysis']['input_columns_metadata'];
+      data = response.data['data_analysis']['input_columns_metadata'];
     } catch (error) {
-        data = null;
+      data = null;
     }
     this.dataQuality = data;
 
     return data;
   };
 
-  loadMissedFileList = async () => {
-    const response = await connection.api.get(`/datasources/${this.name}/missed_files`);
+  loadMissedFileList = async (params = undefined) => {
+    const request = setQueryParams(params, `/datasources/${this.name}/missed_files`);
+    const response = await connection.api.get(request);
+
     this.missedFileList = response.data;
     return this.missedFileList;
   };
 
-  uploadFile = async ({
-    column, rowIndex, extension, file
-  }) => {
+  uploadFile = async ({ column, rowIndex, extension, file }, params = undefined) => {
     const fd = new FormData();
+
     fd.append('file', file);
     fd.append('extension', extension);
-    const response = await connection.api.put(`/datasources/${this.name}/files/${column}:${rowIndex}`, fd);
+
+    const request = setQueryParams(params, `/datasources/${this.name}/files/${column}:${rowIndex}`);
+    const response = await connection.api.put(request, fd);
+
     return response.status === 200;
   };
 }
