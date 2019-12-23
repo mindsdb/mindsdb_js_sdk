@@ -264,7 +264,7 @@ class DataSource {
 
   loadData = async (params) => {
     const request = setQueryParams(params, `/datasources/${this.name}/data`);
-    const response = await connection.api.get(`/datasources/${this.name}/data`);
+    const response = await connection.api.get(request);
 
     this.data = response.data;
     return this.data;
