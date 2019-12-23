@@ -71,10 +71,6 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-function _readOnlyError(name) {
-  throw new Error("\"" + name + "\" is read-only");
-}
-
 var setQueryParams = function setQueryParams(paramsObj, url) {
   var params = '';
 
@@ -85,10 +81,10 @@ var setQueryParams = function setQueryParams(paramsObj, url) {
       var s = url;
       var kvp = key + '=' + value;
       var r = new RegExp('(&|\\?)' + key + '=[^\&]*');
-      s = (_readOnlyError("s"), s.replace(r, '$1' + kvp));
+      s = s.replace(r, '$1' + kvp);
 
       if (!RegExp.$1) {
-        s += (_readOnlyError("s"), (i != 0 ? '&' : '?') + kvp);
+        s += (i != 0 ? '&' : '?') + kvp;
       }
 
       params = params.concat(s);

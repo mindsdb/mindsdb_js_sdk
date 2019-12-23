@@ -2031,12 +2031,6 @@ axios_1.default = default_1;
 
 var axios$1 = axios_1;
 
-function _readOnlyError(name) {
-  throw new Error("\"" + name + "\" is read-only");
-}
-
-var readOnlyError = _readOnlyError;
-
 var setQueryParams = function setQueryParams(paramsObj, url) {
   var params = '';
 
@@ -2047,10 +2041,10 @@ var setQueryParams = function setQueryParams(paramsObj, url) {
       var s = url;
       var kvp = key + '=' + value;
       var r = new RegExp('(&|\\?)' + key + '=[^\&]*');
-      s = (readOnlyError("s"), s.replace(r, '$1' + kvp));
+      s = s.replace(r, '$1' + kvp);
 
       if (!RegExp.$1) {
-        s += (readOnlyError("s"), (i != 0 ? '&' : '?') + kvp);
+        s += (i != 0 ? '&' : '?') + kvp;
       }
 
       params = params.concat(s);

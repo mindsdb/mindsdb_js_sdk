@@ -6,7 +6,7 @@ export const setQueryParams = (paramsObj, url) => {
       const key = encodeURIComponent(item.key); 
       const value = encodeURIComponent(item.value);
   
-      const s = url;
+      let s = url;
       const kvp = key + '=' + value;
       const r = new RegExp('(&|\\?)'+key+'=[^\&]*');
   
