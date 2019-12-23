@@ -9,8 +9,8 @@ const connection = {
   version: 0.2
 };
 
-const connect = (url) => {
-  connection.url = url;
+const connect = (url, params) => {
+  connection.url = setQueryParams(params, url);
   connection.api = axios.create({
     baseURL: url,
     timeout: 20000,
@@ -23,7 +23,7 @@ const disconnect = () => {
   connection.api = null;
 };
 
-const ping = async (params = undefined) => {
+const ping = async (params) => {
   const request = setQueryParams(params, '/util/ping');
   const response = await connection.api.get(request);
 
@@ -38,7 +38,7 @@ const ping = async (params = undefined) => {
 const predictor = (opts) => new Predictor(opts);
 const dataSource = (opts) => new DataSource(opts);
 
-const predictors = async (params = undefined) => {
+const predictors = async (params) => {
   const request = setQueryParams(params, '/predictors');
   const response = await connection.api.get(request);
 
@@ -47,7 +47,7 @@ const predictors = async (params = undefined) => {
   return predictorList;
 };
 
-const dataSources = async (params = undefined) => {
+const dataSources = async (params) => {
   const request = setQueryParams(params, '/datasources');
   const response = await connection.api.get(request);
 
@@ -106,7 +106,7 @@ class Predictor {
     Object.assign(this, data);
   }
 
-  load = async (params = undefined) => {
+  load = async (params) => {
     const request = setQueryParams(params, `/predictors/${this.name}`);
     const response = await connection.api.get(request);
 
@@ -114,7 +114,7 @@ class Predictor {
     return this;
   };
 
-  loadColumns = async (params = undefined) => {
+  loadColumns = async (params) => {
     const request = setQueryParams(params, `/predictors/${this.name}/columns`);
     const response = await connection.api.get(request);
 
@@ -122,7 +122,7 @@ class Predictor {
     return this;
   };
 
-  learn = async ({ dataSourceName, fromData, toPredict }, params = undefined) => {
+  learn = async ({ dataSourceName, fromData, toPredict }, params) => {
     const data = {
       to_predict: toPredict,
     };
@@ -138,19 +138,19 @@ class Predictor {
     return response.data;
   };
 
-  queryPredict = async (when, params = undefined) => {
+  queryPredict = async (when, params) => {
     const request = setQueryParams(params, `/predictors/${this.name}/predict`);
     const response = await connection.api.post(request, { when });
 
     return response.data;
   };
 
-  delete = async (params = undefined) => {
+  delete = async (params) => {
     const request = setQueryParams(params, `/predictors/${this.name}`);
     await connection.api.delete(request);
   };
 
-  upload = async (file, onProgress, params = undefined) => {
+  upload = async (file, onProgress, params) => {
     const fd = new FormData();
     fd.append('file', file);
 
@@ -167,7 +167,7 @@ class Predictor {
     await connection.api.post(request, fd, config);
   };
 
-  download = async (params = undefined) => {
+  download = async (params) => {
     const request = setQueryParams(params, `/predictors/${this.name}/download`);
     const response = await connection.api.get(request, {
       responseType: 'blob',
@@ -199,7 +199,7 @@ class DataSource {
     Object.assign(this, data);
   }
 
-  load = async (params = undefined) => {
+  load = async (params) => {
     const request = setQueryParams(params, `/datasources/${this.name}`);
     const response = await connection.api.get(request);
     Object.assign(this, response.data);
@@ -208,7 +208,7 @@ class DataSource {
 
   // setSource = () => {};
 
-  upload = async (file, onProgress, params = undefined) => {
+  upload = async (file, onProgress, params) => {
     this.source_type = 'file';
     this.source = file.name;
 
@@ -231,7 +231,7 @@ class DataSource {
     await connection.api.put(request, fd, config);
   };
 
-  uploadFromUrl = async (url, params = undefined) => {
+  uploadFromUrl = async (url, params) => {
     this.source_type = 'url';
     this.source = url;
     const data = {
@@ -244,7 +244,7 @@ class DataSource {
     await connection.api.put(request, data);
   };
 
-  download = async (params = undefined) => {
+  download = async (params) => {
     const url = this.getDownloadUrl();
     const request = setQueryParams(params, url);
 
@@ -257,12 +257,12 @@ class DataSource {
 
   getDownloadUrl = () => this.source_type === 'url' ? this.source : `${connection.url}/datasources/${this.name}/download`
 
-  delete = async (params = undefined) => {
+  delete = async (params) => {
     const request = setQueryParams(params, `/datasources/${this.name}`);
     await connection.api.delete(request);
   };
 
-  loadData = async (params = undefined) => {
+  loadData = async (params) => {
     const request = setQueryParams(params, `/datasources/${this.name}/data`);
     const response = await connection.api.get(`/datasources/${this.name}/data`);
 
@@ -270,7 +270,7 @@ class DataSource {
     return this.data;
   };
 
-  loadDataQuality = async (params = undefined) => {
+  loadDataQuality = async (params) => {
     const request = setQueryParams(params, `/datasources/${this.name}/analyze`);
     const response = await connection.api.get(request);
 
@@ -285,7 +285,7 @@ class DataSource {
     return data;
   };
 
-  loadMissedFileList = async (params = undefined) => {
+  loadMissedFileList = async (params) => {
     const request = setQueryParams(params, `/datasources/${this.name}/missed_files`);
     const response = await connection.api.get(request);
 
@@ -293,7 +293,7 @@ class DataSource {
     return this.missedFileList;
   };
 
-  uploadFile = async ({ column, rowIndex, extension, file }, params = undefined) => {
+  uploadFile = async ({ column, rowIndex, extension, file }, params) => {
     const fd = new FormData();
 
     fd.append('file', file);
