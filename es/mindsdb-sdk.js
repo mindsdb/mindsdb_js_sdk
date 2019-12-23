@@ -769,7 +769,7 @@ var DataSource = function DataSource(_data2) {
             case 0:
               request = setQueryParams(params, "/datasources/".concat(_this2.name, "/data"));
               _context16.next = 3;
-              return connection.api.get("/datasources/".concat(_this2.name, "/data"));
+              return connection.api.get(request);
 
             case 3:
               response = _context16.sent;

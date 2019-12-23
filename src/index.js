@@ -10,6 +10,7 @@ const connection = {
 };
 
 const connect = (url, params) => {
+  connection.token = params.find((param) => param.key === 'apiKey').value
   connection.url = setQueryParams(params, url);
   connection.api = axios.create({
     baseURL: url,
