@@ -8,7 +8,7 @@ export const setQueryParams = (paramsObj, url) => {
         const value = encodeURIComponent(item.value);
     
         const kvp = key + '=' + value;
-        params = params.concat(kvp);
+        params = params.concat(i > 0  ? `&${kvp}`: kvp);
       }
     });
 
@@ -16,7 +16,7 @@ export const setQueryParams = (paramsObj, url) => {
       url = url.substring(0,url.length -1);
     }
     
-    return url + `${i >0 ? '&' : '?'}` + params;
+    return url + '?' + params;
   }
 
   return url;
