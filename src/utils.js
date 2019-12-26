@@ -16,7 +16,7 @@ export const setQueryParams = (paramsObj, url) => {
       url = url.substring(0,url.length -1);
     }
     
-    return url + '?' + params;
+    return url + `${i >0 ? '&' : '?'}` + params;
   }
 
   return url;

@@ -2048,7 +2048,7 @@ var setQueryParams = function setQueryParams(paramsObj, url) {
       url = url.substring(0, url.length - 1);
     }
 
-    return url + '?' + params;
+    return url + "".concat(i > 0 ? '&' : '?') + params;
   }
 
   return url;
