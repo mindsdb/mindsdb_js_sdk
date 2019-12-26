@@ -2034,12 +2034,14 @@ var axios$1 = axios_1;
 var setQueryParams = function setQueryParams(paramsObj, url) {
   var params = '';
 
-  if (paramsObj && paramsObj.value) {
+  if (paramsObj) {
     paramsObj.forEach(function (item, i) {
-      var key = encodeURIComponent(item.key);
-      var value = encodeURIComponent(item.value);
-      var kvp = key + '=' + value;
-      params = params.concat(kvp);
+      if (item.value) {
+        var key = encodeURIComponent(item.key);
+        var value = encodeURIComponent(item.value);
+        var kvp = key + '=' + value;
+        params = params.concat(kvp);
+      }
     });
 
     if (url.slice(-1) === '/') {
