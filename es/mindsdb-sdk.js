@@ -71,6 +71,26 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+}
+
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
 var setQueryParams = function setQueryParams(paramsObj, url) {
   var params = '';
 
@@ -97,12 +117,15 @@ var setQueryParams = function setQueryParams(paramsObj, url) {
 var connection = {
   url: null,
   api: null,
-  token: null,
+  token: {
+    key: 'apiKey',
+    value: null
+  },
   version: 0.2
 };
 
 var connect = function connect(url, params) {
-  connection.token = params.find(function (param) {
+  connection.token.value = params.find(function (param) {
     return param.key === 'apiKey';
   }).value;
   connection.url = setQueryParams(params, url);
@@ -114,7 +137,10 @@ var connect = function connect(url, params) {
 
 var disconnect = function disconnect() {
   connection.url = null;
-  connection.token = null;
+  connection.token = {
+    key: 'apiKey',
+    value: null
+  };
   connection.api = null;
 };
 
@@ -129,7 +155,7 @@ function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            request = setQueryParams(params, '/util/ping');
+            request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), '/util/ping');
             _context.next = 3;
             return connection.api.get(request);
 
@@ -178,7 +204,7 @@ function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            request = setQueryParams(params, '/predictors');
+            request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), '/predictors');
             _context2.next = 3;
             return connection.api.get(request);
 
@@ -212,7 +238,7 @@ function () {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            request = setQueryParams(params, '/datasources');
+            request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), '/datasources');
             _context3.next = 3;
             return connection.api.get(request);
 
@@ -312,7 +338,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              request = setQueryParams(params, "/predictors/".concat(_this.name));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/predictors/".concat(_this.name));
               _context4.next = 3;
               return connection.api.get(request);
 
@@ -345,7 +371,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              request = setQueryParams(params, "/predictors/".concat(_this.name, "/columns"));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/predictors/".concat(_this.name, "/columns"));
               _context5.next = 3;
               return connection.api.get(request);
 
@@ -389,7 +415,7 @@ var Predictor = function Predictor(_data) {
                 data.from_data = fromData;
               }
 
-              request = setQueryParams(params, "/predictors/".concat(_this.name));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/predictors/".concat(_this.name));
               _context6.next = 6;
               return connection.api.put(request, data);
 
@@ -421,7 +447,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              request = setQueryParams(params, "/predictors/".concat(_this.name, "/predict"));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/predictors/".concat(_this.name, "/predict"));
               _context7.next = 3;
               return connection.api.post(request, {
                 when: when
@@ -455,7 +481,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              request = setQueryParams(params, "/predictors/".concat(_this.name));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/predictors/".concat(_this.name));
               _context8.next = 3;
               return connection.api.delete(request);
 
@@ -493,7 +519,7 @@ var Predictor = function Predictor(_data) {
                   }
                 }
               };
-              request = setQueryParams(params, '/predictors/upload');
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), '/predictors/upload');
               _context9.next = 6;
               return connection.api.post(request, fd, config);
 
@@ -521,7 +547,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context10.prev = _context10.next) {
             case 0:
-              request = setQueryParams(params, "/predictors/".concat(_this.name, "/download"));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/predictors/".concat(_this.name, "/download"));
               _context10.next = 3;
               return connection.api.get(request, {
                 responseType: 'blob'
@@ -590,7 +616,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context11.prev = _context11.next) {
             case 0:
-              request = setQueryParams(params, "/datasources/".concat(_this2.name));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/datasources/".concat(_this2.name));
               _context11.next = 3;
               return connection.api.get(request);
 
@@ -638,7 +664,7 @@ var DataSource = function DataSource(_data2) {
                   }
                 }
               };
-              request = setQueryParams(params, "/datasources/".concat(_this2.name));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/datasources/".concat(_this2.name));
               _context12.next = 11;
               return connection.api.put(request, fd, config);
 
@@ -673,7 +699,7 @@ var DataSource = function DataSource(_data2) {
                 source_type: _this2.source_type,
                 source: _this2.source
               };
-              request = setQueryParams(params, "/datasources/".concat(_this2.name));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/datasources/".concat(_this2.name));
               _context13.next = 6;
               return connection.api.put(request, data);
 
@@ -702,7 +728,7 @@ var DataSource = function DataSource(_data2) {
           switch (_context14.prev = _context14.next) {
             case 0:
               url = _this2.getDownloadUrl();
-              request = setQueryParams(params, url);
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), url);
               _context14.next = 4;
               return connection.api.get(request, {
                 responseType: 'blob'
@@ -741,7 +767,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context15.prev = _context15.next) {
             case 0:
-              request = setQueryParams(params, "/datasources/".concat(_this2.name));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/datasources/".concat(_this2.name));
               _context15.next = 3;
               return connection.api.delete(request);
 
@@ -769,7 +795,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context16.prev = _context16.next) {
             case 0:
-              request = setQueryParams(params, "/datasources/".concat(_this2.name, "/data"));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/datasources/".concat(_this2.name, "/data"));
               _context16.next = 3;
               return connection.api.get(request);
 
@@ -802,7 +828,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context17.prev = _context17.next) {
             case 0:
-              request = setQueryParams(params, "/datasources/".concat(_this2.name, "/analyze"));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/datasources/".concat(_this2.name, "/analyze"));
               _context17.next = 3;
               return connection.api.get(request);
 
@@ -842,7 +868,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context18.prev = _context18.next) {
             case 0:
-              request = setQueryParams(params, "/datasources/".concat(_this2.name, "/missed_files"));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/datasources/".concat(_this2.name, "/missed_files"));
               _context18.next = 3;
               return connection.api.get(request);
 
@@ -879,7 +905,7 @@ var DataSource = function DataSource(_data2) {
               fd = new FormData();
               fd.append('file', file);
               fd.append('extension', extension);
-              request = setQueryParams(params, "/datasources/".concat(_this2.name, "/files/").concat(column, ":").concat(rowIndex));
+              request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/datasources/".concat(_this2.name, "/files/").concat(column, ":").concat(rowIndex));
               _context19.next = 7;
               return connection.api.put(request, fd);
 
