@@ -25,7 +25,7 @@ const disconnect = () => {
 };
 
 const ping = async (params) => {
-  const mergeParams = params ? [...params, connection.token] : connection.token;
+  const mergeParams = params ? [...params, connection.token] : [connection.token];
 
   const request = setQueryParams(mergeParams, '/util/ping');
   const response = await connection.api.get(request);
@@ -40,7 +40,7 @@ const predictor = (opts) => new Predictor(opts);
 const dataSource = (opts) => new DataSource(opts);
 
 const predictors = async (params) => {
-  const mergeParams = params ? [...params, connection.token] : connection.token;
+  const mergeParams = params ? [...params, connection.token] : [connection.token];
 
   const request = setQueryParams(mergeParams, '/predictors');
   const response = await connection.api.get(request);
@@ -51,7 +51,7 @@ const predictors = async (params) => {
 };
 
 const dataSources = async (params) => {
-  const mergeParams = params ? [...params, connection.token] : connection.token;
+  const mergeParams = params ? [...params, connection.token] : [connection.token];
 
   const request = setQueryParams(mergeParams, '/datasources');
   const response = await connection.api.get(request);
@@ -112,7 +112,7 @@ class Predictor {
   }
 
   load = async (params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
 
     const request = setQueryParams(mergeParams, `/predictors/${this.name}`);
     const response = await connection.api.get(request);
@@ -122,7 +122,7 @@ class Predictor {
   };
 
   loadColumns = async (params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
 
     const request = setQueryParams(mergeParams, `/predictors/${this.name}/columns`);
     const response = await connection.api.get(request);
@@ -141,7 +141,7 @@ class Predictor {
       data.from_data = fromData;
     }
 
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
     const request = setQueryParams(mergeParams, `/predictors/${this.name}`);
     const response = await connection.api.put(request, data);
 
@@ -149,7 +149,7 @@ class Predictor {
   };
 
   queryPredict = async (when, params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
 
     const request = setQueryParams(mergeParams, `/predictors/${this.name}/predict`);
     const response = await connection.api.post(request, { when });
@@ -158,14 +158,14 @@ class Predictor {
   };
 
   delete = async (params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
 
     const request = setQueryParams(mergeParams, `/predictors/${this.name}`);
     await connection.api.delete(request);
   };
 
   upload = async (file, onProgress, params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
 
     const fd = new FormData();
     fd.append('file', file);
@@ -184,7 +184,7 @@ class Predictor {
   };
 
   download = async (params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
 
     const request = setQueryParams(mergeParams, `/predictors/${this.name}/download`);
     const response = await connection.api.get(request, {
@@ -218,7 +218,7 @@ class DataSource {
   }
 
   load = async (params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
 
     const request = setQueryParams(mergeParams, `/datasources/${this.name}`);
     const response = await connection.api.get(request);
@@ -231,7 +231,7 @@ class DataSource {
   upload = async (file, onProgress, params) => {
     this.source_type = 'file';
     this.source = file.name;
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
 
     const fd = new FormData();
     fd.append('name', this.name);
@@ -261,7 +261,7 @@ class DataSource {
       source: this.source,
     };
     
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
     const request = setQueryParams(mergeParams, `/datasources/${this.name}`);
 
     await connection.api.put(request, data);
@@ -269,7 +269,7 @@ class DataSource {
 
   download = async (params) => {
     const url = this.getDownloadUrl();
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
     const request = setQueryParams(mergeParams, url);
 
     const response = await connection.api.get(request, {
@@ -282,13 +282,13 @@ class DataSource {
   getDownloadUrl = () => this.source_type === 'url' ? this.source : `${connection.url}/datasources/${this.name}/download`
 
   delete = async (params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
     const request = setQueryParams(mergeParams, `/datasources/${this.name}`);
     await connection.api.delete(request);
   };
 
   loadData = async (params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
     const request = setQueryParams(mergeParams, `/datasources/${this.name}/data`);
     const response = await connection.api.get(request);
 
@@ -297,7 +297,7 @@ class DataSource {
   };
 
   loadDataQuality = async (params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
     const request = setQueryParams(mergeParams, `/datasources/${this.name}/analyze`);
     const response = await connection.api.get(request);
 
@@ -313,7 +313,7 @@ class DataSource {
   };
 
   loadMissedFileList = async (params) => {
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
     const request = setQueryParams(mergeParams, `/datasources/${this.name}/missed_files`);
     const response = await connection.api.get(request);
 
@@ -327,7 +327,7 @@ class DataSource {
     fd.append('file', file);
     fd.append('extension', extension);
 
-    const mergeParams = params ? [...params, connection.token] : connection.token;
+    const mergeParams = params ? [...params, connection.token] : [connection.token];
     const request = setQueryParams(mergeParams, `/datasources/${this.name}/files/${column}:${rowIndex}`);
     const response = await connection.api.put(request, fd);
 

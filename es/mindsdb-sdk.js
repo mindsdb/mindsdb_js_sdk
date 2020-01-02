@@ -155,7 +155,7 @@ function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
             request = setQueryParams(mergeParams, '/util/ping');
             _context.next = 4;
             return connection.api.get(request);
@@ -205,7 +205,7 @@ function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
             request = setQueryParams(mergeParams, '/predictors');
             _context2.next = 4;
             return connection.api.get(request);
@@ -240,7 +240,7 @@ function () {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
             request = setQueryParams(mergeParams, '/datasources');
             _context3.next = 4;
             return connection.api.get(request);
@@ -341,7 +341,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name));
               _context4.next = 4;
               return connection.api.get(request);
@@ -375,7 +375,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/columns"));
               _context5.next = 4;
               return connection.api.get(request);
@@ -420,7 +420,7 @@ var Predictor = function Predictor(_data) {
                 data.from_data = fromData;
               }
 
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name));
               _context6.next = 7;
               return connection.api.put(request, data);
@@ -453,7 +453,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/predict"));
               _context7.next = 4;
               return connection.api.post(request, {
@@ -488,7 +488,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name));
               _context8.next = 4;
               return connection.api.delete(request);
@@ -517,7 +517,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context9.prev = _context9.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               fd = new FormData();
               fd.append('file', file);
               config = {
@@ -556,7 +556,7 @@ var Predictor = function Predictor(_data) {
         while (1) {
           switch (_context10.prev = _context10.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/download"));
               _context10.next = 4;
               return connection.api.get(request, {
@@ -626,7 +626,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context11.prev = _context11.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
               _context11.next = 4;
               return connection.api.get(request);
@@ -662,7 +662,7 @@ var DataSource = function DataSource(_data2) {
             case 0:
               _this2.source_type = 'file';
               _this2.source = file.name;
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               fd = new FormData();
               fd.append('name', _this2.name);
               fd.append('source_type', _this2.source_type);
@@ -711,7 +711,7 @@ var DataSource = function DataSource(_data2) {
                 source_type: _this2.source_type,
                 source: _this2.source
               };
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
               _context13.next = 7;
               return connection.api.put(request, data);
@@ -741,7 +741,7 @@ var DataSource = function DataSource(_data2) {
           switch (_context14.prev = _context14.next) {
             case 0:
               url = _this2.getDownloadUrl();
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, url);
               _context14.next = 5;
               return connection.api.get(request, {
@@ -781,7 +781,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context15.prev = _context15.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
               _context15.next = 4;
               return connection.api.delete(request);
@@ -810,7 +810,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context16.prev = _context16.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/data"));
               _context16.next = 4;
               return connection.api.get(request);
@@ -844,7 +844,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context17.prev = _context17.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/analyze"));
               _context17.next = 4;
               return connection.api.get(request);
@@ -885,7 +885,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context18.prev = _context18.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/missed_files"));
               _context18.next = 4;
               return connection.api.get(request);
@@ -923,7 +923,7 @@ var DataSource = function DataSource(_data2) {
               fd = new FormData();
               fd.append('file', file);
               fd.append('extension', extension);
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : connection.token;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/files/").concat(column, ":").concat(rowIndex));
               _context19.next = 8;
               return connection.api.put(request, fd);
