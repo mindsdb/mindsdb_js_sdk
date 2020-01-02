@@ -11,7 +11,7 @@ const connection = {
 
 const connect = (url, params) => {
   connection.token.value = params.find((param) => param.key === 'apiKey').value
-  connection.url = setQueryParams(connection.token, url);
+  connection.url = setQueryParams([connection.token], url);
   connection.api = axios.create({
     baseURL: url,
     timeout: 20000,
