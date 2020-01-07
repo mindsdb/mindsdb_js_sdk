@@ -25,7 +25,7 @@ const disconnect = () => {
 };
 
 const ping = async (params) => {
-  const mergeParams = params ? [...params, connection.token] : [connection.token];
+  const mergeParams = [...params, connection.token];
 
   const request = setQueryParams(mergeParams, '/util/ping');
   const response = await connection.api.get(request);
