@@ -29,6 +29,36 @@ function _defineProperty(obj, key, value) {
 
 var defineProperty = _defineProperty;
 
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+
+var arrayWithoutHoles = _arrayWithoutHoles;
+
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+var iterableToArray = _iterableToArray;
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+var nonIterableSpread = _nonIterableSpread;
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+}
+
+var toConsumableArray = _toConsumableArray;
+
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
@@ -773,36 +803,6 @@ function _typeof(obj) {
 
 module.exports = _typeof;
 });
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-
-var arrayWithoutHoles = _arrayWithoutHoles;
-
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-var iterableToArray = _iterableToArray;
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
-var nonIterableSpread = _nonIterableSpread;
-
-function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
-}
-
-var toConsumableArray = _toConsumableArray;
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -2120,30 +2120,29 @@ function () {
   var _ref = asyncToGenerator(
   /*#__PURE__*/
   regenerator.mark(function _callee(params) {
-    var mergeParams, request, response;
+    var request, response;
     return regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            mergeParams = [].concat(toConsumableArray(params), [connection.token]);
-            request = setQueryParams(mergeParams, '/util/ping');
-            _context.next = 4;
+            request = setQueryParams([connection.token], '/util/ping');
+            _context.next = 3;
             return connection.api.get(request);
 
-          case 4:
+          case 3:
             response = _context.sent;
 
             if (!(response.status === 200 && _typeof_1(response.data) === 'object' && response.data.status === 'ok')) {
-              _context.next = 7;
+              _context.next = 6;
               break;
             }
 
             return _context.abrupt("return", true);
 
-          case 7:
+          case 6:
             return _context.abrupt("return", false);
 
-          case 8:
+          case 7:
           case "end":
             return _context.stop();
         }

@@ -150,30 +150,29 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(params) {
-    var mergeParams, request, response;
+    var request, response;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            mergeParams = [].concat(_toConsumableArray(params), [connection.token]);
-            request = setQueryParams(mergeParams, '/util/ping');
-            _context.next = 4;
+            request = setQueryParams([connection.token], '/util/ping');
+            _context.next = 3;
             return connection.api.get(request);
 
-          case 4:
+          case 3:
             response = _context.sent;
 
             if (!(response.status === 200 && _typeof(response.data) === 'object' && response.data.status === 'ok')) {
-              _context.next = 7;
+              _context.next = 6;
               break;
             }
 
             return _context.abrupt("return", true);
 
-          case 7:
+          case 6:
             return _context.abrupt("return", false);
 
-          case 8:
+          case 7:
           case "end":
             return _context.stop();
         }
