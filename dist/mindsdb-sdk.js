@@ -2125,7 +2125,7 @@ function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
+            mergeParams = [].concat(toConsumableArray(params), [connection.token]);
             request = setQueryParams(mergeParams, '/util/ping');
             _context.next = 4;
             return connection.api.get(request);
