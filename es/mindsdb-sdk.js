@@ -92,23 +92,23 @@ function _nonIterableSpread() {
 }
 
 var setQueryParams = function setQueryParams(paramsObj, url) {
-  var params = '';
+  var params = "";
 
   if (paramsObj) {
     paramsObj.forEach(function (item, i) {
       if (item.value) {
         var key = encodeURIComponent(item.key);
         var value = encodeURIComponent(item.value);
-        var kvp = key + '=' + value;
+        var kvp = key + "=" + value;
         params = params.concat(i > 0 ? "&".concat(kvp) : kvp);
       }
     });
 
-    if (url.slice(-1) === '/') {
+    if (url.slice(-1) === "/") {
       url = url.substring(0, url.length - 1);
     }
 
-    return params.length > 0 ? url + '?' + params : url;
+    return params.length > 0 ? url + "?" + params : url;
   }
 
   return url;
@@ -118,7 +118,7 @@ var connection = {
   url: null,
   api: null,
   token: {
-    key: 'apiKey',
+    key: "apiKey",
     value: null
   },
   version: 0.2
@@ -126,7 +126,7 @@ var connection = {
 
 var connect = function connect(url, params) {
   connection.token.value = params.find(function (param) {
-    return param.key === 'apiKey';
+    return param.key === "apiKey";
   }).value;
   connection.url = setQueryParams([connection.token], url);
   connection.api = axios.create({
@@ -138,7 +138,7 @@ var connect = function connect(url, params) {
 var disconnect = function disconnect() {
   connection.url = null;
   connection.token = {
-    key: 'apiKey',
+    key: "apiKey",
     value: null
   };
   connection.api = null;
@@ -155,14 +155,14 @@ function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            request = setQueryParams([connection.token], '/util/ping');
+            request = setQueryParams([connection.token], "/util/ping");
             _context.next = 3;
             return connection.api.get(request);
 
           case 3:
             response = _context.sent;
 
-            if (!(response.status === 200 && _typeof(response.data) === 'object' && response.data.status === 'ok')) {
+            if (!(response.status === 200 && _typeof(response.data) === "object" && response.data.status === "ok")) {
               _context.next = 6;
               break;
             }
@@ -205,7 +205,7 @@ function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-            request = setQueryParams(mergeParams, '/predictors');
+            request = setQueryParams(mergeParams, "/predictors");
             _context2.next = 4;
             return connection.api.get(request);
 
@@ -240,7 +240,7 @@ function () {
         switch (_context3.prev = _context3.next) {
           case 0:
             mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-            request = setQueryParams(mergeParams, '/datasources');
+            request = setQueryParams(mergeParams, "/datasources");
             _context3.next = 4;
             return connection.api.get(request);
 
@@ -265,9 +265,9 @@ function () {
 
 var saveFile = function saveFile(response, source) {
   var url = window.URL.createObjectURL(new Blob([response.data]));
-  var link = document.createElement('a');
+  var link = document.createElement("a");
   link.href = url;
-  var contentDisposition = response.headers['content-disposition'];
+  var contentDisposition = response.headers["content-disposition"];
   var fileName = null;
 
   if (contentDisposition) {
@@ -279,15 +279,15 @@ var saveFile = function saveFile(response, source) {
   }
 
   if (!fileName && source) {
-    var parts = source.split('/');
+    var parts = source.split("/");
     var end = parts[parts.length - 1];
-    parts = end.split('\\');
+    parts = end.split("\\");
     end = parts[parts.length - 1];
     fileName = end;
   }
 
-  fileName = fileName || 'unknown';
-  link.setAttribute('download', fileName);
+  fileName = fileName || "unknown";
+  link.setAttribute("download", fileName);
   document.body.appendChild(link);
   link.click();
   link.remove();
@@ -301,19 +301,19 @@ var Predictor = function Predictor(_data) {
 
   _defineProperty(this, "loaded", false);
 
-  _defineProperty(this, "name", '');
+  _defineProperty(this, "name", "");
 
-  _defineProperty(this, "version", '');
+  _defineProperty(this, "version", "");
 
   _defineProperty(this, "is_active", false);
 
-  _defineProperty(this, "data_source", '');
+  _defineProperty(this, "data_source", "");
 
   _defineProperty(this, "predict", null);
 
   _defineProperty(this, "accuracy", 0);
 
-  _defineProperty(this, "status", '');
+  _defineProperty(this, "status", "");
 
   _defineProperty(this, "train_end_at", null);
 
@@ -403,15 +403,19 @@ var Predictor = function Predictor(_data) {
     var _ref7 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee6(_ref6, params) {
-      var dataSourceName, fromData, toPredict, data, mergeParams, request, response;
+      var dataSourceName, fromData, toPredict, kwargs, data, mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              dataSourceName = _ref6.dataSourceName, fromData = _ref6.fromData, toPredict = _ref6.toPredict;
+              dataSourceName = _ref6.dataSourceName, fromData = _ref6.fromData, toPredict = _ref6.toPredict, kwargs = _ref6.kwargs;
               data = {
                 to_predict: toPredict
               };
+
+              if (kwargs) {
+                data.kwargs = kwargs;
+              }
 
               if (dataSourceName) {
                 data.data_source_name = dataSourceName;
@@ -421,14 +425,14 @@ var Predictor = function Predictor(_data) {
 
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name));
-              _context6.next = 7;
+              _context6.next = 8;
               return connection.api.put(request, data);
 
-            case 7:
+            case 8:
               response = _context6.sent;
               return _context6.abrupt("return", response.data);
 
-            case 9:
+            case 10:
             case "end":
               return _context6.stop();
           }
@@ -518,7 +522,7 @@ var Predictor = function Predictor(_data) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               fd = new FormData();
-              fd.append('file', file);
+              fd.append("file", file);
               config = {
                 onUploadProgress: function onUploadProgress(progressEvent) {
                   if (onProgress) {
@@ -527,7 +531,7 @@ var Predictor = function Predictor(_data) {
                   }
                 }
               };
-              request = setQueryParams(mergeParams, '/predictors/upload');
+              request = setQueryParams(mergeParams, "/predictors/upload");
               _context9.next = 7;
               return connection.api.post(request, fd, config);
 
@@ -559,7 +563,7 @@ var Predictor = function Predictor(_data) {
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/download"));
               _context10.next = 4;
               return connection.api.get(request, {
-                responseType: 'blob'
+                responseType: "blob"
               });
 
             case 4:
@@ -594,11 +598,11 @@ var DataSource = function DataSource(_data2) {
 
   _defineProperty(this, "loaded", false);
 
-  _defineProperty(this, "source_type", 'url');
+  _defineProperty(this, "source_type", "url");
 
-  _defineProperty(this, "name", '');
+  _defineProperty(this, "name", "");
 
-  _defineProperty(this, "source", '');
+  _defineProperty(this, "source", "");
 
   _defineProperty(this, "missed_files", false);
 
@@ -659,14 +663,14 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context12.prev = _context12.next) {
             case 0:
-              _this2.source_type = 'file';
+              _this2.source_type = "file";
               _this2.source = file.name;
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               fd = new FormData();
-              fd.append('name', _this2.name);
-              fd.append('source_type', _this2.source_type);
-              fd.append('source', _this2.source);
-              fd.append('file', file);
+              fd.append("name", _this2.name);
+              fd.append("source_type", _this2.source_type);
+              fd.append("source", _this2.source);
+              fd.append("file", file);
               config = {
                 onUploadProgress: function onUploadProgress(progressEvent) {
                   if (onProgress) {
@@ -703,7 +707,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context13.prev = _context13.next) {
             case 0:
-              _this2.source_type = 'url';
+              _this2.source_type = "url";
               _this2.source = url;
               data = {
                 name: _this2.name,
@@ -744,7 +748,7 @@ var DataSource = function DataSource(_data2) {
               request = setQueryParams(mergeParams, url);
               _context14.next = 5;
               return connection.api.get(request, {
-                responseType: 'blob'
+                responseType: "blob"
               });
 
             case 5:
@@ -766,7 +770,7 @@ var DataSource = function DataSource(_data2) {
   }());
 
   _defineProperty(this, "getDownloadUrl", function () {
-    return _this2.source_type === 'url' ? _this2.source : "".concat(connection.url, "/datasources/").concat(_this2.name, "/download");
+    return _this2.source_type === "url" ? _this2.source : "".concat(connection.url, "/datasources/").concat(_this2.name, "/download");
   });
 
   _defineProperty(this, "delete",
@@ -852,7 +856,7 @@ var DataSource = function DataSource(_data2) {
               response = _context17.sent;
 
               try {
-                data = response.data['data_analysis']['input_columns_metadata'];
+                data = response.data["data_analysis"]["input_columns_metadata"];
               } catch (error) {
                 data = null;
               }
@@ -920,8 +924,8 @@ var DataSource = function DataSource(_data2) {
             case 0:
               column = _ref20.column, rowIndex = _ref20.rowIndex, extension = _ref20.extension, file = _ref20.file;
               fd = new FormData();
-              fd.append('file', file);
-              fd.append('extension', extension);
+              fd.append("file", file);
+              fd.append("extension", extension);
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/files/").concat(column, ":").concat(rowIndex));
               _context19.next = 8;
