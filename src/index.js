@@ -129,6 +129,20 @@ class Predictor {
     return this;
   };
 
+  rename = async params => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+
+    const request = setQueryParams(
+      mergeParams,
+      `/predictors/${params.oldName}/renmame?new_name=${params.newName}`
+    );
+    const response = await connection.api.get(request);
+
+    return response.data;
+  };
+
   loadColumns = async params => {
     const mergeParams = params
       ? [...params, connection.token]
