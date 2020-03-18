@@ -136,7 +136,7 @@ class Predictor {
 
     const request = setQueryParams(
       mergeParams,
-      `/predictors/${params.oldName}/renmame?new_name=${params.newName}`
+      `/predictors/${params.oldName}/rename?new_name=${params.newName}`
     );
     const response = await connection.api.get(request);
 
