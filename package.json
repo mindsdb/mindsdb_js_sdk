@@ -11,7 +11,10 @@
     "url": "https://github.com/mindsdb/mindsdb_sdks/issues"
   },
   "keywords": [
-    "MindsDB"
+    "MindsDB",
+    "mindsdb_js_sdk",
+    "neural-network",
+    "machine-learning"
   ],
   "author": "MindsDB",
   "main": "lib/mindsdb-sdk.js",
