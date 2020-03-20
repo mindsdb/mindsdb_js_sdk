@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function (obj) {
       return typeof obj;
@@ -72,23 +74,36 @@ function _defineProperty(obj, key, value) {
 }
 
 function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
 
 function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(n);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
 }
 
 function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 var setQueryParams = function setQueryParams(paramsObj, url) {
@@ -144,12 +159,8 @@ var disconnect = function disconnect() {
   connection.api = null;
 };
 
-var ping =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(params) {
+var ping = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(params) {
     var request, response;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -193,12 +204,8 @@ var dataSource = function dataSource(opts) {
   return new DataSource(opts);
 };
 
-var predictors =
-/*#__PURE__*/
-function () {
-  var _ref2 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(params) {
+var predictors = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(params) {
     var mergeParams, request, response, rawData, predictorList;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -228,12 +235,8 @@ function () {
   };
 }();
 
-var dataSources =
-/*#__PURE__*/
-function () {
-  var _ref3 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee3(params) {
+var dataSources = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(params) {
     var mergeParams, request, response, rawData, dataSourceList;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
@@ -329,12 +332,8 @@ var Predictor = function Predictor(_data) {
 
   _defineProperty(this, "columns", null);
 
-  _defineProperty(this, "load",
-  /*#__PURE__*/
-  function () {
-    var _ref4 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee4(params) {
+  _defineProperty(this, "load", /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(params) {
       var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
@@ -363,12 +362,8 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "rename",
-  /*#__PURE__*/
-  function () {
-    var _ref5 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee5(params) {
+  _defineProperty(this, "rename", /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(params) {
       var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
@@ -396,12 +391,8 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "loadColumns",
-  /*#__PURE__*/
-  function () {
-    var _ref6 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee6(params) {
+  _defineProperty(this, "loadColumns", /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(params) {
       var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
@@ -430,12 +421,8 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "learn",
-  /*#__PURE__*/
-  function () {
-    var _ref8 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee7(_ref7, params) {
+  _defineProperty(this, "learn", /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(_ref7, params) {
       var dataSourceName, fromData, toPredict, kwargs, data, mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee7$(_context7) {
         while (1) {
@@ -478,12 +465,8 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "queryPredict",
-  /*#__PURE__*/
-  function () {
-    var _ref9 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee8(when, params) {
+  _defineProperty(this, "queryPredict", /*#__PURE__*/function () {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(when, params) {
       var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee8$(_context8) {
         while (1) {
@@ -513,12 +496,8 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "delete",
-  /*#__PURE__*/
-  function () {
-    var _ref10 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee9(params) {
+  _defineProperty(this, "delete", /*#__PURE__*/function () {
+    var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(params) {
       var mergeParams, request;
       return regeneratorRuntime.wrap(function _callee9$(_context9) {
         while (1) {
@@ -542,12 +521,8 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "upload",
-  /*#__PURE__*/
-  function () {
-    var _ref11 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee10(file, onProgress, params) {
+  _defineProperty(this, "upload", /*#__PURE__*/function () {
+    var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(file, onProgress, params) {
       var mergeParams, fd, config, request;
       return regeneratorRuntime.wrap(function _callee10$(_context10) {
         while (1) {
@@ -581,12 +556,8 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "download",
-  /*#__PURE__*/
-  function () {
-    var _ref12 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee11(params) {
+  _defineProperty(this, "download", /*#__PURE__*/function () {
+    var _ref12 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(params) {
       var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee11$(_context11) {
         while (1) {
@@ -651,12 +622,8 @@ var DataSource = function DataSource(_data2) {
 
   _defineProperty(this, "missedFileList", null);
 
-  _defineProperty(this, "load",
-  /*#__PURE__*/
-  function () {
-    var _ref13 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee12(params) {
+  _defineProperty(this, "load", /*#__PURE__*/function () {
+    var _ref13 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12(params) {
       var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee12$(_context12) {
         while (1) {
@@ -685,12 +652,8 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "upload",
-  /*#__PURE__*/
-  function () {
-    var _ref14 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee13(file, onProgress, params) {
+  _defineProperty(this, "upload", /*#__PURE__*/function () {
+    var _ref14 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee13(file, onProgress, params) {
       var mergeParams, fd, config, request;
       return regeneratorRuntime.wrap(function _callee13$(_context13) {
         while (1) {
@@ -729,12 +692,8 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "uploadFromUrl",
-  /*#__PURE__*/
-  function () {
-    var _ref15 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee14(url, params) {
+  _defineProperty(this, "uploadFromUrl", /*#__PURE__*/function () {
+    var _ref15 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee14(url, params) {
       var data, mergeParams, request;
       return regeneratorRuntime.wrap(function _callee14$(_context14) {
         while (1) {
@@ -765,12 +724,8 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "download",
-  /*#__PURE__*/
-  function () {
-    var _ref16 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee15(params) {
+  _defineProperty(this, "download", /*#__PURE__*/function () {
+    var _ref16 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee15(params) {
       var url, mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee15$(_context15) {
         while (1) {
@@ -806,12 +761,8 @@ var DataSource = function DataSource(_data2) {
     return _this2.source_type === "url" ? _this2.source : "".concat(connection.url, "/datasources/").concat(_this2.name, "/download");
   });
 
-  _defineProperty(this, "delete",
-  /*#__PURE__*/
-  function () {
-    var _ref17 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee16(params) {
+  _defineProperty(this, "delete", /*#__PURE__*/function () {
+    var _ref17 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee16(params) {
       var mergeParams, request;
       return regeneratorRuntime.wrap(function _callee16$(_context16) {
         while (1) {
@@ -835,12 +786,8 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "loadData",
-  /*#__PURE__*/
-  function () {
-    var _ref18 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee17(params) {
+  _defineProperty(this, "loadData", /*#__PURE__*/function () {
+    var _ref18 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee17(params) {
       var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee17$(_context17) {
         while (1) {
@@ -869,12 +816,8 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "loadDataQuality",
-  /*#__PURE__*/
-  function () {
-    var _ref19 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee18(params) {
+  _defineProperty(this, "loadDataQuality", /*#__PURE__*/function () {
+    var _ref19 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee18(params) {
       var mergeParams, request, response, data;
       return regeneratorRuntime.wrap(function _callee18$(_context18) {
         while (1) {
@@ -910,12 +853,8 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "loadMissedFileList",
-  /*#__PURE__*/
-  function () {
-    var _ref20 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee19(params) {
+  _defineProperty(this, "loadMissedFileList", /*#__PURE__*/function () {
+    var _ref20 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee19(params) {
       var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee19$(_context19) {
         while (1) {
@@ -944,12 +883,8 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "uploadFile",
-  /*#__PURE__*/
-  function () {
-    var _ref22 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee20(_ref21, params) {
+  _defineProperty(this, "uploadFile", /*#__PURE__*/function () {
+    var _ref22 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee20(_ref21, params) {
       var column, rowIndex, extension, file, fd, mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee20$(_context20) {
         while (1) {
