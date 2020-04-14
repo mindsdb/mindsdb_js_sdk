@@ -466,7 +466,7 @@ var Predictor = function Predictor(_data) {
   }());
 
   _defineProperty(this, "queryPredict", /*#__PURE__*/function () {
-    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(when, params) {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(when, params, format_flag_value) {
       var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee8$(_context8) {
         while (1) {
@@ -476,7 +476,8 @@ var Predictor = function Predictor(_data) {
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/predict"));
               _context8.next = 4;
               return connection.api.post(request, {
-                when: when
+                when: when,
+                format_flag: format_flag_value
               });
 
             case 4:
@@ -491,7 +492,7 @@ var Predictor = function Predictor(_data) {
       }, _callee8);
     }));
 
-    return function (_x9, _x10) {
+    return function (_x9, _x10, _x11) {
       return _ref9.apply(this, arguments);
     };
   }());
@@ -516,7 +517,7 @@ var Predictor = function Predictor(_data) {
       }, _callee9);
     }));
 
-    return function (_x11) {
+    return function (_x12) {
       return _ref10.apply(this, arguments);
     };
   }());
@@ -551,7 +552,7 @@ var Predictor = function Predictor(_data) {
       }, _callee10);
     }));
 
-    return function (_x12, _x13, _x14) {
+    return function (_x13, _x14, _x15) {
       return _ref11.apply(this, arguments);
     };
   }());
@@ -583,7 +584,7 @@ var Predictor = function Predictor(_data) {
       }, _callee11);
     }));
 
-    return function (_x15) {
+    return function (_x16) {
       return _ref12.apply(this, arguments);
     };
   }());
@@ -647,7 +648,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee12);
     }));
 
-    return function (_x16) {
+    return function (_x17) {
       return _ref13.apply(this, arguments);
     };
   }());
@@ -687,7 +688,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee13);
     }));
 
-    return function (_x17, _x18, _x19) {
+    return function (_x18, _x19, _x20) {
       return _ref14.apply(this, arguments);
     };
   }());
@@ -719,7 +720,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee14);
     }));
 
-    return function (_x20, _x21) {
+    return function (_x21, _x22) {
       return _ref15.apply(this, arguments);
     };
   }());
@@ -752,7 +753,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee15);
     }));
 
-    return function (_x22) {
+    return function (_x23) {
       return _ref16.apply(this, arguments);
     };
   }());
@@ -781,7 +782,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee16);
     }));
 
-    return function (_x23) {
+    return function (_x24) {
       return _ref17.apply(this, arguments);
     };
   }());
@@ -811,7 +812,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee17);
     }));
 
-    return function (_x24) {
+    return function (_x25) {
       return _ref18.apply(this, arguments);
     };
   }());
@@ -848,7 +849,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee18);
     }));
 
-    return function (_x25) {
+    return function (_x26) {
       return _ref19.apply(this, arguments);
     };
   }());
@@ -878,7 +879,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee19);
     }));
 
-    return function (_x26) {
+    return function (_x27) {
       return _ref20.apply(this, arguments);
     };
   }());
@@ -911,7 +912,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee20);
     }));
 
-    return function (_x27, _x28) {
+    return function (_x28, _x29) {
       return _ref22.apply(this, arguments);
     };
   }());

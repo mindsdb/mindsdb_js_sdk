@@ -182,7 +182,7 @@ class Predictor {
     return response.data;
   };
 
-  queryPredict = async (when, params) => {
+  queryPredict = async (when, params, format_flag_value) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -191,7 +191,7 @@ class Predictor {
       mergeParams,
       `/predictors/${this.name}/predict`
     );
-    const response = await connection.api.post(request, { when });
+    const response = await connection.api.post(request, { when, format_flag: format_flag_value });
 
     return response.data;
   };

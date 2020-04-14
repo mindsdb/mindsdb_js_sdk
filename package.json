@@ -1,14 +1,14 @@
 {
   "name": "mindsdb-js-sdk",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "MIT",
-  "homepage": "https://github.com/mindsdb/mindsdb_sdks#readme",
+  "homepage": "https://github.com/mindsdb/mindsdb_js_sdk#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mindsdb/mindsdb_sdks.git"
+    "url": "https://github.com/mindsdb/mindsdb_js_sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/mindsdb/mindsdb_sdks/issues"
+    "url": "https://github.com/mindsdb/mindsdb_js_sdk/issues"
   },
   "keywords": [
     "MindsDB",
