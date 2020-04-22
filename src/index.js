@@ -5,12 +5,12 @@ import { setQueryParams } from "./utils";
 const connection = {
   url: null,
   api: null,
-  token: { key: "apiKey", value: null },
+  token: { key: "apikey", value: null },
   version: 0.2
 };
 
 const connect = (url, params) => {
-  connection.token.value = params.find(param => param.key === "apiKey").value;
+  connection.token.value = params.find(param => param.key === "apikey").value;
   connection.url = setQueryParams([connection.token], url);
   connection.api = axios.create({
     baseURL: url,
@@ -20,7 +20,7 @@ const connect = (url, params) => {
 
 const disconnect = () => {
   connection.url = null;
-  connection.token = { key: "apiKey", value: null };
+  connection.token = { key: "apikey", value: null };
   connection.api = null;
 };
 

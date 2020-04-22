@@ -2094,7 +2094,7 @@ var connection = {
   url: null,
   api: null,
   token: {
-    key: "apiKey",
+    key: "apikey",
     value: null
   },
   version: 0.2
@@ -2102,7 +2102,7 @@ var connection = {
 
 var connect = function connect(url, params) {
   connection.token.value = params.find(function (param) {
-    return param.key === "apiKey";
+    return param.key === "apikey";
   }).value;
   connection.url = setQueryParams([connection.token], url);
   connection.api = axios$1.create({
@@ -2114,7 +2114,7 @@ var connect = function connect(url, params) {
 var disconnect = function disconnect() {
   connection.url = null;
   connection.token = {
-    key: "apiKey",
+    key: "apikey",
     value: null
   };
   connection.api = null;
