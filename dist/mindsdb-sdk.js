@@ -2079,11 +2079,6 @@ var setQueryParams = function setQueryParams(paramsObj, url) {
         params = params.concat(i > 0 ? "&".concat(kvp) : kvp);
       }
     });
-
-    if (url.slice(-1) === "/") {
-      url = url.substring(0, url.length - 1);
-    }
-
     return params.length > 0 ? url + "?" + params : url;
   }
 
@@ -2173,7 +2168,7 @@ var predictors = /*#__PURE__*/function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
-            request = setQueryParams(mergeParams, "/predictors");
+            request = setQueryParams(mergeParams, "/predictors/");
             _context2.next = 4;
             return connection.api.get(request);
 
@@ -2204,7 +2199,7 @@ var dataSources = /*#__PURE__*/function () {
         switch (_context3.prev = _context3.next) {
           case 0:
             mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
-            request = setQueryParams(mergeParams, "/datasources");
+            request = setQueryParams(mergeParams, "/datasources/");
             _context3.next = 4;
             return connection.api.get(request);
 
