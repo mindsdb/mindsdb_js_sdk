@@ -46,7 +46,7 @@ const predictors = async params => {
     ? [...params, connection.token]
     : [connection.token];
 
-  const request = setQueryParams(mergeParams, "/predictors");
+  const request = setQueryParams(mergeParams, "/predictors/");
   const response = await connection.api.get(request);
 
   const rawData = response.data || [];
@@ -59,7 +59,7 @@ const dataSources = async params => {
     ? [...params, connection.token]
     : [connection.token];
 
-  const request = setQueryParams(mergeParams, "/datasources");
+  const request = setQueryParams(mergeParams, "/datasources/");
   const response = await connection.api.get(request);
 
   const rawData = response.data || [];
@@ -122,13 +122,7 @@ class Predictor {
       ? [...params, connection.token]
       : [connection.token];
 
-    let url_path = `/predictors`
-
-    if( this.name !== undefined && this.name !== "") {
-      url_path +=`/${this.name}`;
-    }
-
-    const request = setQueryParams(mergeParams, url_path);
+    const request = setQueryParams(mergeParams, `/predictors/${this.name}`);
     const response = await connection.api.get(request);
 
     Object.assign(this, response.data);
@@ -278,13 +272,7 @@ class DataSource {
       ? [...params, connection.token]
       : [connection.token];
 
-    let url_path = `/datasources`
-
-    if( this.name !== undefined && this.name !== "") {
-      url_path +=`/${this.name}`;
-    }
-
-    const request = setQueryParams(mergeParams, url_path);
+    const request = setQueryParams(mergeParams, `/datasources/${this.name}`);
     const response = await connection.api.get(request);
     Object.assign(this, response.data);
     return this;

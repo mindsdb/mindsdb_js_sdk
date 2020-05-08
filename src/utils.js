@@ -12,10 +12,6 @@ export const setQueryParams = (paramsObj, url) => {
       }
     });
 
-    if (url.slice(-1) === "/") {
-      url = url.substring(0, url.length - 1);
-    }
-
     return params.length > 0 ? url + "?" + params : url;
   }
 
