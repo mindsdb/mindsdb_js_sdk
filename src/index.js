@@ -122,7 +122,12 @@ class Predictor {
       ? [...params, connection.token]
       : [connection.token];
 
-    const request = setQueryParams(mergeParams, `/predictors/${this.name}`);
+    let url_path = `/predictors}`;
+    if(this.name !== undefined && this.name !==  "" ) {
+      url_path += `/${this.name}`
+    }
+
+    const request = setQueryParams(mergeParams, url_path);
     const response = await connection.api.get(request);
 
     Object.assign(this, response.data);
