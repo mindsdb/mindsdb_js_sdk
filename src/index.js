@@ -301,7 +301,8 @@ class DataSource {
           );
           onProgress(percentCompleted);
         }
-      }
+      },
+      timeout: 600000
     };
 
     const request = setQueryParams(mergeParams, `/datasources/${this.name}`);
