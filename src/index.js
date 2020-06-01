@@ -384,7 +384,10 @@ class DataSource {
 
     let data;
     try {
-      data = response.data["data_analysis"]["input_columns_metadata"];
+      data = {
+        data_analysis_v1: response.data["data_analysis"]["input_columns_metadata"],
+        data_analysis_v2: response.data["data_analysis_v2"]
+      };
     } catch (error) {
       data = null;
     }
