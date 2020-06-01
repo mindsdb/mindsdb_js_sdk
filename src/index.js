@@ -5,12 +5,12 @@ import { setQueryParams } from "./utils";
 const connection = {
   url: null,
   api: null,
-  token: { key: "apiKey", value: null },
+  token: { key: "apikey", value: null },
   version: 0.2
 };
 
 const connect = (url, params) => {
-  connection.token.value = params.find(param => param.key === "apiKey").value;
+  connection.token.value = params.find(param => param.key === "apikey").value;
   connection.url = setQueryParams([connection.token], url);
   connection.api = axios.create({
     baseURL: url,
@@ -20,7 +20,7 @@ const connect = (url, params) => {
 
 const disconnect = () => {
   connection.url = null;
-  connection.token = { key: "apiKey", value: null };
+  connection.token = { key: "apikey", value: null };
   connection.api = null;
 };
 
@@ -46,7 +46,7 @@ const predictors = async params => {
     ? [...params, connection.token]
     : [connection.token];
 
-  const request = setQueryParams(mergeParams, "/predictors");
+  const request = setQueryParams(mergeParams, "/predictors/");
   const response = await connection.api.get(request);
 
   const rawData = response.data || [];
@@ -59,7 +59,7 @@ const dataSources = async params => {
     ? [...params, connection.token]
     : [connection.token];
 
-  const request = setQueryParams(mergeParams, "/datasources");
+  const request = setQueryParams(mergeParams, "/datasources/");
   const response = await connection.api.get(request);
 
   const rawData = response.data || [];
@@ -134,6 +134,20 @@ class Predictor {
     return this;
   };
 
+  rename = async params => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+
+    const request = setQueryParams(
+      mergeParams,
+      `/predictors/${params.oldName}/rename?new_name=${params.newName}`
+    );
+    const response = await connection.api.get(request);
+
+    return response.data;
+  };
+
   loadColumns = async params => {
     const mergeParams = params
       ? [...params, connection.token]
@@ -173,7 +187,7 @@ class Predictor {
     return response.data;
   };
 
-  queryPredict = async (when, params) => {
+  queryPredict = async (when, params, format_flag_value) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -182,7 +196,7 @@ class Predictor {
       mergeParams,
       `/predictors/${this.name}/predict`
     );
-    const response = await connection.api.post(request, { when });
+    const response = await connection.api.post(request, { when, format_flag: format_flag_value });
 
     return response.data;
   };
@@ -292,7 +306,8 @@ class DataSource {
           );
           onProgress(percentCompleted);
         }
-      }
+      },
+      timeout: 600000
     };
 
     const request = setQueryParams(mergeParams, `/datasources/${this.name}`);
