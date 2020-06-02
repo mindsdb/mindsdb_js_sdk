@@ -122,7 +122,7 @@ class Predictor {
       ? [...params, connection.token]
       : [connection.token];
 
-    let url_path = `/predictors}`;
+    let url_path = `/predictors/`;
     if(this.name !== undefined && this.name !==  "" ) {
       url_path += `/${this.name}`
     }
