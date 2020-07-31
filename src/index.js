@@ -40,6 +40,7 @@ const ping = async params => {
 
 const predictor = opts => new Predictor(opts);
 const dataSource = opts => new DataSource(opts);
+const database = opts => new DataBase(opts);
 
 const predictors = async params => {
   const mergeParams = params
@@ -429,6 +430,74 @@ class DataSource {
   };
 }
 
+class DataBase {
+  loaded = false;
+  source_type = "url";
+  integration = [];
+
+  constructor(data) {
+    Object.assign(this, data);
+  }
+
+  load = async params => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+      // const getDB = async (dbReq) => {
+      //   return await connection.api.get(dbReq)
+      // }
+      const response = []
+      // const dbResourcesRequest = setQueryParams(mergeParams, '/config/integrations');
+      // const dbResources = await connection.api.get(dbResourcesRequest);
+      const clickhouseRequest = setQueryParams(mergeParams, '/config/integrations/default_clickhouse');
+      const mariadbRequest = setQueryParams(mergeParams, '/config/integrations/default_mariadb');
+      try {
+        const mariadb = await connection.api.get(mariadbRequest); 
+        if (mariadb.status === 200) await response.push(mariadb.data)
+      } catch (error) {
+        console.error(error)
+      }
+      try {
+        const clickhouse = await connection.api.get(clickhouseRequest); 
+        if (clickhouse.status === 200)  await response.push(clickhouse.data)
+      } catch (error) {
+        console.error(error)
+      }
+      // response = await dbResources.data.integrations.map( async integration => {
+      //   const request = setQueryParams(mergeParams, `/config/integrations/${integration}`); 
+      //   const infoDB = await getDB(request)
+      //   return infoDB.data
+      // })
+      Object.assign(this, [response ]);
+      return this;
+  };
+
+  delete = async params => {
+    await connection.api.delete( `/config/integrations/${params.type}`);
+  };
+
+  create = async (data, params) => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+    const request = setQueryParams(mergeParams, `/config/integrations/${data.params.type}`);
+    const response = await connection.api.put(request, data);
+
+    return response.data;
+  };
+
+  create = async (data, params) => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+    const request = setQueryParams(mergeParams, `/config/integrations/${data.params.type}`);
+    const response = await connection.api.post(request, data);
+
+    return response.data;
+  };
+
+}
+
 const MindsDB = {
   connect,
   disconnect,
@@ -436,7 +505,8 @@ const MindsDB = {
   predictors,
   dataSources,
   DataSource: dataSource,
-  Predictor: predictor
+  Predictor: predictor,
+  DataBase: database
 };
 
 /* eslint-enable */
