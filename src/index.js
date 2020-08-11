@@ -443,37 +443,23 @@ class DataBase {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
-      // const getDB = async (dbReq) => {
-      //   return await connection.api.get(dbReq)
-      // }
-      const response = []
-      // const dbResourcesRequest = setQueryParams(mergeParams, '/config/integrations');
-      // const dbResources = await connection.api.get(dbResourcesRequest);
-      const clickhouseRequest = setQueryParams(mergeParams, '/config/integrations/default_clickhouse');
-      const mariadbRequest = setQueryParams(mergeParams, '/config/integrations/default_mariadb');
       try {
-        const mariadb = await connection.api.get(mariadbRequest); 
-        if (mariadb.status === 200) await response.push(mariadb.data)
+        const deRequest = setQueryParams(mergeParams, 'config/all_integrations');
+        const response = await connection.api.get(deRequest); 
+        Object.assign(this, response);
+        return this;
       } catch (error) {
+        Object.assign(this, {error : error});
         console.error(error)
       }
-      try {
-        const clickhouse = await connection.api.get(clickhouseRequest); 
-        if (clickhouse.status === 200)  await response.push(clickhouse.data)
-      } catch (error) {
-        console.error(error)
-      }
-      // response = await dbResources.data.integrations.map( async integration => {
-      //   const request = setQueryParams(mergeParams, `/config/integrations/${integration}`); 
-      //   const infoDB = await getDB(request)
-      //   return infoDB.data
-      // })
-      Object.assign(this, [response ]);
-      return this;
   };
 
   delete = async params => {
-    await connection.api.delete( `/config/integrations/${params.type}`);
+    await connection.api.delete( `/config/integrations/${params.db_name}`);
+  };
+
+  check = async params => {
+    await connection.api.get( `/config/integrations/${params.db_name}/check`);
   };
 
   create = async (data, params) => {
