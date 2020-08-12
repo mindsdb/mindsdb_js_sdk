@@ -387,7 +387,8 @@ class DataSource {
     try {
       data = {
         data_analysis_v1: response.data["data_analysis"]["input_columns_metadata"],
-        data_analysis_v2: response.data["data_analysis_v2"]
+        data_analysis_v2: response.data["data_analysis_v2"],
+        status: response.data && response.data.status
       };
     } catch (error) {
       data = null;
