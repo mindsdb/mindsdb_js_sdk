@@ -391,7 +391,10 @@ class DataSource {
         status: response.data && response.data.status
       };
     } catch (error) {
-      data = null;
+      data = {
+        error: error.message,
+        status: response.data && response.data.status
+      };
     }
     this.dataQuality = data;
 

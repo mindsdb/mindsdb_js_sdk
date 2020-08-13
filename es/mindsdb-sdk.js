@@ -902,7 +902,10 @@ var DataSource = function DataSource(_data2) {
                   status: response.data && response.data.status
                 };
               } catch (error) {
-                data = null;
+                data = {
+                  error: error.message,
+                  status: response.data && response.data.status
+                };
               }
 
               _this2.dataQuality = data;
