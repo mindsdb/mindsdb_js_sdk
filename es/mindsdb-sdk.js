@@ -1107,7 +1107,7 @@ var DataBase = function DataBase(_data3) {
     };
   }());
 
-  _defineProperty(this, "create",
+  _defineProperty(this, "edit",
   /*#__PURE__*/
   function () {
     var _ref26 = _asyncToGenerator(
@@ -1119,9 +1119,9 @@ var DataBase = function DataBase(_data3) {
           switch (_context24.prev = _context24.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.type));
+              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.database_name));
               _context24.next = 4;
-              return connection.api.put(request, data);
+              return connection.api.post(request, data);
 
             case 4:
               response = _context24.sent;
@@ -1170,6 +1170,39 @@ var DataBase = function DataBase(_data3) {
 
     return function (_x35, _x36) {
       return _ref27.apply(this, arguments);
+    };
+  }());
+
+  _defineProperty(this, "newDataset",
+  /*#__PURE__*/
+  function () {
+    var _ref28 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee26(data, params, database_name) {
+      var mergeParams, request, response;
+      return regeneratorRuntime.wrap(function _callee26$(_context26) {
+        while (1) {
+          switch (_context26.prev = _context26.next) {
+            case 0:
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              request = setQueryParams(mergeParams, "/config/integrations/".concat(database_name, "/query"));
+              _context26.next = 4;
+              return connection.api.post(request, data);
+
+            case 4:
+              response = _context26.sent;
+              return _context26.abrupt("return", response.data);
+
+            case 6:
+            case "end":
+              return _context26.stop();
+          }
+        }
+      }, _callee26);
+    }));
+
+    return function (_x37, _x38, _x39) {
+      return _ref28.apply(this, arguments);
     };
   }());
 

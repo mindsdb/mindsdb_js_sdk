@@ -466,12 +466,12 @@ class DataBase {
     return await connection.api.get( `/config/integrations/${params.database_name}/check`);
   };
 
-  create = async (data, params) => {
+  edit = async (data, params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
-    const request = setQueryParams(mergeParams, `/config/integrations/${data.params.type}`);
-    const response = await connection.api.put(request, data);
+    const request = setQueryParams(mergeParams, `/config/integrations/${data.params.database_name}`);
+    const response = await connection.api.post(request, data);
 
     return response.data;
   };
@@ -482,6 +482,16 @@ class DataBase {
       : [connection.token];
     const request = setQueryParams(mergeParams, `/config/integrations/${data.params.database_name}`);
     const response = await connection.api.put(request, data);
+
+    return response.data;
+  };
+
+  newDataset = async (data, params, database_name) => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+    const request = setQueryParams(mergeParams, `/config/integrations/${database_name}/query`);
+    const response = await connection.api.post(request, data);
 
     return response.data;
   };
