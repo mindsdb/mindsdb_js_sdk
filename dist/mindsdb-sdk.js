@@ -3149,26 +3149,31 @@ var DataBase = function DataBase(_data3) {
     var _ref28 = asyncToGenerator(
     /*#__PURE__*/
     regenerator.mark(function _callee26(data, params, database_name) {
-      var mergeParams, request, response;
+      var mergeParams, request;
       return regenerator.wrap(function _callee26$(_context26) {
         while (1) {
           switch (_context26.prev = _context26.next) {
             case 0:
               mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
+              _context26.prev = 1;
               request = setQueryParams(mergeParams, "/config/integrations/".concat(database_name, "/query"));
-              _context26.next = 4;
+              _context26.next = 5;
               return connection.api.post(request, data);
 
-            case 4:
-              response = _context26.sent;
-              return _context26.abrupt("return", response.data);
+            case 5:
+              return _context26.abrupt("return", _context26.sent);
 
-            case 6:
+            case 8:
+              _context26.prev = 8;
+              _context26.t0 = _context26["catch"](1);
+              return _context26.abrupt("return", _context26.t0);
+
+            case 11:
             case "end":
               return _context26.stop();
           }
         }
-      }, _callee26);
+      }, _callee26, null, [[1, 8]]);
     }));
 
     return function (_x37, _x38, _x39) {

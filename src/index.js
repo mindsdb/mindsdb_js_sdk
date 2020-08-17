@@ -490,10 +490,12 @@ class DataBase {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
-    const request = setQueryParams(mergeParams, `/config/integrations/${database_name}/query`);
-    const response = await connection.api.post(request, data);
-
-    return response.data;
+    try {
+      const request = setQueryParams(mergeParams, `/config/integrations/${database_name}/query`);
+      return await connection.api.post(request, data);
+    } catch (error) {
+      return error; 
+    }
   };
 
 }
