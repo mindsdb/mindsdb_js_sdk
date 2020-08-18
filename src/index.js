@@ -491,7 +491,7 @@ class DataBase {
       ? [...params, connection.token]
       : [connection.token];
     try {
-      const request = setQueryParams(mergeParams, `/datasources/${data.params.database_name}`);
+      const request = setQueryParams(mergeParams, `/datasources/${data.name}`);
       return await connection.api.put(request, data);
     } catch (error) {
       return error; 
