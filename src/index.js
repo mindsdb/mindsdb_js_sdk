@@ -486,13 +486,13 @@ class DataBase {
     return response.data;
   };
 
-  newDataset = async (data, params, database_name) => {
+  newDataset = async (data, params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
     try {
-      const request = setQueryParams(mergeParams, `/config/integrations/${database_name}/query`);
-      return await connection.api.post(request, data);
+      const request = setQueryParams(mergeParams, `/datasources/${data.params.database_name}`);
+      return await connection.api.put(request, data);
     } catch (error) {
       return error; 
     }
