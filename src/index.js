@@ -381,23 +381,19 @@ class DataSource {
       mergeParams,
       `/datasources/${this.name}/analyze`
     );
-    const response = await connection.api.get(request);
-
     let data;
-    try {
+    try { 
+      const response = await connection.api.get(request);
       data = {
-        data_analysis_v1: response.data["data_analysis"]["input_columns_metadata"],
-        data_analysis_v2: response.data["data_analysis_v2"],
+        data_analysis_v1: response.data["data_analysis"] ? response.data["data_analysis"]["input_columns_metadata"] : [],
+        data_analysis_v2: response.data["data_analysis"] ? response.data["data_analysis_v2"] : [],
         status: response.data && response.data.status
-      };
+      }; 
     } catch (error) {
-      data = {
-        error: error.message,
-        status: response.data && response.data.status
-      };
+      Object.assign(this, {error : error});
+      console.error(error)
     }
     this.dataQuality = data;
-
     return data;
   };
 
