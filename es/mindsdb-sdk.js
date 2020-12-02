@@ -91,33 +91,6 @@ function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance");
 }
 
-var connection = {
-  url: null,
-  api: null,
-  token: {
-    key: "apikey",
-    value: null
-  },
-  version: 0.2
-};
-var connect = function connect(url, params) {
-  connection.token.value = params.find(function (param) {
-    return param.key === "apikey";
-  }).value;
-  connection.url = setQueryParams([connection.token], url);
-  connection.api = axios.create({
-    baseURL: url,
-    timeout: 20000
-  });
-};
-var disconnect = function disconnect() {
-  connection.url = null;
-  connection.token = {
-    key: "apikey",
-    value: null
-  };
-  connection.api = null;
-};
 var setQueryParams = function setQueryParams(paramsObj, url) {
   var params = "";
 
@@ -165,6 +138,142 @@ var saveFile = function saveFile(response, source) {
   link.remove();
   window.URL.revokeObjectURL(url);
 };
+
+var connection = {
+  url: null,
+  api: null,
+  token: {
+    key: "apikey",
+    value: null
+  },
+  version: 0.2
+};
+var connect = function connect(url, params) {
+  connection.token.value = params.find(function (param) {
+    return param.key === "apikey";
+  }).value;
+  connection.url = setQueryParams([connection.token], url);
+  connection.api = axios.create({
+    baseURL: url,
+    timeout: 20000
+  });
+};
+var disconnect = function disconnect() {
+  connection.url = null;
+  connection.token = {
+    key: "apikey",
+    value: null
+  };
+  connection.api = null;
+};
+var ping =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(params) {
+    var request, response;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            request = setQueryParams([connection.token], "/util/ping");
+            _context.next = 3;
+            return connection.api.get(request);
+
+          case 3:
+            response = _context.sent;
+
+            if (!(response.status === 200 && _typeof(response.data) === "object" && response.data.status === "ok")) {
+              _context.next = 6;
+              break;
+            }
+
+            return _context.abrupt("return", true);
+
+          case 6:
+            return _context.abrupt("return", false);
+
+          case 7:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function ping(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var predictors =
+/*#__PURE__*/
+function () {
+  var _ref2 = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(params) {
+    var mergeParams, request, response, rawData, predictorList;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+            request = setQueryParams(mergeParams, "/predictors/");
+            _context2.next = 4;
+            return connection.api.get(request);
+
+          case 4:
+            response = _context2.sent;
+            rawData = response.data || [];
+            predictorList = rawData.map(predictor);
+            return _context2.abrupt("return", predictorList);
+
+          case 8:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function predictors(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var dataSources =
+/*#__PURE__*/
+function () {
+  var _ref3 = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee3(params) {
+    var mergeParams, request, response, rawData, dataSourceList;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+            request = setQueryParams(mergeParams, "/datasources/");
+            _context3.next = 4;
+            return connection.api.get(request);
+
+          case 4:
+            response = _context3.sent;
+            rawData = response.data || [];
+            dataSourceList = rawData.map(dataSource);
+            return _context3.abrupt("return", dataSourceList);
+
+          case 8:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function dataSources(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
 
 var DataBase = function DataBase(_data) {
   var _this = this;
@@ -1091,52 +1200,11 @@ var Predictor = function Predictor(_data) {
   Object.assign(this, _data);
 };
 
-var ping =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(params) {
-    var request, response;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            request = setQueryParams([connection.token], "/util/ping");
-            _context.next = 3;
-            return connection.api.get(request);
-
-          case 3:
-            response = _context.sent;
-
-            if (!(response.status === 200 && _typeof(response.data) === "object" && response.data.status === "ok")) {
-              _context.next = 6;
-              break;
-            }
-
-            return _context.abrupt("return", true);
-
-          case 6:
-            return _context.abrupt("return", false);
-
-          case 7:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function ping(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-var predictor = function predictor(opts) {
+var predictor$1 = function predictor(opts) {
   return new Predictor(opts);
 };
 
-var dataSource = function dataSource(opts) {
+var dataSource$1 = function dataSource(opts) {
   return new DataSource(opts);
 };
 
@@ -1144,84 +1212,14 @@ var database = function database(opts) {
   return new DataBase(opts);
 };
 
-var predictors =
-/*#__PURE__*/
-function () {
-  var _ref2 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(params) {
-    var mergeParams, request, response, rawData, predictorList;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-            request = setQueryParams(mergeParams, "/predictors/");
-            _context2.next = 4;
-            return connection.api.get(request);
-
-          case 4:
-            response = _context2.sent;
-            rawData = response.data || [];
-            predictorList = rawData.map(predictor);
-            return _context2.abrupt("return", predictorList);
-
-          case 8:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2);
-  }));
-
-  return function predictors(_x2) {
-    return _ref2.apply(this, arguments);
-  };
-}();
-
-var dataSources =
-/*#__PURE__*/
-function () {
-  var _ref3 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee3(params) {
-    var mergeParams, request, response, rawData, dataSourceList;
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-            request = setQueryParams(mergeParams, "/datasources/");
-            _context3.next = 4;
-            return connection.api.get(request);
-
-          case 4:
-            response = _context3.sent;
-            rawData = response.data || [];
-            dataSourceList = rawData.map(dataSource);
-            return _context3.abrupt("return", dataSourceList);
-
-          case 8:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3);
-  }));
-
-  return function dataSources(_x3) {
-    return _ref3.apply(this, arguments);
-  };
-}();
-
 var MindsDB = {
   connect: connect,
   disconnect: disconnect,
   ping: ping,
   predictors: predictors,
   dataSources: dataSources,
-  DataSource: dataSource,
-  Predictor: predictor,
+  DataSource: dataSource$1,
+  Predictor: predictor$1,
   DataBase: database
 };
 

@@ -1,27 +1,3 @@
-import axios from "axios";
-
-export const connection = {
-  url: null,
-  api: null,
-  token: { key: "apikey", value: null },
-  version: 0.2
-};
-
-export const connect = (url, params) => {
-  connection.token.value = params.find(param => param.key === "apikey").value;
-  connection.url = setQueryParams([connection.token], url);
-  connection.api = axios.create({
-    baseURL: url,
-    timeout: 20000
-  });
-};
-
-export const disconnect = () => {
-  connection.url = null;
-  connection.token = { key: "apikey", value: null };
-  connection.api = null;
-};
-
 export const setQueryParams = (paramsObj, url) => {
   let params = "";
 

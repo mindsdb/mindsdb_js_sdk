@@ -4,36 +4,6 @@ typeof define === 'function' && define.amd ? define(factory) :
 (global = global || self, global['MindsDB-sdk'] = factory());
 }(this, function () { 'use strict';
 
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-
-var arrayWithoutHoles = _arrayWithoutHoles;
-
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-var iterableToArray = _iterableToArray;
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
-var nonIterableSpread = _nonIterableSpread;
-
-function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
-}
-
-var toConsumableArray = _toConsumableArray;
-
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
@@ -747,37 +717,35 @@ try {
 
 var regenerator = runtime_1;
 
-var _typeof_1 = createCommonjsModule(function (module) {
-function _typeof2(obj) {
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof2 = function _typeof2(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof2 = function _typeof2(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
 
-  return _typeof2(obj);
+    return arr2;
+  }
 }
 
-function _typeof(obj) {
-  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return _typeof2(obj);
-    };
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
-    };
-  }
+var arrayWithoutHoles = _arrayWithoutHoles;
 
-  return _typeof(obj);
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
 }
 
-module.exports = _typeof;
-});
+var iterableToArray = _iterableToArray;
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+var nonIterableSpread = _nonIterableSpread;
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+}
+
+var toConsumableArray = _toConsumableArray;
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -841,6 +809,86 @@ function _defineProperty(obj, key, value) {
 }
 
 var defineProperty = _defineProperty;
+
+var setQueryParams = function setQueryParams(paramsObj, url) {
+  var params = "";
+
+  if (paramsObj) {
+    paramsObj.forEach(function (item, i) {
+      if (item.value) {
+        var key = encodeURIComponent(item.key);
+        var value = encodeURIComponent(item.value);
+        var kvp = key + "=" + value;
+        params = params.concat(i > 0 ? "&".concat(kvp) : kvp);
+      }
+    });
+    return params.length > 0 ? url + "?" + params : url;
+  }
+
+  return url;
+};
+var saveFile = function saveFile(response, source) {
+  var url = window.URL.createObjectURL(new Blob([response.data]));
+  var link = document.createElement("a");
+  link.href = url;
+  var contentDisposition = response.headers["content-disposition"];
+  var fileName = null;
+
+  if (contentDisposition) {
+    var fileNameMatch = contentDisposition.match(/filename="?(.+)"?/);
+
+    if (fileNameMatch.length === 2) {
+      fileName = fileNameMatch[1];
+    }
+  }
+
+  if (!fileName && source) {
+    var parts = source.split("/");
+    var end = parts[parts.length - 1];
+    parts = end.split("\\");
+    end = parts[parts.length - 1];
+    fileName = end;
+  }
+
+  fileName = fileName || "unknown";
+  link.setAttribute("download", fileName);
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.URL.revokeObjectURL(url);
+};
+
+var _typeof_1 = createCommonjsModule(function (module) {
+function _typeof2(obj) {
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof2 = function _typeof2(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof2 = function _typeof2(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof2(obj);
+}
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+});
 
 var bind = function bind(fn, thisArg) {
   return function wrap() {
@@ -2088,53 +2136,114 @@ var disconnect = function disconnect() {
   };
   connection.api = null;
 };
-var setQueryParams = function setQueryParams(paramsObj, url) {
-  var params = "";
+var ping =
+/*#__PURE__*/
+function () {
+  var _ref = asyncToGenerator(
+  /*#__PURE__*/
+  regenerator.mark(function _callee(params) {
+    var request, response;
+    return regenerator.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            request = setQueryParams([connection.token], "/util/ping");
+            _context.next = 3;
+            return connection.api.get(request);
 
-  if (paramsObj) {
-    paramsObj.forEach(function (item, i) {
-      if (item.value) {
-        var key = encodeURIComponent(item.key);
-        var value = encodeURIComponent(item.value);
-        var kvp = key + "=" + value;
-        params = params.concat(i > 0 ? "&".concat(kvp) : kvp);
+          case 3:
+            response = _context.sent;
+
+            if (!(response.status === 200 && _typeof_1(response.data) === "object" && response.data.status === "ok")) {
+              _context.next = 6;
+              break;
+            }
+
+            return _context.abrupt("return", true);
+
+          case 6:
+            return _context.abrupt("return", false);
+
+          case 7:
+          case "end":
+            return _context.stop();
+        }
       }
-    });
-    return params.length > 0 ? url + "?" + params : url;
-  }
+    }, _callee);
+  }));
 
-  return url;
-};
-var saveFile = function saveFile(response, source) {
-  var url = window.URL.createObjectURL(new Blob([response.data]));
-  var link = document.createElement("a");
-  link.href = url;
-  var contentDisposition = response.headers["content-disposition"];
-  var fileName = null;
+  return function ping(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var predictors =
+/*#__PURE__*/
+function () {
+  var _ref2 = asyncToGenerator(
+  /*#__PURE__*/
+  regenerator.mark(function _callee2(params) {
+    var mergeParams, request, response, rawData, predictorList;
+    return regenerator.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
+            request = setQueryParams(mergeParams, "/predictors/");
+            _context2.next = 4;
+            return connection.api.get(request);
 
-  if (contentDisposition) {
-    var fileNameMatch = contentDisposition.match(/filename="?(.+)"?/);
+          case 4:
+            response = _context2.sent;
+            rawData = response.data || [];
+            predictorList = rawData.map(predictor);
+            return _context2.abrupt("return", predictorList);
 
-    if (fileNameMatch.length === 2) {
-      fileName = fileNameMatch[1];
-    }
-  }
+          case 8:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
 
-  if (!fileName && source) {
-    var parts = source.split("/");
-    var end = parts[parts.length - 1];
-    parts = end.split("\\");
-    end = parts[parts.length - 1];
-    fileName = end;
-  }
+  return function predictors(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var dataSources =
+/*#__PURE__*/
+function () {
+  var _ref3 = asyncToGenerator(
+  /*#__PURE__*/
+  regenerator.mark(function _callee3(params) {
+    var mergeParams, request, response, rawData, dataSourceList;
+    return regenerator.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
+            request = setQueryParams(mergeParams, "/datasources/");
+            _context3.next = 4;
+            return connection.api.get(request);
 
-  fileName = fileName || "unknown";
-  link.setAttribute("download", fileName);
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  window.URL.revokeObjectURL(url);
-};
+          case 4:
+            response = _context3.sent;
+            rawData = response.data || [];
+            dataSourceList = rawData.map(dataSource);
+            return _context3.abrupt("return", dataSourceList);
+
+          case 8:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function dataSources(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
 
 var DataBase = function DataBase(_data) {
   var _this = this;
@@ -3061,52 +3170,11 @@ var Predictor = function Predictor(_data) {
   Object.assign(this, _data);
 };
 
-var ping =
-/*#__PURE__*/
-function () {
-  var _ref = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee(params) {
-    var request, response;
-    return regenerator.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            request = setQueryParams([connection.token], "/util/ping");
-            _context.next = 3;
-            return connection.api.get(request);
-
-          case 3:
-            response = _context.sent;
-
-            if (!(response.status === 200 && _typeof_1(response.data) === "object" && response.data.status === "ok")) {
-              _context.next = 6;
-              break;
-            }
-
-            return _context.abrupt("return", true);
-
-          case 6:
-            return _context.abrupt("return", false);
-
-          case 7:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function ping(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-var predictor = function predictor(opts) {
+var predictor$1 = function predictor(opts) {
   return new Predictor(opts);
 };
 
-var dataSource = function dataSource(opts) {
+var dataSource$1 = function dataSource(opts) {
   return new DataSource(opts);
 };
 
@@ -3114,84 +3182,14 @@ var database = function database(opts) {
   return new DataBase(opts);
 };
 
-var predictors =
-/*#__PURE__*/
-function () {
-  var _ref2 = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee2(params) {
-    var mergeParams, request, response, rawData, predictorList;
-    return regenerator.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
-            request = setQueryParams(mergeParams, "/predictors/");
-            _context2.next = 4;
-            return connection.api.get(request);
-
-          case 4:
-            response = _context2.sent;
-            rawData = response.data || [];
-            predictorList = rawData.map(predictor);
-            return _context2.abrupt("return", predictorList);
-
-          case 8:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2);
-  }));
-
-  return function predictors(_x2) {
-    return _ref2.apply(this, arguments);
-  };
-}();
-
-var dataSources =
-/*#__PURE__*/
-function () {
-  var _ref3 = asyncToGenerator(
-  /*#__PURE__*/
-  regenerator.mark(function _callee3(params) {
-    var mergeParams, request, response, rawData, dataSourceList;
-    return regenerator.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
-            request = setQueryParams(mergeParams, "/datasources/");
-            _context3.next = 4;
-            return connection.api.get(request);
-
-          case 4:
-            response = _context3.sent;
-            rawData = response.data || [];
-            dataSourceList = rawData.map(dataSource);
-            return _context3.abrupt("return", dataSourceList);
-
-          case 8:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3);
-  }));
-
-  return function dataSources(_x3) {
-    return _ref3.apply(this, arguments);
-  };
-}();
-
 var MindsDB = {
   connect: connect,
   disconnect: disconnect,
   ping: ping,
   predictors: predictors,
   dataSources: dataSources,
-  DataSource: dataSource,
-  Predictor: predictor,
+  DataSource: dataSource$1,
+  Predictor: predictor$1,
   DataBase: database
 };
 

@@ -1,6 +1,6 @@
+import { setQueryParams, saveFile } from '../utils';
+import { connection } from './commons';
 
-import { setQueryParams, connection, saveFile } from "./utils";
-  
 class DataSource {
   loaded = false;
   source_type = "url";
@@ -18,7 +18,7 @@ class DataSource {
     Object.assign(this, data);
   }
 
-  load = async params => {
+  load = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -28,8 +28,6 @@ class DataSource {
     Object.assign(this, response.data);
     return this;
   };
-
-  // setSource = () => {};
 
   upload = async (file, onProgress, params) => {
     this.source_type = "file";
@@ -77,7 +75,7 @@ class DataSource {
     await connection.api.put(request, data);
   };
 
-  download = async params => {
+  download = async (params) => {
     const url = this.getDownloadUrl();
     const mergeParams = params
       ? [...params, connection.token]
@@ -96,7 +94,7 @@ class DataSource {
       ? this.source
       : `${connection.url}/datasources/${this.name}/download`;
 
-  delete = async params => {
+  delete = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -104,7 +102,7 @@ class DataSource {
     await connection.api.delete(request);
   };
 
-  loadData = async params => {
+  loadData = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -118,7 +116,7 @@ class DataSource {
     return this.data;
   };
 
-  loadDataQuality = async params => {
+  loadDataQuality = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -142,7 +140,7 @@ class DataSource {
     return data;
   };
 
-  loadMissedFileList = async params => {
+  loadMissedFileList = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];

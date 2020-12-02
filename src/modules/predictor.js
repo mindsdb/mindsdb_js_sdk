@@ -1,7 +1,5 @@
-import { 
-  setQueryParams,
-  connection,
-  saveFile } from "./utils";
+import { setQueryParams, saveFile } from '../utils';
+import { connection } from './commons';
 
 class Predictor {
   loaded = false;
@@ -25,7 +23,7 @@ class Predictor {
     Object.assign(this, data);
   }
 
-  load = async params => {
+  load = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -42,7 +40,7 @@ class Predictor {
     return this;
   };
 
-  rename = async params => {
+  rename = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -56,7 +54,7 @@ class Predictor {
     return response.data;
   };
 
-  loadColumns = async params => {
+  loadColumns = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -109,7 +107,7 @@ class Predictor {
     return response.data;
   };
 
-  delete = async params => {
+  delete = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -141,7 +139,7 @@ class Predictor {
     await connection.api.post(request, fd, config);
   };
 
-  download = async params => {
+  download = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];

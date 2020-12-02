@@ -1,4 +1,5 @@
-import { setQueryParams, connection} from "./utils";
+import { setQueryParams } from "../utils";
+import { connection } from './commons';
 
 class DataBase {
   loaded = false;
@@ -9,7 +10,7 @@ class DataBase {
     Object.assign(this, data);
   }
 
-  load = async params => {
+  load = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
@@ -24,11 +25,11 @@ class DataBase {
       }
   };
 
-  delete = async params => {
+  delete = async (params) => {
     await connection.api.delete( `/config/integrations/${params.db_name}`);
   };
 
-  check = async params => {
+  check = async (params) => {
     return await connection.api.get( `/config/integrations/${params.database_name}/check`);
   };
 
