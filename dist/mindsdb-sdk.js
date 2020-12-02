@@ -2095,8 +2095,7 @@ var connect = function connect(url, params) {
   }).value;
   connection.url = setQueryParams([connection.token], url);
   connection.api = axios$1.create({
-    baseURL: url,
-    timeout: 20000
+    baseURL: url
   });
 };
 
