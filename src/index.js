@@ -384,9 +384,11 @@ class DataSource {
     try { 
       const response = await connection.api.get(request);
       data = {
-        data_analysis_v1: response.data["data_analysis"] ? response.data["data_analysis"]["input_columns_metadata"] : [],
-        data_analysis_v2: response.data["data_analysis"] ? response.data["data_analysis_v2"] : [],
-        status: response.data && response.data.status
+        data_preparation: response.data["data_preparation"],
+        data_analysis_v2: response.data["data_analysis_v2"],
+        current_phase: response.data["current_phase"],
+        versionNative: response.data["version"],
+        status: response.data && response.data.status,
       }; 
     } catch (error) {
       Object.assign(this, {error : error});
