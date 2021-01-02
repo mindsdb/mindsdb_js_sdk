@@ -124,7 +124,7 @@ class Predictor {
 
     let url_path = `/predictors/`;
     if(this.name !== undefined && this.name !==  "" ) {
-      url_path += `/${this.name}`
+      url_path += `${this.name}`
     }
 
     const request = setQueryParams(mergeParams, url_path);
