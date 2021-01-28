@@ -1,6 +1,6 @@
 {
   "name": "mindsdb-js-sdk",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "license": "MIT",
   "homepage": "https://github.com/mindsdb/mindsdb_js_sdk#readme",
   "repository": {
@@ -31,19 +31,19 @@
     "build": "npm run clean && rollup -c"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/plugin-transform-runtime": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@babel/runtime": "^7.4.4",
-    "rimraf": "^2.6.3",
-    "rollup": "^1.11.3",
-    "rollup-plugin-babel": "^4.3.2",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/runtime": "^7.12.5",
+    "rimraf": "^2.7.1",
+    "rollup": "^1.32.1",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-node-resolve": "^4.2.4",
     "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-terser": "^5.3.0"
+    "rollup-plugin-terser": "^5.3.1"
   },
   "dependencies": {
     "axios": "^0.21.1",
