@@ -37,6 +37,16 @@ const ping = async params => {
   return false;
 };
 
+const logs = async (params) => {
+  const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+  const request = setQueryParams(mergeParams, "/config/logs");
+  const response = await connection.api.get(request);
+
+  return response.data;
+};
+
 const predictor = opts => new Predictor(opts);
 const dataSource = opts => new DataSource(opts);
 const database = opts => new DataBase(opts);
@@ -501,6 +511,7 @@ const MindsDB = {
   connect,
   disconnect,
   ping,
+  logs,
   predictors,
   dataSources,
   DataSource: dataSource,
