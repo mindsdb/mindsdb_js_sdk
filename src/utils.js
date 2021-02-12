@@ -5,7 +5,8 @@ export const setQueryParams = (paramsObj, url) => {
     paramsObj.forEach((item, i) => {
       if (item.value) {
         const key = encodeURIComponent(item.key);
-        const value = encodeURIComponent(item.value);
+        const value = !item.noEncodeURIComponent ?
+          encodeURIComponent(item.value) : item.value;
 
         const kvp = key + "=" + value;
         params = params.concat(i > 0 ? `&${kvp}` : kvp);
