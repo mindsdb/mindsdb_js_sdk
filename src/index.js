@@ -400,6 +400,7 @@ class DataSource {
       data = {
         data_preparation: response.data["data_preparation"],
         data_analysis_v2: response.data["data_analysis_v2"],
+        useable_input_columns: response.data["useable_input_columns"],
         current_phase: response.data["current_phase"],
         versionNative: response.data["version"],
         status: response.data && response.data.status,
