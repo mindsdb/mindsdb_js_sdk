@@ -23,7 +23,7 @@ const disconnect = () => {
   connection.api = null;
 };
 
-const ping = async params => {
+const ping = async (params) => {
   const request = setQueryParams([connection.token], "/util/ping");
   const response = await connection.api.get(request);
 
@@ -44,8 +44,8 @@ const logs = async (params) => {
   return response.data;
 };
 
-const dependencies = async (params) => {
-  const request = setQueryParams([...params, connection.token], "/config/install_options");
+const dependencies = async () => {
+  const request = setQueryParams([connection.token], "/config/install_options");
   const response = await connection.api.get(request);
 
   return response.data;

@@ -219,13 +219,13 @@ var logs = /*#__PURE__*/function () {
 }();
 
 var dependencies = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(params) {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
     var request, response;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/config/install_options");
+            request = setQueryParams([connection.token], "/config/install_options");
             _context3.next = 3;
             return connection.api.get(request);
 
@@ -241,7 +241,7 @@ var dependencies = /*#__PURE__*/function () {
     }, _callee3);
   }));
 
-  return function dependencies(_x3) {
+  return function dependencies() {
     return _ref3.apply(this, arguments);
   };
 }();
@@ -284,7 +284,7 @@ var predictors = /*#__PURE__*/function () {
     }, _callee4);
   }));
 
-  return function predictors(_x4) {
+  return function predictors(_x3) {
     return _ref4.apply(this, arguments);
   };
 }();
@@ -315,7 +315,7 @@ var dataSources = /*#__PURE__*/function () {
     }, _callee5);
   }));
 
-  return function dataSources(_x5) {
+  return function dataSources(_x4) {
     return _ref5.apply(this, arguments);
   };
 }();
@@ -417,7 +417,7 @@ var Predictor = function Predictor(_data) {
       }, _callee6);
     }));
 
-    return function (_x6) {
+    return function (_x5) {
       return _ref6.apply(this, arguments);
     };
   }());
@@ -446,7 +446,7 @@ var Predictor = function Predictor(_data) {
       }, _callee7);
     }));
 
-    return function (_x7) {
+    return function (_x6) {
       return _ref7.apply(this, arguments);
     };
   }());
@@ -476,7 +476,7 @@ var Predictor = function Predictor(_data) {
       }, _callee8);
     }));
 
-    return function (_x8) {
+    return function (_x7) {
       return _ref8.apply(this, arguments);
     };
   }());
@@ -520,7 +520,7 @@ var Predictor = function Predictor(_data) {
       }, _callee9);
     }));
 
-    return function (_x9, _x10) {
+    return function (_x8, _x9) {
       return _ref10.apply(this, arguments);
     };
   }());
@@ -552,7 +552,7 @@ var Predictor = function Predictor(_data) {
       }, _callee10);
     }));
 
-    return function (_x11, _x12, _x13) {
+    return function (_x10, _x11, _x12) {
       return _ref11.apply(this, arguments);
     };
   }());
@@ -577,7 +577,7 @@ var Predictor = function Predictor(_data) {
       }, _callee11);
     }));
 
-    return function (_x14) {
+    return function (_x13) {
       return _ref12.apply(this, arguments);
     };
   }());
@@ -612,7 +612,7 @@ var Predictor = function Predictor(_data) {
       }, _callee12);
     }));
 
-    return function (_x15, _x16, _x17) {
+    return function (_x14, _x15, _x16) {
       return _ref13.apply(this, arguments);
     };
   }());
@@ -644,7 +644,7 @@ var Predictor = function Predictor(_data) {
       }, _callee13);
     }));
 
-    return function (_x18) {
+    return function (_x17) {
       return _ref14.apply(this, arguments);
     };
   }());
@@ -708,7 +708,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee14);
     }));
 
-    return function (_x19) {
+    return function (_x18) {
       return _ref15.apply(this, arguments);
     };
   }());
@@ -749,7 +749,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee15);
     }));
 
-    return function (_x20, _x21, _x22) {
+    return function (_x19, _x20, _x21) {
       return _ref16.apply(this, arguments);
     };
   }());
@@ -781,7 +781,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee16);
     }));
 
-    return function (_x23, _x24) {
+    return function (_x22, _x23) {
       return _ref17.apply(this, arguments);
     };
   }());
@@ -814,7 +814,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee17);
     }));
 
-    return function (_x25) {
+    return function (_x24) {
       return _ref18.apply(this, arguments);
     };
   }());
@@ -843,7 +843,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee18);
     }));
 
-    return function (_x26) {
+    return function (_x25) {
       return _ref19.apply(this, arguments);
     };
   }());
@@ -873,7 +873,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee19);
     }));
 
-    return function (_x27) {
+    return function (_x26) {
       return _ref20.apply(this, arguments);
     };
   }());
@@ -924,7 +924,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee20, null, [[2, 9]]);
     }));
 
-    return function (_x28) {
+    return function (_x27) {
       return _ref21.apply(this, arguments);
     };
   }());
@@ -954,7 +954,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee21);
     }));
 
-    return function (_x29) {
+    return function (_x28) {
       return _ref22.apply(this, arguments);
     };
   }());
@@ -987,7 +987,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee22);
     }));
 
-    return function (_x30, _x31) {
+    return function (_x29, _x30) {
       return _ref24.apply(this, arguments);
     };
   }());
@@ -1040,7 +1040,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee23, null, [[1, 10]]);
     }));
 
-    return function (_x32) {
+    return function (_x31) {
       return _ref25.apply(this, arguments);
     };
   }());
@@ -1062,7 +1062,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee24);
     }));
 
-    return function (_x33) {
+    return function (_x32) {
       return _ref26.apply(this, arguments);
     };
   }());
@@ -1087,7 +1087,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee25);
     }));
 
-    return function (_x34) {
+    return function (_x33) {
       return _ref27.apply(this, arguments);
     };
   }());
@@ -1116,7 +1116,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee26);
     }));
 
-    return function (_x35, _x36) {
+    return function (_x34, _x35) {
       return _ref28.apply(this, arguments);
     };
   }());
@@ -1145,7 +1145,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee27);
     }));
 
-    return function (_x37, _x38) {
+    return function (_x36, _x37) {
       return _ref29.apply(this, arguments);
     };
   }());
@@ -1179,7 +1179,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee28, null, [[1, 8]]);
     }));
 
-    return function (_x39, _x40) {
+    return function (_x38, _x39) {
       return _ref30.apply(this, arguments);
     };
   }());
