@@ -51,6 +51,13 @@ const dependencies = async () => {
   return response.data;
 };
 
+const installDependencies = async (name) => {
+  const request = setQueryParams([connection.token], `/config/install/${name}`);
+  const response = await connection.api.get(request);
+
+  return response.data;
+};
+
 const predictor = opts => new Predictor(opts);
 const dataSource = opts => new DataSource(opts);
 const database = opts => new DataBase(opts);
@@ -518,6 +525,7 @@ const MindsDB = {
   ping,
   logs,
   dependencies,
+  installDependencies,
   predictors,
   dataSources,
   DataSource: dataSource,
