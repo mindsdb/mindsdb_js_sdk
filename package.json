@@ -1,6 +1,6 @@
 {
   "name": "mindsdb-js-sdk",
-  "version": "0.5.9",
+  "version": "0.5.10",
   "license": "MIT",
   "homepage": "https://github.com/mindsdb/mindsdb_js_sdk#readme",
   "repository": {
@@ -36,7 +36,7 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
-    "@babel/runtime": "^7.12.5",
+    "@babel/runtime": "^7.13.9",
     "rimraf": "^2.7.1",
     "rollup": "^1.32.1",
     "rollup-plugin-babel": "^4.4.0",
