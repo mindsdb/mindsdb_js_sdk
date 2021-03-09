@@ -69,7 +69,7 @@ example of usage:
 import MindsDB from 'mindsdb-js-sdk';
 
 //connection
-MindsDB.connect(url);
+MindsDB.connect("http://127.0.0.1:47334/api", [{key:"apikey",value:"placeholder"}]);
 const connected = await MindsDB.ping();
 if (!connected) return;
 
