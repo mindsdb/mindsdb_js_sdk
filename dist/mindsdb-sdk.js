@@ -2353,7 +2353,7 @@ var connection = {
   url: null,
   api: null,
   token: {
-    key: 'apikey',
+    key: "apikey",
     value: null
   },
   version: 0.2
@@ -2361,7 +2361,7 @@ var connection = {
 
 var connect = function connect(url, params) {
   connection.token.value = params.find(function (param) {
-    return param.key === 'apikey';
+    return param.key === "apikey";
   }).value;
   connection.url = setQueryParams([connection.token], url);
   connection.api = axios$1.create({
@@ -2372,7 +2372,7 @@ var connect = function connect(url, params) {
 var disconnect = function disconnect() {
   connection.url = null;
   connection.token = {
-    key: 'apikey',
+    key: "apikey",
     value: null
   };
   connection.api = null;
@@ -2385,14 +2385,14 @@ var ping = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            request = setQueryParams([connection.token], '/util/ping');
+            request = setQueryParams([connection.token], "/util/ping");
             _context.next = 3;
             return connection.api.get(request);
 
           case 3:
             response = _context.sent;
 
-            if (!(response.status === 200 && _typeof(response.data) === 'object' && response.data.status === 'ok')) {
+            if (!(response.status === 200 && _typeof(response.data) === "object" && response.data.status === "ok")) {
               _context.next = 6;
               break;
             }
@@ -2422,7 +2422,7 @@ var logs = /*#__PURE__*/function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), '/config/logs');
+            request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/config/logs");
             _context2.next = 3;
             return connection.api.get(request);
 
@@ -2450,7 +2450,7 @@ var dependencies = /*#__PURE__*/function () {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            request = setQueryParams([connection.token], '/config/install_options');
+            request = setQueryParams([connection.token], "/config/install_options");
             _context3.next = 3;
             return connection.api.get(request);
 
@@ -2478,7 +2478,7 @@ var getEnvs = /*#__PURE__*/function () {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            request = setQueryParams([connection.token], '/config/vars');
+            request = setQueryParams([connection.token], "/config/vars");
             _context4.next = 3;
             return connection.api.get(request);
 
@@ -2547,7 +2547,7 @@ var predictors = /*#__PURE__*/function () {
         switch (_context6.prev = _context6.next) {
           case 0:
             mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-            request = setQueryParams(mergeParams, '/predictors/');
+            request = setQueryParams(mergeParams, "/predictors/");
             _context6.next = 4;
             return connection.api.get(request);
 
@@ -2578,7 +2578,7 @@ var dataSources = /*#__PURE__*/function () {
         switch (_context7.prev = _context7.next) {
           case 0:
             mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-            request = setQueryParams(mergeParams, '/datasources/');
+            request = setQueryParams(mergeParams, "/datasources/");
             _context7.next = 4;
             return connection.api.get(request);
 
@@ -2603,9 +2603,9 @@ var dataSources = /*#__PURE__*/function () {
 
 var saveFile = function saveFile(response, source) {
   var url = window.URL.createObjectURL(new Blob([response.data]));
-  var link = document.createElement('a');
+  var link = document.createElement("a");
   link.href = url;
-  var contentDisposition = response.headers['content-disposition'];
+  var contentDisposition = response.headers["content-disposition"];
   var fileName = null;
 
   if (contentDisposition) {
@@ -2617,15 +2617,15 @@ var saveFile = function saveFile(response, source) {
   }
 
   if (!fileName && source) {
-    var parts = source.split('/');
+    var parts = source.split("/");
     var end = parts[parts.length - 1];
-    parts = end.split('\\');
+    parts = end.split("\\");
     end = parts[parts.length - 1];
     fileName = end;
   }
 
-  fileName = fileName || 'unknown';
-  link.setAttribute('download', fileName);
+  fileName = fileName || "unknown";
+  link.setAttribute("download", fileName);
   document.body.appendChild(link);
   link.click();
   link.remove();
@@ -2639,19 +2639,19 @@ var Predictor = function Predictor(_data) {
 
   _defineProperty(this, "loaded", false);
 
-  _defineProperty(this, "name", '');
+  _defineProperty(this, "name", "");
 
-  _defineProperty(this, "version", '');
+  _defineProperty(this, "version", "");
 
   _defineProperty(this, "is_active", false);
 
-  _defineProperty(this, "data_source", '');
+  _defineProperty(this, "data_source", "");
 
   _defineProperty(this, "predict", null);
 
   _defineProperty(this, "accuracy", 0);
 
-  _defineProperty(this, "status", '');
+  _defineProperty(this, "status", "");
 
   _defineProperty(this, "train_end_at", null);
 
@@ -2677,7 +2677,7 @@ var Predictor = function Predictor(_data) {
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               url_path = "/predictors/";
 
-              if (_this.name !== undefined && _this.name !== '') {
+              if (_this.name !== undefined && _this.name !== "") {
                 url_path += "".concat(_this.name);
               }
 
@@ -2872,7 +2872,7 @@ var Predictor = function Predictor(_data) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               fd = new FormData();
-              fd.append('file', file);
+              fd.append("file", file);
               config = {
                 onUploadProgress: function onUploadProgress(progressEvent) {
                   if (onProgress) {
@@ -2881,7 +2881,7 @@ var Predictor = function Predictor(_data) {
                   }
                 }
               };
-              request = setQueryParams(mergeParams, '/predictors/upload');
+              request = setQueryParams(mergeParams, "/predictors/upload");
               _context14.next = 7;
               return connection.api.post(request, fd, config);
 
@@ -2909,7 +2909,7 @@ var Predictor = function Predictor(_data) {
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/download"));
               _context15.next = 4;
               return connection.api.get(request, {
-                responseType: 'blob'
+                responseType: "blob"
               });
 
             case 4:
@@ -2944,11 +2944,11 @@ var DataSource = function DataSource(_data2) {
 
   _defineProperty(this, "loaded", false);
 
-  _defineProperty(this, "source_type", 'url');
+  _defineProperty(this, "source_type", "url");
 
-  _defineProperty(this, "name", '');
+  _defineProperty(this, "name", "");
 
-  _defineProperty(this, "source", '');
+  _defineProperty(this, "source", "");
 
   _defineProperty(this, "missed_files", false);
 
@@ -3001,14 +3001,14 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context17.prev = _context17.next) {
             case 0:
-              _this2.source_type = 'file';
+              _this2.source_type = "file";
               _this2.source = file.name;
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               fd = new FormData();
-              fd.append('name', _this2.name);
-              fd.append('source_type', _this2.source_type);
-              fd.append('source', _this2.source);
-              fd.append('file', file);
+              fd.append("name", _this2.name);
+              fd.append("source_type", _this2.source_type);
+              fd.append("source", _this2.source);
+              fd.append("file", file);
               config = {
                 onUploadProgress: function onUploadProgress(progressEvent) {
                   if (onProgress) {
@@ -3042,7 +3042,7 @@ var DataSource = function DataSource(_data2) {
         while (1) {
           switch (_context18.prev = _context18.next) {
             case 0:
-              _this2.source_type = 'url';
+              _this2.source_type = "url";
               _this2.source = url;
               data = {
                 name: _this2.name,
@@ -3079,7 +3079,7 @@ var DataSource = function DataSource(_data2) {
               request = setQueryParams(mergeParams, url);
               _context19.next = 5;
               return connection.api.get(request, {
-                responseType: 'blob'
+                responseType: "blob"
               });
 
             case 5:
@@ -3101,7 +3101,7 @@ var DataSource = function DataSource(_data2) {
   }());
 
   _defineProperty(this, "getDownloadUrl", function () {
-    return _this2.source_type === 'url' ? _this2.source : "".concat(connection.url, "/datasources/").concat(_this2.name, "/download");
+    return _this2.source_type === "url" ? _this2.source : "".concat(connection.url, "/datasources/").concat(_this2.name, "/download");
   });
 
   _defineProperty(this, "delete", /*#__PURE__*/function () {
@@ -3137,7 +3137,7 @@ var DataSource = function DataSource(_data2) {
           switch (_context21.prev = _context21.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/data"));
+              request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/data/"));
               _context21.next = 4;
               return connection.api.get(request);
 
@@ -3175,11 +3175,11 @@ var DataSource = function DataSource(_data2) {
             case 5:
               response = _context22.sent;
               data = {
-                data_preparation: response.data['data_preparation'],
-                data_analysis_v2: response.data['data_analysis_v2'],
-                useable_input_columns: response.data['useable_input_columns'],
-                current_phase: response.data['current_phase'],
-                versionNative: response.data['version'],
+                data_preparation: response.data["data_preparation"],
+                data_analysis_v2: response.data["data_analysis_v2"],
+                useable_input_columns: response.data["useable_input_columns"],
+                current_phase: response.data["current_phase"],
+                versionNative: response.data["version"],
                 status: response.data && response.data.status
               };
               _context22.next = 13;
@@ -3249,8 +3249,8 @@ var DataSource = function DataSource(_data2) {
             case 0:
               column = _ref25.column, rowIndex = _ref25.rowIndex, extension = _ref25.extension, file = _ref25.file;
               fd = new FormData();
-              fd.append('file', file);
-              fd.append('extension', extension);
+              fd.append("file", file);
+              fd.append("extension", extension);
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/files/").concat(column, ":").concat(rowIndex));
               _context24.next = 8;
@@ -3283,7 +3283,7 @@ var DataBase = function DataBase(_data3) {
 
   _defineProperty(this, "loaded", false);
 
-  _defineProperty(this, "source_type", 'url');
+  _defineProperty(this, "source_type", "url");
 
   _defineProperty(this, "integration", []);
 
@@ -3296,7 +3296,7 @@ var DataBase = function DataBase(_data3) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               _context25.prev = 1;
-              deRequest = setQueryParams(mergeParams, 'config/all_integrations');
+              deRequest = setQueryParams(mergeParams, "config/all_integrations");
               _context25.next = 5;
               return connection.api.get(deRequest);
 
