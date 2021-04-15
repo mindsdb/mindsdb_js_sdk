@@ -58,7 +58,7 @@ const installDependencies = async (name) => {
 	const request = setQueryParams([connection.token], `/config/install/${name}`);
 	const response = await connection.api.get(request);
 
-	return response.data;
+	return response;
 };
 
 const predictor = (opts) => new Predictor(opts);
