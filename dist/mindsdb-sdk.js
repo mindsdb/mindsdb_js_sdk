@@ -2501,10 +2501,10 @@ var getEnvs = /*#__PURE__*/function () {
 
 var installDependencies = function installDependencies(name) {
   var request = setQueryParams([connection.token], "/config/install/".concat(name));
-  connection.api.get(request).then(function (res) {
-    return res.json();
-  }).catch(function (error) {
-    return error;
+  return connection.api.get(request).then(function (res) {
+    if (res.status === 500) {
+      return res.json();
+    }
   });
 };
 
