@@ -54,14 +54,11 @@ const getEnvs = async () => {
 	return response.data;
 };
 
-const installDependencies = (name) => {
+const installDependencies = async (name) => {
 	const request = setQueryParams([connection.token], `/config/install/${name}`);
+	const response = await connection.api.get(request);
 
-	return connection.api.get(request).then((res) => {
-		if (res.status === 500) {
-			return res.json();
-		}
-	});
+	return response;
 };
 
 const predictor = (opts) => new Predictor(opts);
