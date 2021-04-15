@@ -287,7 +287,7 @@ var installDependencies = /*#__PURE__*/function () {
 
           case 3:
             response = _context5.sent;
-            return _context5.abrupt("return", response.data);
+            return _context5.abrupt("return", response);
 
           case 5:
           case "end":
