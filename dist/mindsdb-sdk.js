@@ -2798,7 +2798,7 @@ var Predictor = function Predictor(_data) {
           switch (_context12.prev = _context12.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/predictors/update/".concat(predictorName));
+              request = setQueryParams(mergeParams, "/predictors/".concat(predictorName, "/update"));
               _context12.next = 4;
               return connection.api.get(request);
 

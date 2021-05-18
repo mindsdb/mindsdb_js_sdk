@@ -208,7 +208,7 @@ class Predictor {
 
     const request = setQueryParams(
       mergeParams,
-      `/predictors/update/${predictorName}`
+      `/predictors/${predictorName}/update`
     );
     const response = await connection.api.get(request);
 
