@@ -3412,7 +3412,7 @@ var DataBase = function DataBase(_data3) {
           switch (_context29.prev = _context29.next) {
             case 0:
               _context29.next = 2;
-              return connection.api.get("/config/integrations/".concat(params.database_name, "/check"));
+              return connection.api.get("/config/integrations/".concat(params.integrations_name, "/check"));
 
             case 2:
               return _context29.abrupt("return", _context29.sent);
@@ -3438,7 +3438,7 @@ var DataBase = function DataBase(_data3) {
           switch (_context30.prev = _context30.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.database_name));
+              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.integrations_name));
               _context30.next = 4;
               return connection.api.post(request, data);
 
@@ -3467,7 +3467,7 @@ var DataBase = function DataBase(_data3) {
           switch (_context31.prev = _context31.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.database_name));
+              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.integrations_name));
               _context31.next = 4;
               return connection.api.put(request, data);
 

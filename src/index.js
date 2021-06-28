@@ -517,7 +517,7 @@ class DataBase {
 
   check = async (params) => {
     return await connection.api.get(
-      `/config/integrations/${params.database_name}/check`
+      `/config/integrations/${params.integrations_name}/check`
     );
   };
 
@@ -527,7 +527,7 @@ class DataBase {
       : [connection.token];
     const request = setQueryParams(
       mergeParams,
-      `/config/integrations/${data.params.database_name}`
+      `/config/integrations/${data.params.integrations_name}`
     );
     const response = await connection.api.post(request, data);
 
@@ -540,7 +540,7 @@ class DataBase {
       : [connection.token];
     const request = setQueryParams(
       mergeParams,
-      `/config/integrations/${data.params.database_name}`
+      `/config/integrations/${data.params.integrations_name}`
     );
     const response = await connection.api.put(request, data);
 
