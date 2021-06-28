@@ -529,7 +529,6 @@ class DataBase {
       mergeParams,
       `/config/integrations/${data.params.integrations_name}`
     );
-
     const response = await connection.api.post(request, data);
 
     return response.data;
@@ -544,7 +543,6 @@ class DataBase {
       mergeParams,
       `/config/integrations/${data.params.integrations_name}`
     );
-
     const response = await connection.api.put(request, data);
 
     return response.data;
