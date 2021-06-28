@@ -529,6 +529,7 @@ class DataBase {
       mergeParams,
       `/config/integrations/${data.params.integrations_name}`
     );
+
     const response = await connection.api.post(request, data);
 
     return response.data;
@@ -538,10 +539,12 @@ class DataBase {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
+
     const request = setQueryParams(
       mergeParams,
       `/config/integrations/${data.params.integrations_name}`
     );
+
     const response = await connection.api.put(request, data);
 
     return response.data;
@@ -551,6 +554,7 @@ class DataBase {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
+
     try {
       const request = setQueryParams(mergeParams, `/datasources/${data.name}`);
       return await connection.api.put(request, data);
