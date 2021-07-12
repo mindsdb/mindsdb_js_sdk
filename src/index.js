@@ -155,6 +155,42 @@ class Predictor {
     Object.assign(this, data);
   }
 
+  // Lightwood Refactor ⚒
+  code_from_json_ai = async (params) => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+
+    const request = setQueryParams(
+      mergeParams,
+      `/code_from_json_ai/${this.name}`
+    );
+    await connection.api.get(request);
+  };
+
+  // Lightwood Refactor ⚒
+  jsonAI_edit = async (params) => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+
+    const request = setQueryParams(
+      mergeParams,
+      `/lwr/jsonai/edit/${this.name}`
+    );
+    await connection.api.get(request);
+  };
+
+  // Lightwood Refactor ⚒
+  codeAI_edit = async (params) => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+
+    const request = setQueryParams(mergeParams, `/lwr/code/edit/${this.name}`);
+    await connection.api.get(request);
+  };
+
   load = async (params) => {
     const mergeParams = params
       ? [...params, connection.token]
@@ -213,6 +249,18 @@ class Predictor {
     const response = await connection.api.get(request);
 
     return response;
+  };
+
+  // Lightwood Refactor ⚒
+  learn_lwr = async ({ data_source_name, problem_definition }) => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+
+    const request = setQueryParams(mergeParams, `/lwr/generate/${this.name}`);
+    await connection.api.put(request, { data_source_name, problem_definition });
+
+    return response.data;
   };
 
   learn = async ({ dataSourceName, fromData, toPredict, kwargs }, params) => {
