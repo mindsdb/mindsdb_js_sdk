@@ -34,6 +34,7 @@ const ping = async (params) => {
   ) {
     return true;
   }
+
   return false;
 };
 
@@ -89,6 +90,7 @@ const predictors = async (params) => {
 
   const rawData = response.data || [];
   const predictorList = rawData.map(predictor);
+
   return predictorList;
 };
 
@@ -102,6 +104,7 @@ const dataSources = async (params) => {
 
   const rawData = response.data || [];
   const dataSourceList = rawData.map(dataSource);
+
   return dataSourceList;
 };
 
@@ -109,21 +112,27 @@ const saveFile = (response, source) => {
   const url = window.URL.createObjectURL(new Blob([response.data]));
   const link = document.createElement("a");
   link.href = url;
+
   const contentDisposition = response.headers["content-disposition"];
+
   let fileName = null;
   if (contentDisposition) {
     const fileNameMatch = contentDisposition.match(/filename="?(.+)"?/);
+
     if (fileNameMatch.length === 2) {
       fileName = fileNameMatch[1];
     }
   }
+
   if (!fileName && source) {
     let parts = source.split("/");
     let end = parts[parts.length - 1];
+
     parts = end.split("\\");
     end = parts[parts.length - 1];
     fileName = end;
   }
+
   fileName = fileName || "unknown";
   link.setAttribute("download", fileName);
   document.body.appendChild(link);
@@ -144,11 +153,9 @@ class Predictor {
   train_end_at = null;
   updated_at = null;
   created_at = null;
-
   data_preparation = null;
   data_analysis = null;
   model_analysis = null;
-
   columns = null;
 
   constructor(data) {
@@ -166,6 +173,8 @@ class Predictor {
       `/code_from_json_ai/${this.name}`
     );
     await connection.api.get(request);
+
+    return response.data;
   };
 
   // Lightwood Refactor ⚒
@@ -178,7 +187,9 @@ class Predictor {
       mergeParams,
       `/lwr/jsonai/edit/${this.name}`
     );
-    await connection.api.get(request);
+    await connection.api.put(request);
+
+    return response.data;
   };
 
   // Lightwood Refactor ⚒
@@ -188,7 +199,9 @@ class Predictor {
       : [connection.token];
 
     const request = setQueryParams(mergeParams, `/lwr/code/edit/${this.name}`);
-    await connection.api.get(request);
+    await connection.api.put(request);
+
+    return response.data;
   };
 
   load = async (params) => {
@@ -357,9 +370,7 @@ class Predictor {
 
 class DataSource {
   loaded = false;
-
   source_type = "url";
-
   name = "";
   source = "";
   missed_files = false;
@@ -367,7 +378,6 @@ class DataSource {
   updated_at = null;
   row_count = 0;
   columns = null;
-
   data = null;
   missedFileList = null;
 
