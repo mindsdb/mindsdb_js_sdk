@@ -679,7 +679,7 @@ var Predictor = function Predictor(_data) {
   }());
 
   _defineProperty(this, "learn_lwr", /*#__PURE__*/function () {
-    var _ref16 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee16(data_source_name, problem_definition) {
+    var _ref16 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee16(data_source_name, problem_definition, params) {
       var mergeParams, request;
       return regeneratorRuntime.wrap(function _callee16$(_context16) {
         while (1) {
@@ -704,7 +704,7 @@ var Predictor = function Predictor(_data) {
       }, _callee16);
     }));
 
-    return function (_x16, _x17) {
+    return function (_x16, _x17, _x18) {
       return _ref16.apply(this, arguments);
     };
   }());
@@ -748,7 +748,7 @@ var Predictor = function Predictor(_data) {
       }, _callee17);
     }));
 
-    return function (_x18, _x19) {
+    return function (_x19, _x20) {
       return _ref18.apply(this, arguments);
     };
   }());
@@ -780,7 +780,7 @@ var Predictor = function Predictor(_data) {
       }, _callee18);
     }));
 
-    return function (_x20, _x21, _x22) {
+    return function (_x21, _x22, _x23) {
       return _ref19.apply(this, arguments);
     };
   }());
@@ -805,7 +805,7 @@ var Predictor = function Predictor(_data) {
       }, _callee19);
     }));
 
-    return function (_x23) {
+    return function (_x24) {
       return _ref20.apply(this, arguments);
     };
   }());
@@ -840,7 +840,7 @@ var Predictor = function Predictor(_data) {
       }, _callee20);
     }));
 
-    return function (_x24, _x25, _x26) {
+    return function (_x25, _x26, _x27) {
       return _ref21.apply(this, arguments);
     };
   }());
@@ -872,7 +872,7 @@ var Predictor = function Predictor(_data) {
       }, _callee21);
     }));
 
-    return function (_x27) {
+    return function (_x28) {
       return _ref22.apply(this, arguments);
     };
   }());
@@ -937,7 +937,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee22);
     }));
 
-    return function (_x28) {
+    return function (_x29) {
       return _ref23.apply(this, arguments);
     };
   }());
@@ -978,7 +978,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee23);
     }));
 
-    return function (_x29, _x30, _x31) {
+    return function (_x30, _x31, _x32) {
       return _ref24.apply(this, arguments);
     };
   }());
@@ -1010,7 +1010,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee24);
     }));
 
-    return function (_x32, _x33) {
+    return function (_x33, _x34) {
       return _ref25.apply(this, arguments);
     };
   }());
@@ -1043,7 +1043,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee25);
     }));
 
-    return function (_x34) {
+    return function (_x35) {
       return _ref26.apply(this, arguments);
     };
   }());
@@ -1072,7 +1072,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee26);
     }));
 
-    return function (_x35) {
+    return function (_x36) {
       return _ref27.apply(this, arguments);
     };
   }());
@@ -1102,7 +1102,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee27);
     }));
 
-    return function (_x36) {
+    return function (_x37) {
       return _ref28.apply(this, arguments);
     };
   }());
@@ -1154,7 +1154,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee28, null, [[2, 9]]);
     }));
 
-    return function (_x37) {
+    return function (_x38) {
       return _ref29.apply(this, arguments);
     };
   }());
@@ -1184,7 +1184,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee29);
     }));
 
-    return function (_x38) {
+    return function (_x39) {
       return _ref30.apply(this, arguments);
     };
   }());
@@ -1217,7 +1217,7 @@ var DataSource = function DataSource(_data2) {
       }, _callee30);
     }));
 
-    return function (_x39, _x40) {
+    return function (_x40, _x41) {
       return _ref32.apply(this, arguments);
     };
   }());
@@ -1271,7 +1271,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee31, null, [[1, 10]]);
     }));
 
-    return function (_x41) {
+    return function (_x42) {
       return _ref33.apply(this, arguments);
     };
   }());
@@ -1293,7 +1293,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee32);
     }));
 
-    return function (_x42) {
+    return function (_x43) {
       return _ref34.apply(this, arguments);
     };
   }());
@@ -1318,7 +1318,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee33);
     }));
 
-    return function (_x43) {
+    return function (_x44) {
       return _ref35.apply(this, arguments);
     };
   }());
@@ -1347,7 +1347,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee34);
     }));
 
-    return function (_x44, _x45) {
+    return function (_x45, _x46) {
       return _ref36.apply(this, arguments);
     };
   }());
@@ -1376,7 +1376,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee35);
     }));
 
-    return function (_x46, _x47) {
+    return function (_x47, _x48) {
       return _ref37.apply(this, arguments);
     };
   }());
@@ -1410,7 +1410,7 @@ var DataBase = function DataBase(_data3) {
       }, _callee36, null, [[1, 8]]);
     }));
 
-    return function (_x48, _x49) {
+    return function (_x49, _x50) {
       return _ref38.apply(this, arguments);
     };
   }());
