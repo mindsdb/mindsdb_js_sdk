@@ -170,7 +170,7 @@ class Predictor {
 
     const request = setQueryParams(
       mergeParams,
-      `/code_from_json_ai/${this.name}`
+      `/predictors/code_from_json_ai/${this.name}`
     );
     await connection.api.get(request);
 
@@ -185,7 +185,7 @@ class Predictor {
 
     const request = setQueryParams(
       mergeParams,
-      `/lwr/jsonai/edit/${this.name}`
+      `/predictors/lwr/jsonai/edit/${this.name}`
     );
     await connection.api.put(request);
 
@@ -198,7 +198,10 @@ class Predictor {
       ? [...params, connection.token]
       : [connection.token];
 
-    const request = setQueryParams(mergeParams, `/lwr/code/edit/${this.name}`);
+    const request = setQueryParams(
+      mergeParams,
+      `/predictors/lwr/code/edit/${this.name}`
+    );
     await connection.api.put(request);
 
     return response.data;
@@ -270,7 +273,10 @@ class Predictor {
       ? [...params, connection.token]
       : [connection.token];
 
-    const request = setQueryParams(mergeParams, `/lwr/generate/${this.name}`);
+    const request = setQueryParams(
+      mergeParams,
+      `/predictors/lwr/generate/${this.name}`
+    );
     await connection.api.put(request, { data_source_name, problem_definition });
 
     return response.data;

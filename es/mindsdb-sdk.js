@@ -478,7 +478,7 @@ var Predictor = function Predictor(_data) {
           switch (_context9.prev = _context9.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/code_from_json_ai/".concat(_this.name));
+              request = setQueryParams(mergeParams, "/predictors/code_from_json_ai/".concat(_this.name));
               _context9.next = 4;
               return connection.api.get(request);
 
@@ -506,7 +506,7 @@ var Predictor = function Predictor(_data) {
           switch (_context10.prev = _context10.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/lwr/jsonai/edit/".concat(_this.name));
+              request = setQueryParams(mergeParams, "/predictors/lwr/jsonai/edit/".concat(_this.name));
               _context10.next = 4;
               return connection.api.put(request);
 
@@ -534,7 +534,7 @@ var Predictor = function Predictor(_data) {
           switch (_context11.prev = _context11.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/lwr/code/edit/".concat(_this.name));
+              request = setQueryParams(mergeParams, "/predictors/lwr/code/edit/".concat(_this.name));
               _context11.next = 4;
               return connection.api.put(request);
 
@@ -686,7 +686,7 @@ var Predictor = function Predictor(_data) {
           switch (_context16.prev = _context16.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/lwr/generate/".concat(_this.name));
+              request = setQueryParams(mergeParams, "/predictors/lwr/generate/".concat(_this.name));
               _context16.next = 4;
               return connection.api.put(request, {
                 data_source_name: data_source_name,
