@@ -265,7 +265,7 @@ class Predictor {
   };
 
   // Lightwood Refactor ⚒
-  learn_lwr = async ({ data_source_name, problem_definition }) => {
+  learn_lwr = async (data_source_name, problem_definition) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
