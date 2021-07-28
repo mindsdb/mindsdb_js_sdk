@@ -3579,21 +3579,41 @@ var DataBase = function DataBase(_data3) {
 
   _defineProperty(this, "create", /*#__PURE__*/function () {
     var _ref37 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee35(data, params) {
-      var mergeParams, request, response;
+      var mergeParams, form_data, key, request, response;
       return regenerator.wrap(function _callee35$(_context35) {
         while (1) {
           switch (_context35.prev = _context35.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.integrations_name));
-              _context35.next = 4;
-              return connection.api.put(request, data);
+              form_data = new FormData();
 
-            case 4:
+              for (key in data.params) {
+                form_data.append(key, data.params[key]);
+              }
+
+              if (data !== null && data !== void 0 && data.ssl) {
+                if (data !== null && data !== void 0 && data.ssl_ca) {
+                  form_data.set("ssl_ca", data.ssl_ca);
+                }
+
+                if (data !== null && data !== void 0 && data.ssl_cert) {
+                  form_data.set("ssl_cert", data.ssl_cer);
+                }
+
+                if (data !== null && data !== void 0 && data.ssl_key) {
+                  form_data.set("ssl_key", data === null || data === void 0 ? void 0 : data.ssl_key);
+                }
+              }
+
+              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.integrations_name));
+              _context35.next = 7;
+              return connection.api.put(request, form_data);
+
+            case 7:
               response = _context35.sent;
               return _context35.abrupt("return", response.data);
 
-            case 6:
+            case 9:
             case "end":
               return _context35.stop();
           }

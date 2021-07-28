@@ -602,11 +602,32 @@ class DataBase {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
+
+    const form_data = new FormData();
+
+    for (var key in data.params) {
+      form_data.append(key, data.params[key]);
+    }
+
+    if (data?.ssl) {
+      if (data?.ssl_ca) {
+        form_data.set("ssl_ca", data.ssl_ca);
+      }
+
+      if (data?.ssl_cert) {
+        form_data.set("ssl_cert", data.ssl_cer);
+      }
+
+      if (data?.ssl_key) {
+        form_data.set("ssl_key", data?.ssl_key);
+      }
+    }
+
     const request = setQueryParams(
       mergeParams,
       `/config/integrations/${data.params.integrations_name}`
     );
-    const response = await connection.api.put(request, data);
+    const response = await connection.api.put(request, form_data);
 
     return response.data;
   };
