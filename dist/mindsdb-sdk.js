@@ -2731,7 +2731,7 @@ var Predictor = function Predictor(_data) {
           switch (_context10.prev = _context10.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/predictors/lwr/jsonai/edit/".concat(_this.name));
+              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/edit/jsonai"));
               _context10.next = 4;
               return connection.api.put(request);
 
@@ -2759,7 +2759,7 @@ var Predictor = function Predictor(_data) {
           switch (_context11.prev = _context11.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/predictors/lwr/code/edit/".concat(_this.name));
+              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/edit/code"));
               _context11.next = 4;
               return connection.api.put(request);
 
@@ -2779,30 +2779,22 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "load", /*#__PURE__*/function () {
+  _defineProperty(this, "validate_json_ai", /*#__PURE__*/function () {
     var _ref12 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee12(params) {
-      var mergeParams, url_path, request, response;
+      var mergeParams, request;
       return regenerator.wrap(function _callee12$(_context12) {
         while (1) {
           switch (_context12.prev = _context12.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              url_path = "/predictors/";
+              request = setQueryParams(mergeParams, "/utils/validate_json_ai");
+              _context12.next = 4;
+              return connection.api.put(request);
 
-              if (_this.name !== undefined && _this.name !== "") {
-                url_path += "".concat(_this.name);
-              }
+            case 4:
+              return _context12.abrupt("return", response.data);
 
-              request = setQueryParams(mergeParams, url_path);
-              _context12.next = 6;
-              return connection.api.get(request);
-
-            case 6:
-              response = _context12.sent;
-              Object.assign(_this, response.data);
-              return _context12.abrupt("return", _this);
-
-            case 9:
+            case 5:
             case "end":
               return _context12.stop();
           }
@@ -2815,23 +2807,25 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "rename", /*#__PURE__*/function () {
-    var _ref13 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee13(params) {
-      var mergeParams, request, response;
+  _defineProperty(this, "learn_lwr", /*#__PURE__*/function () {
+    var _ref13 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee13(data_source_name, problem_definition, params) {
+      var mergeParams, request;
       return regenerator.wrap(function _callee13$(_context13) {
         while (1) {
           switch (_context13.prev = _context13.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/predictors/".concat(params.oldName, "/rename?new_name=").concat(params.newName));
+              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/generate"));
               _context13.next = 4;
-              return connection.api.get(request);
+              return connection.api.put(request, {
+                data_source_name: data_source_name,
+                problem_definition: problem_definition
+              });
 
             case 4:
-              response = _context13.sent;
               return _context13.abrupt("return", response.data);
 
-            case 6:
+            case 5:
             case "end":
               return _context13.stop();
           }
@@ -2839,29 +2833,35 @@ var Predictor = function Predictor(_data) {
       }, _callee13);
     }));
 
-    return function (_x12) {
+    return function (_x12, _x13, _x14) {
       return _ref13.apply(this, arguments);
     };
   }());
 
-  _defineProperty(this, "loadColumns", /*#__PURE__*/function () {
+  _defineProperty(this, "load", /*#__PURE__*/function () {
     var _ref14 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee14(params) {
-      var mergeParams, request, response;
+      var mergeParams, url_path, request, response;
       return regenerator.wrap(function _callee14$(_context14) {
         while (1) {
           switch (_context14.prev = _context14.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/columns"));
-              _context14.next = 4;
+              url_path = "/predictors/";
+
+              if (_this.name !== undefined && _this.name !== "") {
+                url_path += "".concat(_this.name);
+              }
+
+              request = setQueryParams(mergeParams, url_path);
+              _context14.next = 6;
               return connection.api.get(request);
 
-            case 4:
+            case 6:
               response = _context14.sent;
-              _this.columns = response.data;
+              Object.assign(_this, response.data);
               return _context14.abrupt("return", _this);
 
-            case 7:
+            case 9:
             case "end":
               return _context14.stop();
           }
@@ -2869,26 +2869,26 @@ var Predictor = function Predictor(_data) {
       }, _callee14);
     }));
 
-    return function (_x13) {
+    return function (_x15) {
       return _ref14.apply(this, arguments);
     };
   }());
 
-  _defineProperty(this, "update", /*#__PURE__*/function () {
-    var _ref15 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee15(params, predictorName) {
+  _defineProperty(this, "rename", /*#__PURE__*/function () {
+    var _ref15 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee15(params) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee15$(_context15) {
         while (1) {
           switch (_context15.prev = _context15.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/predictors/".concat(predictorName, "/update"));
+              request = setQueryParams(mergeParams, "/predictors/".concat(params.oldName, "/rename?new_name=").concat(params.newName));
               _context15.next = 4;
               return connection.api.get(request);
 
             case 4:
               response = _context15.sent;
-              return _context15.abrupt("return", response);
+              return _context15.abrupt("return", response.data);
 
             case 6:
             case "end":
@@ -2898,30 +2898,29 @@ var Predictor = function Predictor(_data) {
       }, _callee15);
     }));
 
-    return function (_x14, _x15) {
+    return function (_x16) {
       return _ref15.apply(this, arguments);
     };
   }());
 
-  _defineProperty(this, "learn_lwr", /*#__PURE__*/function () {
-    var _ref16 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee16(data_source_name, problem_definition, params) {
-      var mergeParams, request;
+  _defineProperty(this, "loadColumns", /*#__PURE__*/function () {
+    var _ref16 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee16(params) {
+      var mergeParams, request, response;
       return regenerator.wrap(function _callee16$(_context16) {
         while (1) {
           switch (_context16.prev = _context16.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/predictors/lwr/generate/".concat(_this.name));
+              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/columns"));
               _context16.next = 4;
-              return connection.api.put(request, {
-                data_source_name: data_source_name,
-                problem_definition: problem_definition
-              });
+              return connection.api.get(request);
 
             case 4:
-              return _context16.abrupt("return", response.data);
+              response = _context16.sent;
+              _this.columns = response.data;
+              return _context16.abrupt("return", _this);
 
-            case 5:
+            case 7:
             case "end":
               return _context16.stop();
           }
@@ -2929,19 +2928,48 @@ var Predictor = function Predictor(_data) {
       }, _callee16);
     }));
 
-    return function (_x16, _x17, _x18) {
+    return function (_x17) {
       return _ref16.apply(this, arguments);
     };
   }());
 
-  _defineProperty(this, "learn", /*#__PURE__*/function () {
-    var _ref18 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee17(_ref17, params) {
-      var dataSourceName, fromData, toPredict, kwargs, data, mergeParams, request, response;
+  _defineProperty(this, "update", /*#__PURE__*/function () {
+    var _ref17 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee17(params, predictorName) {
+      var mergeParams, request, response;
       return regenerator.wrap(function _callee17$(_context17) {
         while (1) {
           switch (_context17.prev = _context17.next) {
             case 0:
-              dataSourceName = _ref17.dataSourceName, fromData = _ref17.fromData, toPredict = _ref17.toPredict, kwargs = _ref17.kwargs;
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              request = setQueryParams(mergeParams, "/predictors/".concat(predictorName, "/update"));
+              _context17.next = 4;
+              return connection.api.get(request);
+
+            case 4:
+              response = _context17.sent;
+              return _context17.abrupt("return", response);
+
+            case 6:
+            case "end":
+              return _context17.stop();
+          }
+        }
+      }, _callee17);
+    }));
+
+    return function (_x18, _x19) {
+      return _ref17.apply(this, arguments);
+    };
+  }());
+
+  _defineProperty(this, "learn", /*#__PURE__*/function () {
+    var _ref19 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee18(_ref18, params) {
+      var dataSourceName, fromData, toPredict, kwargs, data, mergeParams, request, response;
+      return regenerator.wrap(function _callee18$(_context18) {
+        while (1) {
+          switch (_context18.prev = _context18.next) {
+            case 0:
+              dataSourceName = _ref18.dataSourceName, fromData = _ref18.fromData, toPredict = _ref18.toPredict, kwargs = _ref18.kwargs;
               data = {
                 to_predict: toPredict
               };
@@ -2958,46 +2986,14 @@ var Predictor = function Predictor(_data) {
 
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name));
-              _context17.next = 8;
+              _context18.next = 8;
               return connection.api.put(request, data);
 
             case 8:
-              response = _context17.sent;
-              return _context17.abrupt("return", response.data);
-
-            case 10:
-            case "end":
-              return _context17.stop();
-          }
-        }
-      }, _callee17);
-    }));
-
-    return function (_x19, _x20) {
-      return _ref18.apply(this, arguments);
-    };
-  }());
-
-  _defineProperty(this, "queryPredict", /*#__PURE__*/function () {
-    var _ref19 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee18(when, params, format_flag_value) {
-      var mergeParams, request, response;
-      return regenerator.wrap(function _callee18$(_context18) {
-        while (1) {
-          switch (_context18.prev = _context18.next) {
-            case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/predict"));
-              _context18.next = 4;
-              return connection.api.post(request, {
-                when: when,
-                format_flag: format_flag_value
-              });
-
-            case 4:
               response = _context18.sent;
               return _context18.abrupt("return", response.data);
 
-            case 6:
+            case 10:
             case "end":
               return _context18.stop();
           }
@@ -3005,24 +3001,31 @@ var Predictor = function Predictor(_data) {
       }, _callee18);
     }));
 
-    return function (_x21, _x22, _x23) {
+    return function (_x20, _x21) {
       return _ref19.apply(this, arguments);
     };
   }());
 
-  _defineProperty(this, "delete", /*#__PURE__*/function () {
-    var _ref20 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee19(params) {
-      var mergeParams, request;
+  _defineProperty(this, "queryPredict", /*#__PURE__*/function () {
+    var _ref20 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee19(when, params, format_flag_value) {
+      var mergeParams, request, response;
       return regenerator.wrap(function _callee19$(_context19) {
         while (1) {
           switch (_context19.prev = _context19.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name));
+              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/predict"));
               _context19.next = 4;
-              return connection.api.delete(request);
+              return connection.api.post(request, {
+                when: when,
+                format_flag: format_flag_value
+              });
 
             case 4:
+              response = _context19.sent;
+              return _context19.abrupt("return", response.data);
+
+            case 6:
             case "end":
               return _context19.stop();
           }
@@ -3030,17 +3033,42 @@ var Predictor = function Predictor(_data) {
       }, _callee19);
     }));
 
-    return function (_x24) {
+    return function (_x22, _x23, _x24) {
       return _ref20.apply(this, arguments);
     };
   }());
 
-  _defineProperty(this, "upload", /*#__PURE__*/function () {
-    var _ref21 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee20(file, onProgress, params) {
-      var mergeParams, fd, config, request;
+  _defineProperty(this, "delete", /*#__PURE__*/function () {
+    var _ref21 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee20(params) {
+      var mergeParams, request;
       return regenerator.wrap(function _callee20$(_context20) {
         while (1) {
           switch (_context20.prev = _context20.next) {
+            case 0:
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name));
+              _context20.next = 4;
+              return connection.api.delete(request);
+
+            case 4:
+            case "end":
+              return _context20.stop();
+          }
+        }
+      }, _callee20);
+    }));
+
+    return function (_x25) {
+      return _ref21.apply(this, arguments);
+    };
+  }());
+
+  _defineProperty(this, "upload", /*#__PURE__*/function () {
+    var _ref22 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee21(file, onProgress, params) {
+      var mergeParams, fd, config, request;
+      return regenerator.wrap(function _callee21$(_context21) {
+        while (1) {
+          switch (_context21.prev = _context21.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               fd = new FormData();
@@ -3054,40 +3082,8 @@ var Predictor = function Predictor(_data) {
                 }
               };
               request = setQueryParams(mergeParams, "/predictors/upload");
-              _context20.next = 7;
+              _context21.next = 7;
               return connection.api.post(request, fd, config);
-
-            case 7:
-            case "end":
-              return _context20.stop();
-          }
-        }
-      }, _callee20);
-    }));
-
-    return function (_x25, _x26, _x27) {
-      return _ref21.apply(this, arguments);
-    };
-  }());
-
-  _defineProperty(this, "download", /*#__PURE__*/function () {
-    var _ref22 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee21(params) {
-      var mergeParams, request, response;
-      return regenerator.wrap(function _callee21$(_context21) {
-        while (1) {
-          switch (_context21.prev = _context21.next) {
-            case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/download"));
-              _context21.next = 4;
-              return connection.api.get(request, {
-                responseType: "blob"
-              });
-
-            case 4:
-              response = _context21.sent;
-              saveFile(response);
-              return _context21.abrupt("return", _this);
 
             case 7:
             case "end":
@@ -3097,8 +3093,40 @@ var Predictor = function Predictor(_data) {
       }, _callee21);
     }));
 
-    return function (_x28) {
+    return function (_x26, _x27, _x28) {
       return _ref22.apply(this, arguments);
+    };
+  }());
+
+  _defineProperty(this, "download", /*#__PURE__*/function () {
+    var _ref23 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee22(params) {
+      var mergeParams, request, response;
+      return regenerator.wrap(function _callee22$(_context22) {
+        while (1) {
+          switch (_context22.prev = _context22.next) {
+            case 0:
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/download"));
+              _context22.next = 4;
+              return connection.api.get(request, {
+                responseType: "blob"
+              });
+
+            case 4:
+              response = _context22.sent;
+              saveFile(response);
+              return _context22.abrupt("return", _this);
+
+            case 7:
+            case "end":
+              return _context22.stop();
+          }
+        }
+      }, _callee22);
+    }));
+
+    return function (_x29) {
+      return _ref23.apply(this, arguments);
     };
   }());
 
@@ -3138,41 +3166,41 @@ var DataSource = function DataSource(_data2) {
   _defineProperty(this, "missedFileList", null);
 
   _defineProperty(this, "load", /*#__PURE__*/function () {
-    var _ref23 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee22(params) {
+    var _ref24 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee23(params) {
       var mergeParams, request, response;
-      return regenerator.wrap(function _callee22$(_context22) {
+      return regenerator.wrap(function _callee23$(_context23) {
         while (1) {
-          switch (_context22.prev = _context22.next) {
+          switch (_context23.prev = _context23.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
-              _context22.next = 4;
+              _context23.next = 4;
               return connection.api.get(request);
 
             case 4:
-              response = _context22.sent;
+              response = _context23.sent;
               Object.assign(_this2, response.data);
-              return _context22.abrupt("return", _this2);
+              return _context23.abrupt("return", _this2);
 
             case 7:
             case "end":
-              return _context22.stop();
+              return _context23.stop();
           }
         }
-      }, _callee22);
+      }, _callee23);
     }));
 
-    return function (_x29) {
-      return _ref23.apply(this, arguments);
+    return function (_x30) {
+      return _ref24.apply(this, arguments);
     };
   }());
 
   _defineProperty(this, "upload", /*#__PURE__*/function () {
-    var _ref24 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee23(file, onProgress, params) {
+    var _ref25 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee24(file, onProgress, params) {
       var mergeParams, fd, config, request;
-      return regenerator.wrap(function _callee23$(_context23) {
+      return regenerator.wrap(function _callee24$(_context24) {
         while (1) {
-          switch (_context23.prev = _context23.next) {
+          switch (_context24.prev = _context24.next) {
             case 0:
               _this2.source_type = "file";
               _this2.source = file.name;
@@ -3192,28 +3220,28 @@ var DataSource = function DataSource(_data2) {
                 timeout: 600000
               };
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
-              _context23.next = 12;
+              _context24.next = 12;
               return connection.api.put(request, fd, config);
 
             case 12:
             case "end":
-              return _context23.stop();
+              return _context24.stop();
           }
         }
-      }, _callee23);
+      }, _callee24);
     }));
 
-    return function (_x30, _x31, _x32) {
-      return _ref24.apply(this, arguments);
+    return function (_x31, _x32, _x33) {
+      return _ref25.apply(this, arguments);
     };
   }());
 
   _defineProperty(this, "uploadFromUrl", /*#__PURE__*/function () {
-    var _ref25 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee24(url, params) {
+    var _ref26 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee25(url, params) {
       var data, mergeParams, request;
-      return regenerator.wrap(function _callee24$(_context24) {
+      return regenerator.wrap(function _callee25$(_context25) {
         while (1) {
-          switch (_context24.prev = _context24.next) {
+          switch (_context25.prev = _context25.next) {
             case 0:
               _this2.source_type = "url";
               _this2.source = url;
@@ -3224,43 +3252,10 @@ var DataSource = function DataSource(_data2) {
               };
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
-              _context24.next = 7;
+              _context25.next = 7;
               return connection.api.put(request, data);
 
             case 7:
-            case "end":
-              return _context24.stop();
-          }
-        }
-      }, _callee24);
-    }));
-
-    return function (_x33, _x34) {
-      return _ref25.apply(this, arguments);
-    };
-  }());
-
-  _defineProperty(this, "download", /*#__PURE__*/function () {
-    var _ref26 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee25(params) {
-      var url, mergeParams, request, response;
-      return regenerator.wrap(function _callee25$(_context25) {
-        while (1) {
-          switch (_context25.prev = _context25.next) {
-            case 0:
-              url = _this2.getDownloadUrl();
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, url);
-              _context25.next = 5;
-              return connection.api.get(request, {
-                responseType: "blob"
-              });
-
-            case 5:
-              response = _context25.sent;
-              saveFile(response, _this2.source);
-              return _context25.abrupt("return", _this2);
-
-            case 8:
             case "end":
               return _context25.stop();
           }
@@ -3268,28 +3263,32 @@ var DataSource = function DataSource(_data2) {
       }, _callee25);
     }));
 
-    return function (_x35) {
+    return function (_x34, _x35) {
       return _ref26.apply(this, arguments);
     };
   }());
 
-  _defineProperty(this, "getDownloadUrl", function () {
-    return _this2.source_type === "url" ? _this2.source : "".concat(connection.url, "/datasources/").concat(_this2.name, "/download");
-  });
-
-  _defineProperty(this, "delete", /*#__PURE__*/function () {
+  _defineProperty(this, "download", /*#__PURE__*/function () {
     var _ref27 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee26(params) {
-      var mergeParams, request;
+      var url, mergeParams, request, response;
       return regenerator.wrap(function _callee26$(_context26) {
         while (1) {
           switch (_context26.prev = _context26.next) {
             case 0:
+              url = _this2.getDownloadUrl();
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
-              _context26.next = 4;
-              return connection.api.delete(request);
+              request = setQueryParams(mergeParams, url);
+              _context26.next = 5;
+              return connection.api.get(request, {
+                responseType: "blob"
+              });
 
-            case 4:
+            case 5:
+              response = _context26.sent;
+              saveFile(response, _this2.source);
+              return _context26.abrupt("return", _this2);
+
+            case 8:
             case "end":
               return _context26.stop();
           }
@@ -3302,24 +3301,23 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "loadData", /*#__PURE__*/function () {
+  _defineProperty(this, "getDownloadUrl", function () {
+    return _this2.source_type === "url" ? _this2.source : "".concat(connection.url, "/datasources/").concat(_this2.name, "/download");
+  });
+
+  _defineProperty(this, "delete", /*#__PURE__*/function () {
     var _ref28 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee27(params) {
-      var mergeParams, request, response;
+      var mergeParams, request;
       return regenerator.wrap(function _callee27$(_context27) {
         while (1) {
           switch (_context27.prev = _context27.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/data/"));
+              request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
               _context27.next = 4;
-              return connection.api.get(request);
+              return connection.api.delete(request);
 
             case 4:
-              response = _context27.sent;
-              _this2.data = response.data;
-              return _context27.abrupt("return", _this2.data);
-
-            case 7:
             case "end":
               return _context27.stop();
           }
@@ -3332,22 +3330,52 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "loadDataQuality", /*#__PURE__*/function () {
+  _defineProperty(this, "loadData", /*#__PURE__*/function () {
     var _ref29 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee28(params) {
-      var mergeParams, request, data, _response;
-
+      var mergeParams, request, response;
       return regenerator.wrap(function _callee28$(_context28) {
         while (1) {
           switch (_context28.prev = _context28.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/data/"));
+              _context28.next = 4;
+              return connection.api.get(request);
+
+            case 4:
+              response = _context28.sent;
+              _this2.data = response.data;
+              return _context28.abrupt("return", _this2.data);
+
+            case 7:
+            case "end":
+              return _context28.stop();
+          }
+        }
+      }, _callee28);
+    }));
+
+    return function (_x38) {
+      return _ref29.apply(this, arguments);
+    };
+  }());
+
+  _defineProperty(this, "loadDataQuality", /*#__PURE__*/function () {
+    var _ref30 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee29(params) {
+      var mergeParams, request, data, _response;
+
+      return regenerator.wrap(function _callee29$(_context29) {
+        while (1) {
+          switch (_context29.prev = _context29.next) {
+            case 0:
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/analyze"));
-              _context28.prev = 2;
-              _context28.next = 5;
+              _context29.prev = 2;
+              _context29.next = 5;
               return connection.api.get(request);
 
             case 5:
-              _response = _context28.sent;
+              _response = _context29.sent;
               data = {
                 data_preparation: _response.data["data_preparation"],
                 data_analysis_v2: _response.data["data_analysis_v2"],
@@ -3356,57 +3384,27 @@ var DataSource = function DataSource(_data2) {
                 versionNative: _response.data["version"],
                 status: _response.data && _response.data.status
               };
-              _context28.next = 13;
+              _context29.next = 13;
               break;
 
             case 9:
-              _context28.prev = 9;
-              _context28.t0 = _context28["catch"](2);
+              _context29.prev = 9;
+              _context29.t0 = _context29["catch"](2);
               Object.assign(_this2, {
-                error: _context28.t0
+                error: _context29.t0
               });
-              console.error(_context28.t0);
+              console.error(_context29.t0);
 
             case 13:
               _this2.dataQuality = data;
-              return _context28.abrupt("return", data);
+              return _context29.abrupt("return", data);
 
             case 15:
-            case "end":
-              return _context28.stop();
-          }
-        }
-      }, _callee28, null, [[2, 9]]);
-    }));
-
-    return function (_x38) {
-      return _ref29.apply(this, arguments);
-    };
-  }());
-
-  _defineProperty(this, "loadMissedFileList", /*#__PURE__*/function () {
-    var _ref30 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee29(params) {
-      var mergeParams, request, response;
-      return regenerator.wrap(function _callee29$(_context29) {
-        while (1) {
-          switch (_context29.prev = _context29.next) {
-            case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/missed_files"));
-              _context29.next = 4;
-              return connection.api.get(request);
-
-            case 4:
-              response = _context29.sent;
-              _this2.missedFileList = response.data;
-              return _context29.abrupt("return", _this2.missedFileList);
-
-            case 7:
             case "end":
               return _context29.stop();
           }
         }
-      }, _callee29);
+      }, _callee29, null, [[2, 9]]);
     }));
 
     return function (_x39) {
@@ -3414,27 +3412,24 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "uploadFile", /*#__PURE__*/function () {
-    var _ref32 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee30(_ref31, params) {
-      var column, rowIndex, extension, file, fd, mergeParams, request, response;
+  _defineProperty(this, "loadMissedFileList", /*#__PURE__*/function () {
+    var _ref31 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee30(params) {
+      var mergeParams, request, response;
       return regenerator.wrap(function _callee30$(_context30) {
         while (1) {
           switch (_context30.prev = _context30.next) {
             case 0:
-              column = _ref31.column, rowIndex = _ref31.rowIndex, extension = _ref31.extension, file = _ref31.file;
-              fd = new FormData();
-              fd.append("file", file);
-              fd.append("extension", extension);
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/files/").concat(column, ":").concat(rowIndex));
-              _context30.next = 8;
-              return connection.api.put(request, fd);
+              request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/missed_files"));
+              _context30.next = 4;
+              return connection.api.get(request);
 
-            case 8:
+            case 4:
               response = _context30.sent;
-              return _context30.abrupt("return", response.status === 200);
+              _this2.missedFileList = response.data;
+              return _context30.abrupt("return", _this2.missedFileList);
 
-            case 10:
+            case 7:
             case "end":
               return _context30.stop();
           }
@@ -3442,8 +3437,41 @@ var DataSource = function DataSource(_data2) {
       }, _callee30);
     }));
 
-    return function (_x40, _x41) {
-      return _ref32.apply(this, arguments);
+    return function (_x40) {
+      return _ref31.apply(this, arguments);
+    };
+  }());
+
+  _defineProperty(this, "uploadFile", /*#__PURE__*/function () {
+    var _ref33 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee31(_ref32, params) {
+      var column, rowIndex, extension, file, fd, mergeParams, request, response;
+      return regenerator.wrap(function _callee31$(_context31) {
+        while (1) {
+          switch (_context31.prev = _context31.next) {
+            case 0:
+              column = _ref32.column, rowIndex = _ref32.rowIndex, extension = _ref32.extension, file = _ref32.file;
+              fd = new FormData();
+              fd.append("file", file);
+              fd.append("extension", extension);
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/files/").concat(column, ":").concat(rowIndex));
+              _context31.next = 8;
+              return connection.api.put(request, fd);
+
+            case 8:
+              response = _context31.sent;
+              return _context31.abrupt("return", response.status === 200);
+
+            case 10:
+            case "end":
+              return _context31.stop();
+          }
+        }
+      }, _callee31);
+    }));
+
+    return function (_x41, _x42) {
+      return _ref33.apply(this, arguments);
     };
   }());
 
@@ -3462,60 +3490,38 @@ var DataBase = function DataBase(_data3) {
   _defineProperty(this, "integration", []);
 
   _defineProperty(this, "load", /*#__PURE__*/function () {
-    var _ref33 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee31(params) {
+    var _ref34 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee32(params) {
       var mergeParams, deRequest, _response2;
 
-      return regenerator.wrap(function _callee31$(_context31) {
-        while (1) {
-          switch (_context31.prev = _context31.next) {
-            case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              _context31.prev = 1;
-              deRequest = setQueryParams(mergeParams, "config/all_integrations");
-              _context31.next = 5;
-              return connection.api.get(deRequest);
-
-            case 5:
-              _response2 = _context31.sent;
-              Object.assign(_this3, _response2);
-              return _context31.abrupt("return", _this3);
-
-            case 10:
-              _context31.prev = 10;
-              _context31.t0 = _context31["catch"](1);
-              Object.assign(_this3, {
-                error: _context31.t0
-              });
-              console.error(_context31.t0);
-
-            case 14:
-            case "end":
-              return _context31.stop();
-          }
-        }
-      }, _callee31, null, [[1, 10]]);
-    }));
-
-    return function (_x42) {
-      return _ref33.apply(this, arguments);
-    };
-  }());
-
-  _defineProperty(this, "delete", /*#__PURE__*/function () {
-    var _ref34 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee32(params) {
       return regenerator.wrap(function _callee32$(_context32) {
         while (1) {
           switch (_context32.prev = _context32.next) {
             case 0:
-              _context32.next = 2;
-              return connection.api.delete("/config/integrations/".concat(params.db_name));
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              _context32.prev = 1;
+              deRequest = setQueryParams(mergeParams, "config/all_integrations");
+              _context32.next = 5;
+              return connection.api.get(deRequest);
 
-            case 2:
+            case 5:
+              _response2 = _context32.sent;
+              Object.assign(_this3, _response2);
+              return _context32.abrupt("return", _this3);
+
+            case 10:
+              _context32.prev = 10;
+              _context32.t0 = _context32["catch"](1);
+              Object.assign(_this3, {
+                error: _context32.t0
+              });
+              console.error(_context32.t0);
+
+            case 14:
             case "end":
               return _context32.stop();
           }
         }
-      }, _callee32);
+      }, _callee32, null, [[1, 10]]);
     }));
 
     return function (_x43) {
@@ -3523,19 +3529,16 @@ var DataBase = function DataBase(_data3) {
     };
   }());
 
-  _defineProperty(this, "check", /*#__PURE__*/function () {
+  _defineProperty(this, "delete", /*#__PURE__*/function () {
     var _ref35 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee33(params) {
       return regenerator.wrap(function _callee33$(_context33) {
         while (1) {
           switch (_context33.prev = _context33.next) {
             case 0:
               _context33.next = 2;
-              return connection.api.get("/config/integrations/".concat(params.integrations_name, "/check"));
+              return connection.api.delete("/config/integrations/".concat(params.db_name));
 
             case 2:
-              return _context33.abrupt("return", _context33.sent);
-
-            case 3:
             case "end":
               return _context33.stop();
           }
@@ -3548,23 +3551,19 @@ var DataBase = function DataBase(_data3) {
     };
   }());
 
-  _defineProperty(this, "edit", /*#__PURE__*/function () {
-    var _ref36 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee34(data, params) {
-      var mergeParams, request, response;
+  _defineProperty(this, "check", /*#__PURE__*/function () {
+    var _ref36 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee34(params) {
       return regenerator.wrap(function _callee34$(_context34) {
         while (1) {
           switch (_context34.prev = _context34.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.integrations_name));
-              _context34.next = 4;
-              return connection.api.post(request, data);
+              _context34.next = 2;
+              return connection.api.get("/config/integrations/".concat(params.integrations_name, "/check"));
 
-            case 4:
-              response = _context34.sent;
-              return _context34.abrupt("return", response.data);
+            case 2:
+              return _context34.abrupt("return", _context34.sent);
 
-            case 6:
+            case 3:
             case "end":
               return _context34.stop();
           }
@@ -3572,17 +3571,46 @@ var DataBase = function DataBase(_data3) {
       }, _callee34);
     }));
 
-    return function (_x45, _x46) {
+    return function (_x45) {
       return _ref36.apply(this, arguments);
     };
   }());
 
-  _defineProperty(this, "create", /*#__PURE__*/function () {
+  _defineProperty(this, "edit", /*#__PURE__*/function () {
     var _ref37 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee35(data, params) {
-      var mergeParams, form_data, key, request, response;
+      var mergeParams, request, response;
       return regenerator.wrap(function _callee35$(_context35) {
         while (1) {
           switch (_context35.prev = _context35.next) {
+            case 0:
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.integrations_name));
+              _context35.next = 4;
+              return connection.api.post(request, data);
+
+            case 4:
+              response = _context35.sent;
+              return _context35.abrupt("return", response.data);
+
+            case 6:
+            case "end":
+              return _context35.stop();
+          }
+        }
+      }, _callee35);
+    }));
+
+    return function (_x46, _x47) {
+      return _ref37.apply(this, arguments);
+    };
+  }());
+
+  _defineProperty(this, "create", /*#__PURE__*/function () {
+    var _ref38 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee36(data, params) {
+      var mergeParams, form_data, key, request, response;
+      return regenerator.wrap(function _callee36$(_context36) {
+        while (1) {
+          switch (_context36.prev = _context36.next) {
             case 0:
               mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
               form_data = new FormData();
@@ -3606,57 +3634,57 @@ var DataBase = function DataBase(_data3) {
               }
 
               request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.integrations_name));
-              _context35.next = 7;
+              _context36.next = 7;
               return connection.api.put(request, form_data);
 
             case 7:
-              response = _context35.sent;
-              return _context35.abrupt("return", response.data);
+              response = _context36.sent;
+              return _context36.abrupt("return", response.data);
 
             case 9:
-            case "end":
-              return _context35.stop();
-          }
-        }
-      }, _callee35);
-    }));
-
-    return function (_x47, _x48) {
-      return _ref37.apply(this, arguments);
-    };
-  }());
-
-  _defineProperty(this, "newDataset", /*#__PURE__*/function () {
-    var _ref38 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee36(data, params) {
-      var mergeParams, request;
-      return regenerator.wrap(function _callee36$(_context36) {
-        while (1) {
-          switch (_context36.prev = _context36.next) {
-            case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
-              _context36.prev = 1;
-              request = setQueryParams(mergeParams, "/datasources/".concat(data.name));
-              _context36.next = 5;
-              return connection.api.put(request, data);
-
-            case 5:
-              return _context36.abrupt("return", _context36.sent);
-
-            case 8:
-              _context36.prev = 8;
-              _context36.t0 = _context36["catch"](1);
-              return _context36.abrupt("return", _context36.t0);
-
-            case 11:
             case "end":
               return _context36.stop();
           }
         }
-      }, _callee36, null, [[1, 8]]);
+      }, _callee36);
     }));
 
-    return function (_x49, _x50) {
+    return function (_x48, _x49) {
       return _ref38.apply(this, arguments);
+    };
+  }());
+
+  _defineProperty(this, "newDataset", /*#__PURE__*/function () {
+    var _ref39 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee37(data, params) {
+      var mergeParams, request;
+      return regenerator.wrap(function _callee37$(_context37) {
+        while (1) {
+          switch (_context37.prev = _context37.next) {
+            case 0:
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              _context37.prev = 1;
+              request = setQueryParams(mergeParams, "/datasources/".concat(data.name));
+              _context37.next = 5;
+              return connection.api.put(request, data);
+
+            case 5:
+              return _context37.abrupt("return", _context37.sent);
+
+            case 8:
+              _context37.prev = 8;
+              _context37.t0 = _context37["catch"](1);
+              return _context37.abrupt("return", _context37.t0);
+
+            case 11:
+            case "end":
+              return _context37.stop();
+          }
+        }
+      }, _callee37, null, [[1, 8]]);
+    }));
+
+    return function (_x50, _x51) {
+      return _ref39.apply(this, arguments);
     };
   }());
 
