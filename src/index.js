@@ -521,6 +521,7 @@ class DataSource {
         current_phase: response.data["current_phase"],
         versionNative: response.data["version"],
         status: response.data && response.data.status,
+        dataset: response.data,
       };
     } catch (error) {
       Object.assign(this, { error: error });
