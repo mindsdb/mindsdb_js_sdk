@@ -640,7 +640,16 @@ class DataBase {
       mergeParams,
       `/config/integrations/${data.params.integrations_name}`
     );
-    const response = await connection.api.put(request, form_data);
+    // const response = await connection.api.put(request, form_data, headers);
+    const response = await axios.post(
+      `${connection.url}/config/integrations/${data.params.integrations_name}`,
+      form_data,
+      {
+        headers: {
+          "database-type": data.params.type,
+        },
+      }
+    );
 
     return response.data;
   };
