@@ -641,7 +641,7 @@ class DataBase {
       `/config/integrations/${data.params.integrations_name}`
     );
     // const response = await connection.api.put(request, form_data, headers);
-    const response = await axios.post(
+    const response = await axios.put(
       `${connection.url}/config/integrations/${data.params.integrations_name}`,
       form_data,
       {
