@@ -3637,7 +3637,7 @@ var DataBase = function DataBase(_data3) {
               request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.integrations_name)); // const response = await connection.api.put(request, form_data, headers);
 
               _context36.next = 7;
-              return axios$1.post("".concat(connection.url, "/config/integrations/").concat(data.params.integrations_name), form_data, {
+              return axios$1.put("".concat(connection.url, "/config/integrations/").concat(data.params.integrations_name), form_data, {
                 headers: {
                   "database-type": data.params.type
                 }
