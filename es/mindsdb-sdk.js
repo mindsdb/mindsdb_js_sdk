@@ -815,7 +815,7 @@ var Predictor = function Predictor(_data) {
 
   _defineProperty(this, "delete", /*#__PURE__*/function () {
     var _ref21 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee20(params) {
-      var mergeParams, request;
+      var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee20$(_context20) {
         while (1) {
           switch (_context20.prev = _context20.next) {
@@ -826,6 +826,10 @@ var Predictor = function Predictor(_data) {
               return connection.api.delete(request);
 
             case 4:
+              response = _context20.sent;
+              return _context20.abrupt("return", response.data);
+
+            case 6:
             case "end":
               return _context20.stop();
           }
@@ -1082,7 +1086,7 @@ var DataSource = function DataSource(_data2) {
 
   _defineProperty(this, "delete", /*#__PURE__*/function () {
     var _ref28 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee27(params) {
-      var mergeParams, request;
+      var mergeParams, request, response;
       return regeneratorRuntime.wrap(function _callee27$(_context27) {
         while (1) {
           switch (_context27.prev = _context27.next) {
@@ -1093,6 +1097,10 @@ var DataSource = function DataSource(_data2) {
               return connection.api.delete(request);
 
             case 4:
+              response = _context27.sent;
+              return _context27.abrupt("return", response.data);
+
+            case 6:
             case "end":
               return _context27.stop();
           }
@@ -1307,6 +1315,7 @@ var DataBase = function DataBase(_data3) {
 
   _defineProperty(this, "delete", /*#__PURE__*/function () {
     var _ref35 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee33(params) {
+      var response;
       return regeneratorRuntime.wrap(function _callee33$(_context33) {
         while (1) {
           switch (_context33.prev = _context33.next) {
@@ -1315,6 +1324,10 @@ var DataBase = function DataBase(_data3) {
               return connection.api.delete("/config/integrations/".concat(params.db_name));
 
             case 2:
+              response = _context33.sent;
+              return _context33.abrupt("return", response.data);
+
+            case 4:
             case "end":
               return _context33.stop();
           }

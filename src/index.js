@@ -341,7 +341,9 @@ class Predictor {
       : [connection.token];
 
     const request = setQueryParams(mergeParams, `/predictors/${this.name}`);
-    await connection.api.delete(request);
+    const response = await connection.api.delete(request);
+
+    return response.data;
   };
 
   upload = async (file, onProgress, params) => {
@@ -486,7 +488,9 @@ class DataSource {
       ? [...params, connection.token]
       : [connection.token];
     const request = setQueryParams(mergeParams, `/datasources/${this.name}`);
-    await connection.api.delete(request);
+    const response = await connection.api.delete(request);
+
+    return response.data;
   };
 
   loadData = async (params) => {
@@ -589,7 +593,11 @@ class DataBase {
   };
 
   delete = async (params) => {
-    await connection.api.delete(`/config/integrations/${params.db_name}`);
+    const response = await connection.api.delete(
+      `/config/integrations/${params.db_name}`
+    );
+
+    return response.data;
   };
 
   check = async (params) => {
