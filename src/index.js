@@ -220,14 +220,14 @@ class Predictor {
   };
 
   // Lightwood Refactor ⚒
-  learn_lwr = async (data_source_name, problem_definition, params) => {
+  generate = async (data_source_name, problem_definition, params) => {
     const mergeParams = params
       ? [...params, connection.token]
       : [connection.token];
 
     const request = setQueryParams(
       mergeParams,
-      `/predictors/${this.name}/generate`
+      `/predictors/generate/${this.name}`
     );
     await connection.api.put(request, { data_source_name, problem_definition });
 
