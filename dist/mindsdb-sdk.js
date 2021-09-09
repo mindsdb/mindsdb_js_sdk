@@ -3621,7 +3621,8 @@ var DataBase = function DataBase(_data3) {
 
   _defineProperty(this, "create", /*#__PURE__*/function () {
     var _ref38 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee36(data, params) {
-      var mergeParams, form_data, key, request, response;
+      var mergeParams, form_data, key, _data$params, response;
+
       return regenerator.wrap(function _callee36$(_context36) {
         while (1) {
           switch (_context36.prev = _context36.next) {
@@ -3647,7 +3648,9 @@ var DataBase = function DataBase(_data3) {
                 }
               }
 
-              request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.integrations_name)); // const response = await connection.api.put(request, form_data, headers);
+              if (data.params.type === 'redis' || data.params.type === 'kafka') {
+                form_data.set("connection", JSON.stringify(data === null || data === void 0 ? void 0 : (_data$params = data.params) === null || _data$params === void 0 ? void 0 : _data$params.connection));
+              }
 
               _context36.next = 7;
               return axios$1.put("".concat(connection.url, "/config/integrations/").concat(data.params.integrations_name), form_data, {
