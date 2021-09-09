@@ -643,12 +643,11 @@ class DataBase {
         form_data.set("ssl_key", data?.ssl_key);
       }
     }
+   
+    if (data.params.type === 'redis' || data.params.type === 'kafka') {
+      form_data.set("connection", JSON.stringify(data?.params?.connection));
+    }
 
-    const request = setQueryParams(
-      mergeParams,
-      `/config/integrations/${data.params.integrations_name}`
-    );
-    // const response = await connection.api.put(request, form_data, headers);
     const response = await axios.put(
       `${connection.url}/config/integrations/${data.params.integrations_name}`,
       form_data,
