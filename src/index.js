@@ -644,8 +644,8 @@ class DataBase {
         form_data.set("ssl_key", data?.ssl_key);
       }
     }
-   
-    if (data.params.type === 'redis' || data.params.type === 'kafka') {
+
+    if (data.params.type === "redis" || data.params.type === "kafka") {
       form_data.set("connection", JSON.stringify(data?.params?.connection));
     }
 
@@ -691,20 +691,14 @@ class Stream {
     try {
       const deRequest = setQueryParams(mergeParams, "streams/");
       const response = await connection.api.get(deRequest);
-      Object.assign(this, response);
-      return this;
+      return response;
     } catch (error) {
-      Object.assign(this, { error: error });
-      console.error(error);
+      return error;
     }
   };
 
   delete = async (params) => {
-    const response = await connection.api.delete(
-      `/streams/${params.stream_name}`
-    );
-
-    return response.data;
+    return await connection.api.delete(`/streams/${params.name}`);
   };
 }
 

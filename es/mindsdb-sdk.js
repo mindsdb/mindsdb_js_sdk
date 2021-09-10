@@ -1427,7 +1427,7 @@ var DataBase = function DataBase(_data3) {
                 }
               }
 
-              if (data.params.type === 'redis' || data.params.type === 'kafka') {
+              if (data.params.type === "redis" || data.params.type === "kafka") {
                 form_data.set("connection", JSON.stringify(data === null || data === void 0 ? void 0 : (_data$params = data.params) === null || _data$params === void 0 ? void 0 : _data$params.connection));
               }
 
@@ -1493,8 +1493,6 @@ var DataBase = function DataBase(_data3) {
 };
 
 var Stream = function Stream(data) {
-  var _this4 = this;
-
   _classCallCheck(this, Stream);
 
   _defineProperty(this, "loaded", false);
@@ -1519,23 +1517,19 @@ var Stream = function Stream(data) {
 
             case 5:
               _response3 = _context38.sent;
-              Object.assign(_this4, _response3);
-              return _context38.abrupt("return", _this4);
+              return _context38.abrupt("return", _response3);
 
-            case 10:
-              _context38.prev = 10;
+            case 9:
+              _context38.prev = 9;
               _context38.t0 = _context38["catch"](1);
-              Object.assign(_this4, {
-                error: _context38.t0
-              });
-              console.error(_context38.t0);
+              return _context38.abrupt("return", _context38.t0);
 
-            case 14:
+            case 12:
             case "end":
               return _context38.stop();
           }
         }
-      }, _callee38, null, [[1, 10]]);
+      }, _callee38, null, [[1, 9]]);
     }));
 
     return function (_x52) {
@@ -1545,19 +1539,17 @@ var Stream = function Stream(data) {
 
   _defineProperty(this, "delete", /*#__PURE__*/function () {
     var _ref41 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee39(params) {
-      var response;
       return regeneratorRuntime.wrap(function _callee39$(_context39) {
         while (1) {
           switch (_context39.prev = _context39.next) {
             case 0:
               _context39.next = 2;
-              return connection.api.delete("/streams/".concat(params.stream_name));
+              return connection.api.delete("/streams/".concat(params.name));
 
             case 2:
-              response = _context39.sent;
-              return _context39.abrupt("return", response.data);
+              return _context39.abrupt("return", _context39.sent);
 
-            case 4:
+            case 3:
             case "end":
               return _context39.stop();
           }
