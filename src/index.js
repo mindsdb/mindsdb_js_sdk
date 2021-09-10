@@ -79,6 +79,7 @@ const installDependencies = async (name) => {
 const predictor = (opts) => new Predictor(opts);
 const dataSource = (opts) => new DataSource(opts);
 const database = (opts) => new DataBase(opts);
+const stream = (opts) => new Stream(opts);
 
 const predictors = async (params) => {
   const mergeParams = params
@@ -674,6 +675,39 @@ class DataBase {
   };
 }
 
+class Stream {
+  loaded = false;
+  source_type = "url";
+  integration = [];
+
+  constructor(data) {
+    Object.assign(this, data);
+  }
+
+  load = async (params) => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+    try {
+      const deRequest = setQueryParams(mergeParams, "streams/");
+      const response = await connection.api.get(deRequest);
+      Object.assign(this, response);
+      return this;
+    } catch (error) {
+      Object.assign(this, { error: error });
+      console.error(error);
+    }
+  };
+
+  delete = async (params) => {
+    const response = await connection.api.delete(
+      `/streams/${params.stream_name}`
+    );
+
+    return response.data;
+  };
+}
+
 const MindsDB = {
   connect,
   disconnect,
@@ -688,6 +722,7 @@ const MindsDB = {
   DataSource: dataSource,
   Predictor: predictor,
   DataBase: database,
+  Stream: stream,
 };
 
 /* eslint-enable */
