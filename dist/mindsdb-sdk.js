@@ -2567,6 +2567,10 @@ var database = function database(opts) {
   return new DataBase(opts);
 };
 
+var stream = function stream(opts) {
+  return new Stream(opts);
+};
+
 var predictors = /*#__PURE__*/function () {
   var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee7(params) {
     var mergeParams, request, response, rawData, predictorList;
@@ -3648,7 +3652,7 @@ var DataBase = function DataBase(_data3) {
                 }
               }
 
-              if (data.params.type === 'redis' || data.params.type === 'kafka') {
+              if (data.params.type === "redis" || data.params.type === "kafka") {
                 form_data.set("connection", JSON.stringify(data === null || data === void 0 ? void 0 : (_data$params = data.params) === null || _data$params === void 0 ? void 0 : _data$params.connection));
               }
 
@@ -3713,6 +3717,79 @@ var DataBase = function DataBase(_data3) {
   Object.assign(this, _data3);
 };
 
+var Stream = function Stream(data) {
+  _classCallCheck(this, Stream);
+
+  _defineProperty(this, "loaded", false);
+
+  _defineProperty(this, "source_type", "url");
+
+  _defineProperty(this, "integration", []);
+
+  _defineProperty(this, "load", /*#__PURE__*/function () {
+    var _ref40 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee38(params) {
+      var mergeParams, deRequest, _response3;
+
+      return regenerator.wrap(function _callee38$(_context38) {
+        while (1) {
+          switch (_context38.prev = _context38.next) {
+            case 0:
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              _context38.prev = 1;
+              deRequest = setQueryParams(mergeParams, "streams/");
+              _context38.next = 5;
+              return connection.api.get(deRequest);
+
+            case 5:
+              _response3 = _context38.sent;
+              return _context38.abrupt("return", _response3);
+
+            case 9:
+              _context38.prev = 9;
+              _context38.t0 = _context38["catch"](1);
+              return _context38.abrupt("return", _context38.t0);
+
+            case 12:
+            case "end":
+              return _context38.stop();
+          }
+        }
+      }, _callee38, null, [[1, 9]]);
+    }));
+
+    return function (_x52) {
+      return _ref40.apply(this, arguments);
+    };
+  }());
+
+  _defineProperty(this, "delete", /*#__PURE__*/function () {
+    var _ref41 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee39(params) {
+      return regenerator.wrap(function _callee39$(_context39) {
+        while (1) {
+          switch (_context39.prev = _context39.next) {
+            case 0:
+              _context39.next = 2;
+              return connection.api.delete("/streams/".concat(params.name));
+
+            case 2:
+              return _context39.abrupt("return", _context39.sent);
+
+            case 3:
+            case "end":
+              return _context39.stop();
+          }
+        }
+      }, _callee39);
+    }));
+
+    return function (_x53) {
+      return _ref41.apply(this, arguments);
+    };
+  }());
+
+  Object.assign(this, data);
+};
+
 var MindsDB = {
   connect: connect,
   disconnect: disconnect,
@@ -3726,7 +3803,8 @@ var MindsDB = {
   dataSources: dataSources,
   DataSource: dataSource,
   Predictor: predictor,
-  DataBase: database
+  DataBase: database,
+  Stream: stream
 };
 
 return MindsDB;

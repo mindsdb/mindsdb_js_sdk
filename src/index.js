@@ -79,6 +79,7 @@ const installDependencies = async (name) => {
 const predictor = (opts) => new Predictor(opts);
 const dataSource = (opts) => new DataSource(opts);
 const database = (opts) => new DataBase(opts);
+const stream = (opts) => new Stream(opts);
 
 const predictors = async (params) => {
   const mergeParams = params
@@ -643,8 +644,8 @@ class DataBase {
         form_data.set("ssl_key", data?.ssl_key);
       }
     }
-   
-    if (data.params.type === 'redis' || data.params.type === 'kafka') {
+
+    if (data.params.type === "redis" || data.params.type === "kafka") {
       form_data.set("connection", JSON.stringify(data?.params?.connection));
     }
 
@@ -674,6 +675,33 @@ class DataBase {
   };
 }
 
+class Stream {
+  loaded = false;
+  source_type = "url";
+  integration = [];
+
+  constructor(data) {
+    Object.assign(this, data);
+  }
+
+  load = async (params) => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+    try {
+      const deRequest = setQueryParams(mergeParams, "streams/");
+      const response = await connection.api.get(deRequest);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  };
+
+  delete = async (params) => {
+    return await connection.api.delete(`/streams/${params.name}`);
+  };
+}
+
 const MindsDB = {
   connect,
   disconnect,
@@ -688,6 +716,7 @@ const MindsDB = {
   DataSource: dataSource,
   Predictor: predictor,
   DataBase: database,
+  Stream: stream,
 };
 
 /* eslint-enable */
