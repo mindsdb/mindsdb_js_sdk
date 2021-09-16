@@ -649,6 +649,10 @@ class DataBase {
       form_data.set("connection", JSON.stringify(data?.params?.connection));
     }
 
+    if (data.params.type === "kafka") {
+      form_data.set("advanced", JSON.stringify(data?.params?.advanced));
+    }
+
     const response = await axios.put(
       `${connection.url}/config/integrations/${data.params.integrations_name}`,
       form_data,
