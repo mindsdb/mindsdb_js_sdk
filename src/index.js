@@ -86,13 +86,16 @@ const predictors = async (params) => {
     ? [...params, connection.token]
     : [connection.token];
 
-  const request = setQueryParams(mergeParams, "/predictors/");
-  const response = await connection.api.get(request);
+  if (connection.api) {
+    const request = setQueryParams(mergeParams, "/predictors/");
+    const response = await connection.api.get(request);
 
-  const rawData = response.data || [];
-  const predictorList = rawData.map(predictor);
+    const rawData = response.data || [];
+    const predictorList = rawData.map(predictor);
 
-  return predictorList;
+    return predictorList;
+  }
+  return [];
 };
 
 const dataSources = async (params) => {
