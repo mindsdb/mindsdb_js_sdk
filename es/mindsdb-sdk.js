@@ -348,23 +348,33 @@ var stream = function stream(opts) {
 
 var predictors = /*#__PURE__*/function () {
   var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(params) {
-    var mergeParams, request, response, rawData, predictorList;
+    var mergeParams, request, _response, rawData, predictorList;
+
     return regeneratorRuntime.wrap(function _callee7$(_context7) {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
             mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+
+            if (!connection.api) {
+              _context7.next = 9;
+              break;
+            }
+
             request = setQueryParams(mergeParams, "/predictors/");
-            _context7.next = 4;
+            _context7.next = 5;
             return connection.api.get(request);
 
-          case 4:
-            response = _context7.sent;
-            rawData = response.data || [];
+          case 5:
+            _response = _context7.sent;
+            rawData = _response.data || [];
             predictorList = rawData.map(predictor);
             return _context7.abrupt("return", predictorList);
 
-          case 8:
+          case 9:
+            return _context7.abrupt("return", []);
+
+          case 10:
           case "end":
             return _context7.stop();
         }
@@ -1149,7 +1159,7 @@ var DataSource = function DataSource(_data2) {
 
   _defineProperty(this, "loadDataQuality", /*#__PURE__*/function () {
     var _ref30 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee29(params) {
-      var mergeParams, request, data, _response;
+      var mergeParams, request, data, _response2;
 
       return regeneratorRuntime.wrap(function _callee29$(_context29) {
         while (1) {
@@ -1162,15 +1172,15 @@ var DataSource = function DataSource(_data2) {
               return connection.api.get(request);
 
             case 5:
-              _response = _context29.sent;
+              _response2 = _context29.sent;
               data = {
-                data_preparation: _response.data["data_preparation"],
-                data_analysis_v2: _response.data["data_analysis_v2"],
-                useable_input_columns: _response.data["useable_input_columns"],
-                current_phase: _response.data["current_phase"],
-                versionNative: _response.data["version"],
-                status: _response.data && _response.data.status,
-                dataset: _response.data
+                data_preparation: _response2.data["data_preparation"],
+                data_analysis_v2: _response2.data["data_analysis_v2"],
+                useable_input_columns: _response2.data["useable_input_columns"],
+                current_phase: _response2.data["current_phase"],
+                versionNative: _response2.data["version"],
+                status: _response2.data && _response2.data.status,
+                dataset: _response2.data
               };
               _context29.next = 13;
               break;
@@ -1279,7 +1289,7 @@ var DataBase = function DataBase(_data3) {
 
   _defineProperty(this, "load", /*#__PURE__*/function () {
     var _ref34 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee32(params) {
-      var mergeParams, deRequest, _response2;
+      var mergeParams, deRequest, _response3;
 
       return regeneratorRuntime.wrap(function _callee32$(_context32) {
         while (1) {
@@ -1292,8 +1302,8 @@ var DataBase = function DataBase(_data3) {
               return connection.api.get(deRequest);
 
             case 5:
-              _response2 = _context32.sent;
-              Object.assign(_this3, _response2);
+              _response3 = _context32.sent;
+              Object.assign(_this3, _response3);
               return _context32.abrupt("return", _this3);
 
             case 10:
@@ -1507,7 +1517,7 @@ var Stream = function Stream(data) {
 
   _defineProperty(this, "load", /*#__PURE__*/function () {
     var _ref40 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee38(params) {
-      var mergeParams, deRequest, _response3;
+      var mergeParams, deRequest, _response4;
 
       return regeneratorRuntime.wrap(function _callee38$(_context38) {
         while (1) {
@@ -1520,8 +1530,8 @@ var Stream = function Stream(data) {
               return connection.api.get(deRequest);
 
             case 5:
-              _response3 = _context38.sent;
-              return _context38.abrupt("return", _response3);
+              _response4 = _context38.sent;
+              return _context38.abrupt("return", _response4);
 
             case 9:
               _context38.prev = 9;
