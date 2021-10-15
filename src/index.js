@@ -704,6 +704,34 @@ class Stream {
     }
   };
 
+  create = async (data, params) => {
+    const mergeParams = params
+      ? [...params, connection.token]
+      : [connection.token];
+
+    const form_data = new FormData();
+
+    for (var key in data.params) {
+      form_data.append(key, data.params[key]);
+    }
+
+    if (data.params.isCloud) {
+      form_data.set("connection", JSON.stringify(data?.params?.connection));
+    }
+
+    const response = await axios.put(
+      `${connection.url}/stream/${data.params.predictor}`,
+      form_data,
+      {
+        headers: {
+          "database-type": data.params.type,
+        },
+      }
+    );
+
+    return response.data;
+  };
+
   delete = async (params) => {
     return await connection.api.delete(`/streams/${params.name}`);
   };
