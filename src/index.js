@@ -719,7 +719,7 @@ class Stream {
       form_data.set("connection", JSON.stringify(data?.params?.connection));
     }
 
-    const response = await axios.put(
+    const response = await axios.post(
       `${connection.url}/stream/${data.params.predictor}`,
       form_data,
       {

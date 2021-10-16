@@ -82,7 +82,7 @@ function _arrayWithoutHoles(arr) {
 }
 
 function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 
 function _unsupportedIterableToArray(o, minLen) {
@@ -1506,7 +1506,7 @@ var DataBase = function DataBase(_data3) {
   Object.assign(this, _data3);
 };
 
-var Stream = function Stream(data) {
+var Stream = function Stream(_data4) {
   _classCallCheck(this, Stream);
 
   _defineProperty(this, "loaded", false);
@@ -1551,19 +1551,37 @@ var Stream = function Stream(data) {
     };
   }());
 
-  _defineProperty(this, "delete", /*#__PURE__*/function () {
-    var _ref41 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee39(params) {
+  _defineProperty(this, "create", /*#__PURE__*/function () {
+    var _ref41 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee39(data, params) {
+      var mergeParams, form_data, key, _data$params3, response;
+
       return regeneratorRuntime.wrap(function _callee39$(_context39) {
         while (1) {
           switch (_context39.prev = _context39.next) {
             case 0:
-              _context39.next = 2;
-              return connection.api.delete("/streams/".concat(params.name));
+              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              form_data = new FormData();
 
-            case 2:
-              return _context39.abrupt("return", _context39.sent);
+              for (key in data.params) {
+                form_data.append(key, data.params[key]);
+              }
 
-            case 3:
+              if (data.params.isCloud) {
+                form_data.set("connection", JSON.stringify(data === null || data === void 0 ? void 0 : (_data$params3 = data.params) === null || _data$params3 === void 0 ? void 0 : _data$params3.connection));
+              }
+
+              _context39.next = 6;
+              return axios.post("".concat(connection.url, "/stream/").concat(data.params.predictor), form_data, {
+                headers: {
+                  "database-type": data.params.type
+                }
+              });
+
+            case 6:
+              response = _context39.sent;
+              return _context39.abrupt("return", response.data);
+
+            case 8:
             case "end":
               return _context39.stop();
           }
@@ -1571,12 +1589,37 @@ var Stream = function Stream(data) {
       }, _callee39);
     }));
 
-    return function (_x53) {
+    return function (_x53, _x54) {
       return _ref41.apply(this, arguments);
     };
   }());
 
-  Object.assign(this, data);
+  _defineProperty(this, "delete", /*#__PURE__*/function () {
+    var _ref42 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee40(params) {
+      return regeneratorRuntime.wrap(function _callee40$(_context40) {
+        while (1) {
+          switch (_context40.prev = _context40.next) {
+            case 0:
+              _context40.next = 2;
+              return connection.api.delete("/streams/".concat(params.name));
+
+            case 2:
+              return _context40.abrupt("return", _context40.sent);
+
+            case 3:
+            case "end":
+              return _context40.stop();
+          }
+        }
+      }, _callee40);
+    }));
+
+    return function (_x55) {
+      return _ref42.apply(this, arguments);
+    };
+  }());
+
+  Object.assign(this, _data4);
 };
 
 var MindsDB = {
