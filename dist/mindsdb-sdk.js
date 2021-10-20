@@ -4093,7 +4093,7 @@ var Stream = function Stream(_data4) {
               }
 
               _context39.next = 6;
-              return axios$1.post("".concat(connection.url, "/stream/").concat(data.params.predictor), form_data, {
+              return axios$1.put("".concat(connection.url, "/streams/").concat(data.params.predictor), form_data, {
                 headers: {
                   "database-type": data.params.type
                 }
