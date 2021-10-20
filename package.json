@@ -1,6 +1,6 @@
 {
   "name": "mindsdb-js-sdk",
-  "version": "0.5.41",
+  "version": "0.5.43",
   "license": "MIT",
   "homepage": "https://github.com/mindsdb/mindsdb_js_sdk#readme",
   "repository": {
@@ -47,7 +47,7 @@
     "rollup-plugin-terser": "^5.3.1"
   },
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^0.23.0",
     "serialize-javascript": "^4.0.0"
   }
 }

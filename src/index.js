@@ -720,7 +720,7 @@ class Stream {
     }
 
     const response = await axios.put(
-      `${connection.url}/stream/${data.params.predictor}`,
+      `${connection.url}/streams/${data.params.predictor}`,
       form_data,
       {
         headers: {
