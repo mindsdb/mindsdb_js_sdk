@@ -4,28 +4,14 @@ typeof define === 'function' && define.amd ? define(factory) :
 (global = global || self, global['MindsDB-sdk'] = factory());
 }(this, (function () { 'use strict';
 
-function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
-}
-
-var classCallCheck = createCommonjsModule(function (module) {
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-module.exports = _classCallCheck;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
+var classCallCheck = _classCallCheck;
 
-var _classCallCheck = unwrapExports(classCallCheck);
-
-var defineProperty = createCommonjsModule(function (module) {
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -41,13 +27,8 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-module.exports = _defineProperty;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
+var defineProperty = _defineProperty;
 
-var _defineProperty = unwrapExports(defineProperty);
-
-var arrayLikeToArray = createCommonjsModule(function (module) {
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
 
@@ -58,35 +39,20 @@ function _arrayLikeToArray(arr, len) {
   return arr2;
 }
 
-module.exports = _arrayLikeToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
+var arrayLikeToArray = _arrayLikeToArray;
 
-unwrapExports(arrayLikeToArray);
-
-var arrayWithoutHoles = createCommonjsModule(function (module) {
 function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) return arrayLikeToArray(arr);
 }
 
-module.exports = _arrayWithoutHoles;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
+var arrayWithoutHoles = _arrayWithoutHoles;
 
-unwrapExports(arrayWithoutHoles);
-
-var iterableToArray = createCommonjsModule(function (module) {
 function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
 
-module.exports = _iterableToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
+var iterableToArray = _iterableToArray;
 
-unwrapExports(iterableToArray);
-
-var unsupportedIterableToArray = createCommonjsModule(function (module) {
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
   if (typeof o === "string") return arrayLikeToArray(o, minLen);
@@ -96,103 +62,23 @@ function _unsupportedIterableToArray(o, minLen) {
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
 }
 
-module.exports = _unsupportedIterableToArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
+var unsupportedIterableToArray = _unsupportedIterableToArray;
 
-unwrapExports(unsupportedIterableToArray);
-
-var nonIterableSpread = createCommonjsModule(function (module) {
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-module.exports = _nonIterableSpread;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
+var nonIterableSpread = _nonIterableSpread;
 
-unwrapExports(nonIterableSpread);
-
-var toConsumableArray = createCommonjsModule(function (module) {
 function _toConsumableArray(arr) {
   return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
 }
 
-module.exports = _toConsumableArray;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
+var toConsumableArray = _toConsumableArray;
 
-var _toConsumableArray = unwrapExports(toConsumableArray);
-
-var _typeof_1 = createCommonjsModule(function (module) {
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  }
-
-  return _typeof(obj);
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
-
-module.exports = _typeof;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
-
-var _typeof = unwrapExports(_typeof_1);
-
-var asyncToGenerator = createCommonjsModule(function (module) {
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-module.exports = _asyncToGenerator;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
-
-var _asyncToGenerator = unwrapExports(asyncToGenerator);
 
 var runtime_1 = createCommonjsModule(function (module) {
 /**
@@ -211,25 +97,6 @@ var runtime = function (exports) {
   var iteratorSymbol = $Symbol.iterator || "@@iterator";
   var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
   var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  function define(obj, key, value) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-    return obj[key];
-  }
-
-  try {
-    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
-    define({}, "");
-  } catch (err) {
-    define = function (obj, key, value) {
-      return obj[key] = value;
-    };
-  }
 
   function wrap(innerFn, outerFn, self, tryLocsList) {
     // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
@@ -287,9 +154,11 @@ var runtime = function (exports) {
 
 
   var IteratorPrototype = {};
-  define(IteratorPrototype, iteratorSymbol, function () {
+
+  IteratorPrototype[iteratorSymbol] = function () {
     return this;
-  });
+  };
+
   var getProto = Object.getPrototypeOf;
   var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
 
@@ -300,17 +169,16 @@ var runtime = function (exports) {
   }
 
   var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = GeneratorFunctionPrototype;
-  define(Gp, "constructor", GeneratorFunctionPrototype);
-  define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
-  GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"); // Helper for defining the .next, .throw, and .return methods of the
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunctionPrototype[toStringTagSymbol] = GeneratorFunction.displayName = "GeneratorFunction"; // Helper for defining the .next, .throw, and .return methods of the
   // Iterator interface in terms of a single ._invoke method.
 
   function defineIteratorMethods(prototype) {
     ["next", "throw", "return"].forEach(function (method) {
-      define(prototype, method, function (arg) {
+      prototype[method] = function (arg) {
         return this._invoke(method, arg);
-      });
+      };
     });
   }
 
@@ -326,7 +194,10 @@ var runtime = function (exports) {
       Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
     } else {
       genFun.__proto__ = GeneratorFunctionPrototype;
-      define(genFun, toStringTagSymbol, "GeneratorFunction");
+
+      if (!(toStringTagSymbol in genFun)) {
+        genFun[toStringTagSymbol] = "GeneratorFunction";
+      }
     }
 
     genFun.prototype = Object.create(Gp);
@@ -407,9 +278,11 @@ var runtime = function (exports) {
   }
 
   defineIteratorMethods(AsyncIterator.prototype);
-  define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
     return this;
-  });
+  };
+
   exports.AsyncIterator = AsyncIterator; // Note that simple async functions are implemented on top of
   // AsyncIterator objects; they just return a Promise for the value of
   // the final result produced by the iterator.
@@ -580,18 +453,19 @@ var runtime = function (exports) {
 
 
   defineIteratorMethods(Gp);
-  define(Gp, toStringTagSymbol, "Generator"); // A Generator should always return itself as the iterator object when the
+  Gp[toStringTagSymbol] = "Generator"; // A Generator should always return itself as the iterator object when the
   // @@iterator function is called on it. Some browsers' implementations of the
   // iterator prototype chain incorrectly implement this, causing the Generator
   // object to not be returned from this call. This ensures that doesn't happen.
   // See https://github.com/facebook/regenerator/issues/274 for more details.
 
-  define(Gp, iteratorSymbol, function () {
+  Gp[iteratorSymbol] = function () {
     return this;
-  });
-  define(Gp, "toString", function () {
+  };
+
+  Gp.toString = function () {
     return "[object Generator]";
-  });
+  };
 
   function pushTryEntry(locs) {
     var entry = {
@@ -903,23 +777,76 @@ try {
 } catch (accidentalStrictMode) {
   // This module should not be running in strict mode, so the above
   // assignment should always work unless something is misconfigured. Just
-  // in case runtime.js accidentally runs in strict mode, in modern engines
-  // we can explicitly access globalThis. In older engines we can escape
+  // in case runtime.js accidentally runs in strict mode, we can escape
   // strict mode using a global Function call. This could conceivably fail
   // if a Content Security Policy forbids using Function, but in that case
   // the proper solution is to fix the accidental strict mode problem. If
   // you've misconfigured your bundler to force strict mode and applied a
   // CSP to forbid Function, and you're not willing to fix either of those
   // problems, please detail your unique predicament in a GitHub issue.
-  if (typeof globalThis === "object") {
-    globalThis.regeneratorRuntime = runtime;
-  } else {
-    Function("r", "regeneratorRuntime = r")(runtime);
-  }
+  Function("r", "regeneratorRuntime = r")(runtime);
 }
 });
 
 var regenerator = runtime_1;
+
+var _typeof_1 = createCommonjsModule(function (module) {
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+});
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var asyncToGenerator = _asyncToGenerator;
 
 var bind = function bind(fn, thisArg) {
   return function wrap() {
@@ -933,6 +860,7 @@ var bind = function bind(fn, thisArg) {
   };
 };
 
+/*global toString:true*/
 // utils is a library of generic helper functions non-specific to axios
 
 
@@ -1134,7 +1062,7 @@ function isURLSearchParams(val) {
 
 
 function trim(str) {
-  return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '');
+  return str.replace(/^\s*/, '').replace(/\s*$/, '');
 }
 /**
  * Determine if we're running in a standard browser environment
@@ -1219,7 +1147,9 @@ function forEach(obj, fn) {
  */
 
 
-function merge() {
+function merge()
+/* obj1, obj2, obj3, ... */
+{
   var result = {};
 
   function assignValue(val, key) {
@@ -1377,12 +1307,10 @@ function InterceptorManager() {
  */
 
 
-InterceptorManager.prototype.use = function use(fulfilled, rejected, options) {
+InterceptorManager.prototype.use = function use(fulfilled, rejected) {
   this.handlers.push({
     fulfilled: fulfilled,
-    rejected: rejected,
-    synchronous: options ? options.synchronous : false,
-    runWhen: options ? options.runWhen : null
+    rejected: rejected
   });
   return this.handlers.length - 1;
 };
@@ -1417,6 +1345,28 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 };
 
 var InterceptorManager_1 = InterceptorManager;
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+
+
+var transformData = function transformData(data, headers, fns) {
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn(data, headers);
+  });
+  return data;
+};
+
+var isCancel = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
 
 var normalizeHeaderName = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -1464,8 +1414,7 @@ var enhanceError = function enhanceError(error, config, code, request, response)
       stack: this.stack,
       // Axios
       config: this.config,
-      code: this.code,
-      status: this.response && this.response.status ? this.response.status : null
+      code: this.code
     };
   };
 
@@ -1701,40 +1650,10 @@ function nonStandardBrowserEnv() {
   };
 }();
 
-/**
- * A `Cancel` is an object that is thrown when an operation is canceled.
- *
- * @class
- * @param {string=} message The message.
- */
-
-function Cancel(message) {
-  this.message = message;
-}
-
-Cancel.prototype.toString = function toString() {
-  return 'Cancel' + (this.message ? ': ' + this.message : '');
-};
-
-Cancel.prototype.__CANCEL__ = true;
-var Cancel_1 = Cancel;
-
 var xhr = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
     var requestData = config.data;
     var requestHeaders = config.headers;
-    var responseType = config.responseType;
-    var onCanceled;
-
-    function done() {
-      if (config.cancelToken) {
-        config.cancelToken.unsubscribe(onCanceled);
-      }
-
-      if (config.signal) {
-        config.signal.removeEventListener('abort', onCanceled);
-      }
-    }
 
     if (utils.isFormData(requestData)) {
       delete requestHeaders['Content-Type']; // Let the browser set it
@@ -1751,16 +1670,24 @@ var xhr = function xhrAdapter(config) {
     var fullPath = buildFullPath(config.baseURL, config.url);
     request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true); // Set the request timeout in MS
 
-    request.timeout = config.timeout;
+    request.timeout = config.timeout; // Listen for ready state
 
-    function onloadend() {
-      if (!request) {
+    request.onreadystatechange = function handleLoad() {
+      if (!request || request.readyState !== 4) {
+        return;
+      } // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+
+
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
         return;
       } // Prepare the response
 
 
       var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-      var responseData = !responseType || responseType === 'text' || responseType === 'json' ? request.responseText : request.response;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
       var response = {
         data: responseData,
         status: request.status,
@@ -1769,40 +1696,10 @@ var xhr = function xhrAdapter(config) {
         config: config,
         request: request
       };
-      settle(function _resolve(value) {
-        resolve(value);
-        done();
-      }, function _reject(err) {
-        reject(err);
-        done();
-      }, response); // Clean up request
+      settle(resolve, reject, response); // Clean up request
 
       request = null;
-    }
-
-    if ('onloadend' in request) {
-      // Use onloadend if available
-      request.onloadend = onloadend;
-    } else {
-      // Listen for ready state to emulate onloadend
-      request.onreadystatechange = function handleLoad() {
-        if (!request || request.readyState !== 4) {
-          return;
-        } // The request errored out and we didn't get a response, this will be
-        // handled by onerror instead
-        // With one exception: request that using file: protocol, most browsers
-        // will return status as 0 even though it's a successful request
-
-
-        if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-          return;
-        } // readystate handler is calling before onerror or ontimeout handlers,
-        // so we should call onloadend on the next 'tick'
-
-
-        setTimeout(onloadend);
-      };
-    } // Handle browser request cancellation (as opposed to a manual cancellation)
+    }; // Handle browser request cancellation (as opposed to a manual cancellation)
 
 
     request.onabort = function handleAbort() {
@@ -1826,14 +1723,13 @@ var xhr = function xhrAdapter(config) {
 
 
     request.ontimeout = function handleTimeout() {
-      var timeoutErrorMessage = config.timeout ? 'timeout of ' + config.timeout + 'ms exceeded' : 'timeout exceeded';
-      var transitional = config.transitional || defaults_1.transitional;
+      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
 
       if (config.timeoutErrorMessage) {
         timeoutErrorMessage = config.timeoutErrorMessage;
       }
 
-      reject(createError(timeoutErrorMessage, config, transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED', request)); // Clean up request
+      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED', request)); // Clean up request
 
       request = null;
     }; // Add xsrf header
@@ -1869,8 +1765,16 @@ var xhr = function xhrAdapter(config) {
     } // Add responseType to request if needed
 
 
-    if (responseType && responseType !== 'json') {
-      request.responseType = config.responseType;
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
+        }
+      }
     } // Handle progress if needed
 
 
@@ -1883,24 +1787,18 @@ var xhr = function xhrAdapter(config) {
       request.upload.addEventListener('progress', config.onUploadProgress);
     }
 
-    if (config.cancelToken || config.signal) {
+    if (config.cancelToken) {
       // Handle cancellation
-      // eslint-disable-next-line func-names
-      onCanceled = function (cancel) {
+      config.cancelToken.promise.then(function onCanceled(cancel) {
         if (!request) {
           return;
         }
 
-        reject(!cancel || cancel && cancel.type ? new Cancel_1('canceled') : cancel);
         request.abort();
+        reject(cancel); // Clean up request
+
         request = null;
-      };
-
-      config.cancelToken && config.cancelToken.subscribe(onCanceled);
-
-      if (config.signal) {
-        config.signal.aborted ? onCanceled() : config.signal.addEventListener('abort', onCanceled);
-      }
+      });
     }
 
     if (!requestData) {
@@ -1936,27 +1834,7 @@ function getDefaultAdapter() {
   return adapter;
 }
 
-function stringifySafely(rawValue, parser, encoder) {
-  if (utils.isString(rawValue)) {
-    try {
-      (parser || JSON.parse)(rawValue);
-      return utils.trim(rawValue);
-    } catch (e) {
-      if (e.name !== 'SyntaxError') {
-        throw e;
-      }
-    }
-  }
-
-  return (encoder || JSON.stringify)(rawValue);
-}
-
 var defaults = {
-  transitional: {
-    silentJSONParsing: true,
-    forcedJSONParsing: true,
-    clarifyTimeoutError: false
-  },
   adapter: getDefaultAdapter(),
   transformRequest: [function transformRequest(data, headers) {
     normalizeHeaderName(headers, 'Accept');
@@ -1975,30 +1853,20 @@ var defaults = {
       return data.toString();
     }
 
-    if (utils.isObject(data) || headers && headers['Content-Type'] === 'application/json') {
-      setContentTypeIfUnset(headers, 'application/json');
-      return stringifySafely(data);
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
     }
 
     return data;
   }],
   transformResponse: [function transformResponse(data) {
-    var transitional = this.transitional || defaults.transitional;
-    var silentJSONParsing = transitional && transitional.silentJSONParsing;
-    var forcedJSONParsing = transitional && transitional.forcedJSONParsing;
-    var strictJSONParsing = !silentJSONParsing && this.responseType === 'json';
-
-    if (strictJSONParsing || forcedJSONParsing && utils.isString(data) && data.length) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
       try {
-        return JSON.parse(data);
+        data = JSON.parse(data);
       } catch (e) {
-        if (strictJSONParsing) {
-          if (e.name === 'SyntaxError') {
-            throw enhanceError(e, this, 'E_JSON_PARSE');
-          }
-
-          throw e;
-        }
+        /* Ignore */
       }
     }
 
@@ -2016,11 +1884,11 @@ var defaults = {
   maxBodyLength: -1,
   validateStatus: function validateStatus(status) {
     return status >= 200 && status < 300;
-  },
-  headers: {
-    common: {
-      'Accept': 'application/json, text/plain, */*'
-    }
+  }
+};
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
   }
 };
 utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -2032,30 +1900,6 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 var defaults_1 = defaults;
 
 /**
- * Transform the data for a request or a response
- *
- * @param {Object|String} data The data to be transformed
- * @param {Array} headers The headers for the request or response
- * @param {Array|Function} fns A single function or Array of functions
- * @returns {*} The resulting transformed data
- */
-
-
-var transformData = function transformData(data, headers, fns) {
-  var context = this || defaults_1;
-  /*eslint no-param-reassign:0*/
-
-  utils.forEach(fns, function transform(fn) {
-    data = fn.call(context, data, headers);
-  });
-  return data;
-};
-
-var isCancel = function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-};
-
-/**
  * Throws a `Cancel` if cancellation has been requested.
  */
 
@@ -2063,10 +1907,6 @@ var isCancel = function isCancel(value) {
 function throwIfCancellationRequested(config) {
   if (config.cancelToken) {
     config.cancelToken.throwIfRequested();
-  }
-
-  if (config.signal && config.signal.aborted) {
-    throw new Cancel_1('canceled');
   }
 }
 /**
@@ -2082,7 +1922,7 @@ var dispatchRequest = function dispatchRequest(config) {
 
   config.headers = config.headers || {}; // Transform request data
 
-  config.data = transformData.call(config, config.data, config.headers, config.transformRequest); // Flatten headers
+  config.data = transformData(config.data, config.headers, config.transformRequest); // Flatten headers
 
   config.headers = utils.merge(config.headers.common || {}, config.headers[config.method] || {}, config.headers);
   utils.forEach(['delete', 'get', 'head', 'post', 'put', 'patch', 'common'], function cleanHeaderConfig(method) {
@@ -2092,14 +1932,14 @@ var dispatchRequest = function dispatchRequest(config) {
   return adapter(config).then(function onAdapterResolution(response) {
     throwIfCancellationRequested(config); // Transform response data
 
-    response.data = transformData.call(config, response.data, response.headers, config.transformResponse);
+    response.data = transformData(response.data, response.headers, config.transformResponse);
     return response;
   }, function onAdapterRejection(reason) {
     if (!isCancel(reason)) {
       throwIfCancellationRequested(config); // Transform response data
 
       if (reason && reason.response) {
-        reason.response.data = transformData.call(config, reason.response.data, reason.response.headers, config.transformResponse);
+        reason.response.data = transformData(reason.response.data, reason.response.headers, config.transformResponse);
       }
     }
 
@@ -2121,6 +1961,10 @@ var mergeConfig = function mergeConfig(config1, config2) {
   // eslint-disable-next-line no-param-reassign
   config2 = config2 || {};
   var config = {};
+  var valueFromConfig2Keys = ['url', 'method', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy', 'params'];
+  var defaultToConfig2Keys = ['baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer', 'timeout', 'timeoutMessage', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName', 'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'decompress', 'maxContentLength', 'maxBodyLength', 'maxRedirects', 'transport', 'httpAgent', 'httpsAgent', 'cancelToken', 'socketPath', 'responseEncoding'];
+  var directMergeKeys = ['validateStatus'];
 
   function getMergedValue(target, source) {
     if (utils.isPlainObject(target) && utils.isPlainObject(source)) {
@@ -2132,168 +1976,50 @@ var mergeConfig = function mergeConfig(config1, config2) {
     }
 
     return source;
-  } // eslint-disable-next-line consistent-return
-
+  }
 
   function mergeDeepProperties(prop) {
     if (!utils.isUndefined(config2[prop])) {
-      return getMergedValue(config1[prop], config2[prop]);
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
     } else if (!utils.isUndefined(config1[prop])) {
-      return getMergedValue(undefined, config1[prop]);
-    }
-  } // eslint-disable-next-line consistent-return
-
-
-  function valueFromConfig2(prop) {
-    if (!utils.isUndefined(config2[prop])) {
-      return getMergedValue(undefined, config2[prop]);
-    }
-  } // eslint-disable-next-line consistent-return
-
-
-  function defaultToConfig2(prop) {
-    if (!utils.isUndefined(config2[prop])) {
-      return getMergedValue(undefined, config2[prop]);
-    } else if (!utils.isUndefined(config1[prop])) {
-      return getMergedValue(undefined, config1[prop]);
-    }
-  } // eslint-disable-next-line consistent-return
-
-
-  function mergeDirectKeys(prop) {
-    if (prop in config2) {
-      return getMergedValue(config1[prop], config2[prop]);
-    } else if (prop in config1) {
-      return getMergedValue(undefined, config1[prop]);
+      config[prop] = getMergedValue(undefined, config1[prop]);
     }
   }
 
-  var mergeMap = {
-    'url': valueFromConfig2,
-    'method': valueFromConfig2,
-    'data': valueFromConfig2,
-    'baseURL': defaultToConfig2,
-    'transformRequest': defaultToConfig2,
-    'transformResponse': defaultToConfig2,
-    'paramsSerializer': defaultToConfig2,
-    'timeout': defaultToConfig2,
-    'timeoutMessage': defaultToConfig2,
-    'withCredentials': defaultToConfig2,
-    'adapter': defaultToConfig2,
-    'responseType': defaultToConfig2,
-    'xsrfCookieName': defaultToConfig2,
-    'xsrfHeaderName': defaultToConfig2,
-    'onUploadProgress': defaultToConfig2,
-    'onDownloadProgress': defaultToConfig2,
-    'decompress': defaultToConfig2,
-    'maxContentLength': defaultToConfig2,
-    'maxBodyLength': defaultToConfig2,
-    'transport': defaultToConfig2,
-    'httpAgent': defaultToConfig2,
-    'httpsAgent': defaultToConfig2,
-    'cancelToken': defaultToConfig2,
-    'socketPath': defaultToConfig2,
-    'responseEncoding': defaultToConfig2,
-    'validateStatus': mergeDirectKeys
-  };
-  utils.forEach(Object.keys(config1).concat(Object.keys(config2)), function computeConfigValue(prop) {
-    var merge = mergeMap[prop] || mergeDeepProperties;
-    var configValue = merge(prop);
-    utils.isUndefined(configValue) && merge !== mergeDirectKeys || (config[prop] = configValue);
+  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    }
   });
+  utils.forEach(mergeDeepPropertiesKeys, mergeDeepProperties);
+  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+  utils.forEach(directMergeKeys, function merge(prop) {
+    if (prop in config2) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (prop in config1) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+  var axiosKeys = valueFromConfig2Keys.concat(mergeDeepPropertiesKeys).concat(defaultToConfig2Keys).concat(directMergeKeys);
+  var otherKeys = Object.keys(config1).concat(Object.keys(config2)).filter(function filterAxiosKeys(key) {
+    return axiosKeys.indexOf(key) === -1;
+  });
+  utils.forEach(otherKeys, mergeDeepProperties);
   return config;
 };
 
-var data = {
-  "version": "0.23.0"
-};
-
-var VERSION = data.version;
-
-var validators = {}; // eslint-disable-next-line func-names
-
-['object', 'boolean', 'number', 'function', 'string', 'symbol'].forEach(function (type, i) {
-  validators[type] = function validator(thing) {
-    return typeof thing === type || 'a' + (i < 1 ? 'n ' : ' ') + type;
-  };
-});
-var deprecatedWarnings = {};
-/**
- * Transitional option validator
- * @param {function|boolean?} validator - set to false if the transitional option has been removed
- * @param {string?} version - deprecated version / removed since version
- * @param {string?} message - some message with additional info
- * @returns {function}
- */
-
-validators.transitional = function transitional(validator, version, message) {
-  function formatMessage(opt, desc) {
-    return '[Axios v' + VERSION + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
-  } // eslint-disable-next-line func-names
-
-
-  return function (value, opt, opts) {
-    if (validator === false) {
-      throw new Error(formatMessage(opt, ' has been removed' + (version ? ' in ' + version : '')));
-    }
-
-    if (version && !deprecatedWarnings[opt]) {
-      deprecatedWarnings[opt] = true; // eslint-disable-next-line no-console
-
-      console.warn(formatMessage(opt, ' has been deprecated since v' + version + ' and will be removed in the near future'));
-    }
-
-    return validator ? validator(value, opt, opts) : true;
-  };
-};
-/**
- * Assert object's properties type
- * @param {object} options
- * @param {object} schema
- * @param {boolean?} allowUnknown
- */
-
-
-function assertOptions(options, schema, allowUnknown) {
-  if (typeof options !== 'object') {
-    throw new TypeError('options must be an object');
-  }
-
-  var keys = Object.keys(options);
-  var i = keys.length;
-
-  while (i-- > 0) {
-    var opt = keys[i];
-    var validator = schema[opt];
-
-    if (validator) {
-      var value = options[opt];
-      var result = value === undefined || validator(value, opt, options);
-
-      if (result !== true) {
-        throw new TypeError('option ' + opt + ' must be ' + result);
-      }
-
-      continue;
-    }
-
-    if (allowUnknown !== true) {
-      throw Error('Unknown option ' + opt);
-    }
-  }
-}
-
-var validator = {
-  assertOptions: assertOptions,
-  validators: validators
-};
-
-var validators$1 = validator.validators;
 /**
  * Create a new instance of Axios
  *
  * @param {Object} instanceConfig The default config for the instance
  */
+
 
 function Axios(instanceConfig) {
   this.defaults = instanceConfig;
@@ -2327,70 +2053,20 @@ Axios.prototype.request = function request(config) {
     config.method = this.defaults.method.toLowerCase();
   } else {
     config.method = 'get';
-  }
-
-  var transitional = config.transitional;
-
-  if (transitional !== undefined) {
-    validator.assertOptions(transitional, {
-      silentJSONParsing: validators$1.transitional(validators$1.boolean),
-      forcedJSONParsing: validators$1.transitional(validators$1.boolean),
-      clarifyTimeoutError: validators$1.transitional(validators$1.boolean)
-    }, false);
-  } // filter out skipped interceptors
+  } // Hook up interceptors middleware
 
 
-  var requestInterceptorChain = [];
-  var synchronousRequestInterceptors = true;
+  var chain = [dispatchRequest, undefined];
+  var promise = Promise.resolve(config);
   this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-    if (typeof interceptor.runWhen === 'function' && interceptor.runWhen(config) === false) {
-      return;
-    }
-
-    synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
-    requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
+    chain.unshift(interceptor.fulfilled, interceptor.rejected);
   });
-  var responseInterceptorChain = [];
   this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-    responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
+    chain.push(interceptor.fulfilled, interceptor.rejected);
   });
-  var promise;
 
-  if (!synchronousRequestInterceptors) {
-    var chain = [dispatchRequest, undefined];
-    Array.prototype.unshift.apply(chain, requestInterceptorChain);
-    chain = chain.concat(responseInterceptorChain);
-    promise = Promise.resolve(config);
-
-    while (chain.length) {
-      promise = promise.then(chain.shift(), chain.shift());
-    }
-
-    return promise;
-  }
-
-  var newConfig = config;
-
-  while (requestInterceptorChain.length) {
-    var onFulfilled = requestInterceptorChain.shift();
-    var onRejected = requestInterceptorChain.shift();
-
-    try {
-      newConfig = onFulfilled(newConfig);
-    } catch (error) {
-      onRejected(error);
-      break;
-    }
-  }
-
-  try {
-    promise = dispatchRequest(newConfig);
-  } catch (error) {
-    return Promise.reject(error);
-  }
-
-  while (responseInterceptorChain.length) {
-    promise = promise.then(responseInterceptorChain.shift(), responseInterceptorChain.shift());
+  while (chain.length) {
+    promise = promise.then(chain.shift(), chain.shift());
   }
 
   return promise;
@@ -2425,6 +2101,24 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 var Axios_1 = Axios;
 
 /**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+var Cancel_1 = Cancel;
+
+/**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
  *
  * @class
@@ -2441,36 +2135,7 @@ function CancelToken(executor) {
   this.promise = new Promise(function promiseExecutor(resolve) {
     resolvePromise = resolve;
   });
-  var token = this; // eslint-disable-next-line func-names
-
-  this.promise.then(function (cancel) {
-    if (!token._listeners) return;
-    var i;
-    var l = token._listeners.length;
-
-    for (i = 0; i < l; i++) {
-      token._listeners[i](cancel);
-    }
-
-    token._listeners = null;
-  }); // eslint-disable-next-line func-names
-
-  this.promise.then = function (onfulfilled) {
-    var _resolve; // eslint-disable-next-line func-names
-
-
-    var promise = new Promise(function (resolve) {
-      token.subscribe(resolve);
-      _resolve = resolve;
-    }).then(onfulfilled);
-
-    promise.cancel = function reject() {
-      token.unsubscribe(_resolve);
-    };
-
-    return promise;
-  };
-
+  var token = this;
   executor(function cancel(message) {
     if (token.reason) {
       // Cancellation has already been requested
@@ -2489,39 +2154,6 @@ function CancelToken(executor) {
 CancelToken.prototype.throwIfRequested = function throwIfRequested() {
   if (this.reason) {
     throw this.reason;
-  }
-};
-/**
- * Subscribe to the cancel signal
- */
-
-
-CancelToken.prototype.subscribe = function subscribe(listener) {
-  if (this.reason) {
-    listener(this.reason);
-    return;
-  }
-
-  if (this._listeners) {
-    this._listeners.push(listener);
-  } else {
-    this._listeners = [listener];
-  }
-};
-/**
- * Unsubscribe from the cancel signal
- */
-
-
-CancelToken.prototype.unsubscribe = function unsubscribe(listener) {
-  if (!this._listeners) {
-    return;
-  }
-
-  var index = this._listeners.indexOf(listener);
-
-  if (index !== -1) {
-    this._listeners.splice(index, 1);
   }
 };
 /**
@@ -2595,24 +2227,23 @@ function createInstance(defaultConfig) {
 
   utils.extend(instance, Axios_1.prototype, context); // Copy context to instance
 
-  utils.extend(instance, context); // Factory for creating new instances
-
-  instance.create = function create(instanceConfig) {
-    return createInstance(mergeConfig(defaultConfig, instanceConfig));
-  };
-
+  utils.extend(instance, context);
   return instance;
 } // Create the default instance to be exported
 
 
 var axios = createInstance(defaults_1); // Expose Axios class to allow class inheritance
 
-axios.Axios = Axios_1; // Expose Cancel & CancelToken
+axios.Axios = Axios_1; // Factory for creating new instances
+
+axios.create = function create(instanceConfig) {
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
+}; // Expose Cancel & CancelToken
+
 
 axios.Cancel = Cancel_1;
 axios.CancelToken = CancelToken_1;
-axios.isCancel = isCancel;
-axios.VERSION = data.version; // Expose all/spread
+axios.isCancel = isCancel; // Expose all/spread
 
 axios.all = function all(promises) {
   return Promise.all(promises);
@@ -2676,7 +2307,7 @@ var disconnect = function disconnect() {
 };
 
 var ping = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(params) {
+  var _ref = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(params) {
     var request, response;
     return regenerator.wrap(function _callee$(_context) {
       while (1) {
@@ -2689,7 +2320,7 @@ var ping = /*#__PURE__*/function () {
           case 3:
             response = _context.sent;
 
-            if (!(response.status === 200 && _typeof(response.data) === "object" && response.data.status === "ok")) {
+            if (!(response.status === 200 && _typeof_1(response.data) === "object" && response.data.status === "ok")) {
               _context.next = 6;
               break;
             }
@@ -2713,13 +2344,13 @@ var ping = /*#__PURE__*/function () {
 }();
 
 var logs = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2(params) {
+  var _ref2 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2(params) {
     var request, response;
     return regenerator.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            request = setQueryParams([].concat(_toConsumableArray(params), [connection.token]), "/config/logs");
+            request = setQueryParams([].concat(toConsumableArray(params), [connection.token]), "/config/logs");
             _context2.next = 3;
             return connection.api.get(request);
 
@@ -2741,7 +2372,7 @@ var logs = /*#__PURE__*/function () {
 }();
 
 var dependencies = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3() {
+  var _ref3 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3() {
     var request, response;
     return regenerator.wrap(function _callee3$(_context3) {
       while (1) {
@@ -2769,7 +2400,7 @@ var dependencies = /*#__PURE__*/function () {
 }();
 
 var getEnvs = /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee4() {
+  var _ref4 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee4() {
     var request, response;
     return regenerator.wrap(function _callee4$(_context4) {
       while (1) {
@@ -2797,7 +2428,7 @@ var getEnvs = /*#__PURE__*/function () {
 }();
 
 var uppdateVar = /*#__PURE__*/function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee5(env, status) {
+  var _ref5 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee5(env, status) {
     var request, response;
     return regenerator.wrap(function _callee5$(_context5) {
       while (1) {
@@ -2825,7 +2456,7 @@ var uppdateVar = /*#__PURE__*/function () {
 }();
 
 var installDependencies = /*#__PURE__*/function () {
-  var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee6(name) {
+  var _ref6 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee6(name) {
     var request, response;
     return regenerator.wrap(function _callee6$(_context6) {
       while (1) {
@@ -2869,14 +2500,14 @@ var stream = function stream(opts) {
 };
 
 var predictors = /*#__PURE__*/function () {
-  var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee7(params) {
+  var _ref7 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee7(params) {
     var mergeParams, request, _response, rawData, predictorList;
 
     return regenerator.wrap(function _callee7$(_context7) {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+            mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
 
             if (!connection.api) {
               _context7.next = 9;
@@ -2910,13 +2541,13 @@ var predictors = /*#__PURE__*/function () {
 }();
 
 var dataSources = /*#__PURE__*/function () {
-  var _ref8 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee8(params) {
+  var _ref8 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee8(params) {
     var mergeParams, request, response, rawData, dataSourceList;
     return regenerator.wrap(function _callee8$(_context8) {
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
-            mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+            mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
             request = setQueryParams(mergeParams, "/datasources/");
             _context8.next = 4;
             return connection.api.get(request);
@@ -2974,46 +2605,46 @@ var saveFile = function saveFile(response, source) {
 var Predictor = function Predictor(_data) {
   var _this = this;
 
-  _classCallCheck(this, Predictor);
+  classCallCheck(this, Predictor);
 
-  _defineProperty(this, "loaded", false);
+  defineProperty(this, "loaded", false);
 
-  _defineProperty(this, "name", "");
+  defineProperty(this, "name", "");
 
-  _defineProperty(this, "version", "");
+  defineProperty(this, "version", "");
 
-  _defineProperty(this, "is_active", false);
+  defineProperty(this, "is_active", false);
 
-  _defineProperty(this, "data_source", "");
+  defineProperty(this, "data_source", "");
 
-  _defineProperty(this, "predict", null);
+  defineProperty(this, "predict", null);
 
-  _defineProperty(this, "accuracy", 0);
+  defineProperty(this, "accuracy", 0);
 
-  _defineProperty(this, "status", "");
+  defineProperty(this, "status", "");
 
-  _defineProperty(this, "train_end_at", null);
+  defineProperty(this, "train_end_at", null);
 
-  _defineProperty(this, "updated_at", null);
+  defineProperty(this, "updated_at", null);
 
-  _defineProperty(this, "created_at", null);
+  defineProperty(this, "created_at", null);
 
-  _defineProperty(this, "data_preparation", null);
+  defineProperty(this, "data_preparation", null);
 
-  _defineProperty(this, "data_analysis", null);
+  defineProperty(this, "data_analysis", null);
 
-  _defineProperty(this, "model_analysis", null);
+  defineProperty(this, "model_analysis", null);
 
-  _defineProperty(this, "columns", null);
+  defineProperty(this, "columns", null);
 
-  _defineProperty(this, "code_from_json_ai", /*#__PURE__*/function () {
-    var _ref9 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee9(params) {
+  defineProperty(this, "code_from_json_ai", /*#__PURE__*/function () {
+    var _ref9 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee9(params) {
       var mergeParams, request;
       return regenerator.wrap(function _callee9$(_context9) {
         while (1) {
           switch (_context9.prev = _context9.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/code_from_json_ai/".concat(_this.name));
               _context9.next = 4;
               return connection.api.get(request);
@@ -3034,14 +2665,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "jsonAI_edit", /*#__PURE__*/function () {
-    var _ref10 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee10(params) {
+  defineProperty(this, "jsonAI_edit", /*#__PURE__*/function () {
+    var _ref10 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee10(params) {
       var mergeParams, request;
       return regenerator.wrap(function _callee10$(_context10) {
         while (1) {
           switch (_context10.prev = _context10.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/edit/jsonai"));
               _context10.next = 4;
               return connection.api.put(request);
@@ -3062,14 +2693,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "codeAI_edit", /*#__PURE__*/function () {
-    var _ref11 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee11(params) {
+  defineProperty(this, "codeAI_edit", /*#__PURE__*/function () {
+    var _ref11 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee11(params) {
       var mergeParams, request;
       return regenerator.wrap(function _callee11$(_context11) {
         while (1) {
           switch (_context11.prev = _context11.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/edit/code"));
               _context11.next = 4;
               return connection.api.put(request);
@@ -3090,14 +2721,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "validate_json_ai", /*#__PURE__*/function () {
-    var _ref12 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee12(params) {
+  defineProperty(this, "validate_json_ai", /*#__PURE__*/function () {
+    var _ref12 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee12(params) {
       var mergeParams, request;
       return regenerator.wrap(function _callee12$(_context12) {
         while (1) {
           switch (_context12.prev = _context12.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/utils/validate_json_ai");
               _context12.next = 4;
               return connection.api.put(request);
@@ -3118,14 +2749,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "generate", /*#__PURE__*/function () {
-    var _ref13 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee13(data_source_name, problem_definition, params) {
+  defineProperty(this, "generate", /*#__PURE__*/function () {
+    var _ref13 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee13(data_source_name, problem_definition, params) {
       var mergeParams, request;
       return regenerator.wrap(function _callee13$(_context13) {
         while (1) {
           switch (_context13.prev = _context13.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/generate/".concat(_this.name));
               _context13.next = 4;
               return connection.api.put(request, {
@@ -3149,14 +2780,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "load", /*#__PURE__*/function () {
-    var _ref14 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee14(params) {
+  defineProperty(this, "load", /*#__PURE__*/function () {
+    var _ref14 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee14(params) {
       var mergeParams, url_path, request, response;
       return regenerator.wrap(function _callee14$(_context14) {
         while (1) {
           switch (_context14.prev = _context14.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               url_path = "/predictors/";
 
               if (_this.name !== undefined && _this.name !== "") {
@@ -3185,14 +2816,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "rename", /*#__PURE__*/function () {
-    var _ref15 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee15(params) {
+  defineProperty(this, "rename", /*#__PURE__*/function () {
+    var _ref15 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee15(params) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee15$(_context15) {
         while (1) {
           switch (_context15.prev = _context15.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(params.oldName, "/rename?new_name=").concat(params.newName));
               _context15.next = 4;
               return connection.api.get(request);
@@ -3214,14 +2845,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "loadColumns", /*#__PURE__*/function () {
-    var _ref16 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee16(params) {
+  defineProperty(this, "loadColumns", /*#__PURE__*/function () {
+    var _ref16 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee16(params) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee16$(_context16) {
         while (1) {
           switch (_context16.prev = _context16.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/columns"));
               _context16.next = 4;
               return connection.api.get(request);
@@ -3244,14 +2875,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "update", /*#__PURE__*/function () {
-    var _ref17 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee17(params, predictorName) {
+  defineProperty(this, "update", /*#__PURE__*/function () {
+    var _ref17 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee17(params, predictorName) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee17$(_context17) {
         while (1) {
           switch (_context17.prev = _context17.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(predictorName, "/update"));
               _context17.next = 4;
               return connection.api.get(request);
@@ -3273,8 +2904,8 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "learn", /*#__PURE__*/function () {
-    var _ref19 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee18(_ref18, params) {
+  defineProperty(this, "learn", /*#__PURE__*/function () {
+    var _ref19 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee18(_ref18, params) {
       var dataSourceName, fromData, toPredict, kwargs, data, mergeParams, request, response;
       return regenerator.wrap(function _callee18$(_context18) {
         while (1) {
@@ -3295,7 +2926,7 @@ var Predictor = function Predictor(_data) {
                 data.from_data = fromData;
               }
 
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name));
               _context18.next = 8;
               return connection.api.put(request, data);
@@ -3317,14 +2948,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "queryPredict", /*#__PURE__*/function () {
-    var _ref20 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee19(when, params, format_flag_value) {
+  defineProperty(this, "queryPredict", /*#__PURE__*/function () {
+    var _ref20 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee19(when, params, format_flag_value) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee19$(_context19) {
         while (1) {
           switch (_context19.prev = _context19.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/predict"));
               _context19.next = 4;
               return connection.api.post(request, {
@@ -3349,14 +2980,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "delete", /*#__PURE__*/function () {
-    var _ref21 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee20(params) {
+  defineProperty(this, "delete", /*#__PURE__*/function () {
+    var _ref21 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee20(params) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee20$(_context20) {
         while (1) {
           switch (_context20.prev = _context20.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name));
               _context20.next = 4;
               return connection.api.delete(request);
@@ -3378,14 +3009,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "upload", /*#__PURE__*/function () {
-    var _ref22 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee21(file, onProgress, params) {
+  defineProperty(this, "upload", /*#__PURE__*/function () {
+    var _ref22 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee21(file, onProgress, params) {
       var mergeParams, fd, config, request;
       return regenerator.wrap(function _callee21$(_context21) {
         while (1) {
           switch (_context21.prev = _context21.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               fd = new FormData();
               fd.append("file", file);
               config = {
@@ -3413,14 +3044,14 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "download", /*#__PURE__*/function () {
-    var _ref23 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee22(params) {
+  defineProperty(this, "download", /*#__PURE__*/function () {
+    var _ref23 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee22(params) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee22$(_context22) {
         while (1) {
           switch (_context22.prev = _context22.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/predictors/".concat(_this.name, "/download"));
               _context22.next = 4;
               return connection.api.get(request, {
@@ -3445,7 +3076,7 @@ var Predictor = function Predictor(_data) {
     };
   }());
 
-  _defineProperty(this, "getDownloadUrl", function () {
+  defineProperty(this, "getDownloadUrl", function () {
     return "".concat(connection.url, "/predictors/").concat(_this.name, "/download");
   });
 
@@ -3456,38 +3087,38 @@ var Predictor = function Predictor(_data) {
 var DataSource = function DataSource(_data2) {
   var _this2 = this;
 
-  _classCallCheck(this, DataSource);
+  classCallCheck(this, DataSource);
 
-  _defineProperty(this, "loaded", false);
+  defineProperty(this, "loaded", false);
 
-  _defineProperty(this, "source_type", "url");
+  defineProperty(this, "source_type", "url");
 
-  _defineProperty(this, "name", "");
+  defineProperty(this, "name", "");
 
-  _defineProperty(this, "source", "");
+  defineProperty(this, "source", "");
 
-  _defineProperty(this, "missed_files", false);
+  defineProperty(this, "missed_files", false);
 
-  _defineProperty(this, "created_at", null);
+  defineProperty(this, "created_at", null);
 
-  _defineProperty(this, "updated_at", null);
+  defineProperty(this, "updated_at", null);
 
-  _defineProperty(this, "row_count", 0);
+  defineProperty(this, "row_count", 0);
 
-  _defineProperty(this, "columns", null);
+  defineProperty(this, "columns", null);
 
-  _defineProperty(this, "data", null);
+  defineProperty(this, "data", null);
 
-  _defineProperty(this, "missedFileList", null);
+  defineProperty(this, "missedFileList", null);
 
-  _defineProperty(this, "load", /*#__PURE__*/function () {
-    var _ref24 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee23(params) {
+  defineProperty(this, "load", /*#__PURE__*/function () {
+    var _ref24 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee23(params) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee23$(_context23) {
         while (1) {
           switch (_context23.prev = _context23.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
               _context23.next = 4;
               return connection.api.get(request);
@@ -3510,8 +3141,8 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "upload", /*#__PURE__*/function () {
-    var _ref25 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee24(file, onProgress, params) {
+  defineProperty(this, "upload", /*#__PURE__*/function () {
+    var _ref25 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee24(file, onProgress, params) {
       var mergeParams, fd, config, request;
       return regenerator.wrap(function _callee24$(_context24) {
         while (1) {
@@ -3519,7 +3150,7 @@ var DataSource = function DataSource(_data2) {
             case 0:
               _this2.source_type = "file";
               _this2.source = file.name;
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               fd = new FormData();
               fd.append("name", _this2.name);
               fd.append("source_type", _this2.source_type);
@@ -3551,8 +3182,8 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "uploadFromUrl", /*#__PURE__*/function () {
-    var _ref26 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee25(url, params) {
+  defineProperty(this, "uploadFromUrl", /*#__PURE__*/function () {
+    var _ref26 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee25(url, params) {
       var data, mergeParams, request;
       return regenerator.wrap(function _callee25$(_context25) {
         while (1) {
@@ -3565,7 +3196,7 @@ var DataSource = function DataSource(_data2) {
                 source_type: _this2.source_type,
                 source: _this2.source
               };
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
               _context25.next = 7;
               return connection.api.put(request, data);
@@ -3583,15 +3214,15 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "download", /*#__PURE__*/function () {
-    var _ref27 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee26(params) {
+  defineProperty(this, "download", /*#__PURE__*/function () {
+    var _ref27 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee26(params) {
       var url, mergeParams, request, response;
       return regenerator.wrap(function _callee26$(_context26) {
         while (1) {
           switch (_context26.prev = _context26.next) {
             case 0:
               url = _this2.getDownloadUrl();
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, url);
               _context26.next = 5;
               return connection.api.get(request, {
@@ -3616,18 +3247,18 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "getDownloadUrl", function () {
+  defineProperty(this, "getDownloadUrl", function () {
     return _this2.source_type === "url" ? _this2.source : "".concat(connection.url, "/datasources/").concat(_this2.name, "/download");
   });
 
-  _defineProperty(this, "delete", /*#__PURE__*/function () {
-    var _ref28 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee27(params) {
+  defineProperty(this, "delete", /*#__PURE__*/function () {
+    var _ref28 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee27(params) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee27$(_context27) {
         while (1) {
           switch (_context27.prev = _context27.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name));
               _context27.next = 4;
               return connection.api.delete(request);
@@ -3649,14 +3280,14 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "loadData", /*#__PURE__*/function () {
-    var _ref29 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee28(params) {
+  defineProperty(this, "loadData", /*#__PURE__*/function () {
+    var _ref29 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee28(params) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee28$(_context28) {
         while (1) {
           switch (_context28.prev = _context28.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/data/"));
               _context28.next = 4;
               return connection.api.get(request);
@@ -3679,15 +3310,15 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "loadDataQuality", /*#__PURE__*/function () {
-    var _ref30 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee29(params) {
+  defineProperty(this, "loadDataQuality", /*#__PURE__*/function () {
+    var _ref30 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee29(params) {
       var mergeParams, request, data, _response2;
 
       return regenerator.wrap(function _callee29$(_context29) {
         while (1) {
           switch (_context29.prev = _context29.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/analyze"));
               _context29.prev = 2;
               _context29.next = 5;
@@ -3732,14 +3363,14 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "loadMissedFileList", /*#__PURE__*/function () {
-    var _ref31 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee30(params) {
+  defineProperty(this, "loadMissedFileList", /*#__PURE__*/function () {
+    var _ref31 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee30(params) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee30$(_context30) {
         while (1) {
           switch (_context30.prev = _context30.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/missed_files"));
               _context30.next = 4;
               return connection.api.get(request);
@@ -3762,8 +3393,8 @@ var DataSource = function DataSource(_data2) {
     };
   }());
 
-  _defineProperty(this, "uploadFile", /*#__PURE__*/function () {
-    var _ref33 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee31(_ref32, params) {
+  defineProperty(this, "uploadFile", /*#__PURE__*/function () {
+    var _ref33 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee31(_ref32, params) {
       var column, rowIndex, extension, file, fd, mergeParams, request, response;
       return regenerator.wrap(function _callee31$(_context31) {
         while (1) {
@@ -3773,7 +3404,7 @@ var DataSource = function DataSource(_data2) {
               fd = new FormData();
               fd.append("file", file);
               fd.append("extension", extension);
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/datasources/".concat(_this2.name, "/files/").concat(column, ":").concat(rowIndex));
               _context31.next = 8;
               return connection.api.put(request, fd);
@@ -3801,23 +3432,23 @@ var DataSource = function DataSource(_data2) {
 var DataBase = function DataBase(_data3) {
   var _this3 = this;
 
-  _classCallCheck(this, DataBase);
+  classCallCheck(this, DataBase);
 
-  _defineProperty(this, "loaded", false);
+  defineProperty(this, "loaded", false);
 
-  _defineProperty(this, "source_type", "url");
+  defineProperty(this, "source_type", "url");
 
-  _defineProperty(this, "integration", []);
+  defineProperty(this, "integration", []);
 
-  _defineProperty(this, "load", /*#__PURE__*/function () {
-    var _ref34 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee32(params) {
+  defineProperty(this, "load", /*#__PURE__*/function () {
+    var _ref34 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee32(params) {
       var mergeParams, deRequest, _response3;
 
       return regenerator.wrap(function _callee32$(_context32) {
         while (1) {
           switch (_context32.prev = _context32.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               _context32.prev = 1;
               deRequest = setQueryParams(mergeParams, "config/all_integrations");
               _context32.next = 5;
@@ -3849,8 +3480,8 @@ var DataBase = function DataBase(_data3) {
     };
   }());
 
-  _defineProperty(this, "delete", /*#__PURE__*/function () {
-    var _ref35 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee33(params) {
+  defineProperty(this, "delete", /*#__PURE__*/function () {
+    var _ref35 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee33(params) {
       var response;
       return regenerator.wrap(function _callee33$(_context33) {
         while (1) {
@@ -3876,8 +3507,8 @@ var DataBase = function DataBase(_data3) {
     };
   }());
 
-  _defineProperty(this, "check", /*#__PURE__*/function () {
-    var _ref36 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee34(params) {
+  defineProperty(this, "check", /*#__PURE__*/function () {
+    var _ref36 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee34(params) {
       return regenerator.wrap(function _callee34$(_context34) {
         while (1) {
           switch (_context34.prev = _context34.next) {
@@ -3901,14 +3532,14 @@ var DataBase = function DataBase(_data3) {
     };
   }());
 
-  _defineProperty(this, "edit", /*#__PURE__*/function () {
-    var _ref37 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee35(data, params) {
+  defineProperty(this, "edit", /*#__PURE__*/function () {
+    var _ref37 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee35(data, params) {
       var mergeParams, request, response;
       return regenerator.wrap(function _callee35$(_context35) {
         while (1) {
           switch (_context35.prev = _context35.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               request = setQueryParams(mergeParams, "/config/integrations/".concat(data.params.integrations_name));
               _context35.next = 4;
               return connection.api.post(request, data);
@@ -3930,15 +3561,15 @@ var DataBase = function DataBase(_data3) {
     };
   }());
 
-  _defineProperty(this, "create", /*#__PURE__*/function () {
-    var _ref38 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee36(data, params) {
+  defineProperty(this, "create", /*#__PURE__*/function () {
+    var _ref38 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee36(data, params) {
       var mergeParams, form_data, key, _data$params, _data$params2, response;
 
       return regenerator.wrap(function _callee36$(_context36) {
         while (1) {
           switch (_context36.prev = _context36.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               form_data = new FormData();
 
               for (key in data.params) {
@@ -3991,14 +3622,14 @@ var DataBase = function DataBase(_data3) {
     };
   }());
 
-  _defineProperty(this, "newDataset", /*#__PURE__*/function () {
-    var _ref39 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee37(data, params) {
+  defineProperty(this, "newDataset", /*#__PURE__*/function () {
+    var _ref39 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee37(data, params) {
       var mergeParams, request;
       return regenerator.wrap(function _callee37$(_context37) {
         while (1) {
           switch (_context37.prev = _context37.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               _context37.prev = 1;
               request = setQueryParams(mergeParams, "/datasources/".concat(data.name));
               _context37.next = 5;
@@ -4029,23 +3660,23 @@ var DataBase = function DataBase(_data3) {
 };
 
 var Stream = function Stream(_data4) {
-  _classCallCheck(this, Stream);
+  classCallCheck(this, Stream);
 
-  _defineProperty(this, "loaded", false);
+  defineProperty(this, "loaded", false);
 
-  _defineProperty(this, "source_type", "url");
+  defineProperty(this, "source_type", "url");
 
-  _defineProperty(this, "integration", []);
+  defineProperty(this, "integration", []);
 
-  _defineProperty(this, "load", /*#__PURE__*/function () {
-    var _ref40 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee38(params) {
+  defineProperty(this, "load", /*#__PURE__*/function () {
+    var _ref40 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee38(params) {
       var mergeParams, deRequest, _response4;
 
       return regenerator.wrap(function _callee38$(_context38) {
         while (1) {
           switch (_context38.prev = _context38.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               _context38.prev = 1;
               deRequest = setQueryParams(mergeParams, "streams/");
               _context38.next = 5;
@@ -4073,15 +3704,15 @@ var Stream = function Stream(_data4) {
     };
   }());
 
-  _defineProperty(this, "create", /*#__PURE__*/function () {
-    var _ref41 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee39(data, params) {
+  defineProperty(this, "create", /*#__PURE__*/function () {
+    var _ref41 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee39(data, params) {
       var mergeParams, form_data, key, _data$params3, response;
 
       return regenerator.wrap(function _callee39$(_context39) {
         while (1) {
           switch (_context39.prev = _context39.next) {
             case 0:
-              mergeParams = params ? [].concat(_toConsumableArray(params), [connection.token]) : [connection.token];
+              mergeParams = params ? [].concat(toConsumableArray(params), [connection.token]) : [connection.token];
               form_data = new FormData();
 
               for (key in data.params) {
@@ -4116,8 +3747,8 @@ var Stream = function Stream(_data4) {
     };
   }());
 
-  _defineProperty(this, "delete", /*#__PURE__*/function () {
-    var _ref42 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee40(params) {
+  defineProperty(this, "delete", /*#__PURE__*/function () {
+    var _ref42 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee40(params) {
       return regenerator.wrap(function _callee40$(_context40) {
         while (1) {
           switch (_context40.prev = _context40.next) {
