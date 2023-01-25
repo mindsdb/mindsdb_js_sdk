@@ -1,6 +1,7 @@
 {
     "name": "mindsdb-js-sdk",
     "license": "MIT",
+    "version": "1.0.0",
     "homepage": "https://github.com/mindsdb/mindsdb_js_sdk#readme",
     "repository": {
         "type": "git",
