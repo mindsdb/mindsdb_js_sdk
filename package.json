@@ -1,5 +1,8 @@
 {
   "name": "mindsdb-js-sdk",
+  "author": "MindsDB",
+  "license": "MIT",
+  "version": "1.0.12",
   "type": "module",
   "files": [
     "dist"
@@ -12,9 +15,6 @@
       "require": "./dist/mindsdb-js-sdk.umd.cjs"
     }
   },
-  "author": "MindsDB",
-  "license": "MIT",
-  "version": "1.0.11",
   "homepage": "https://github.com/mindsdb/mindsdb_js_sdk#readme",
   "repository": {
     "type": "git",
@@ -30,11 +30,13 @@
     "machine-learning"
   ],
   "scripts": {
+    "dev:file": "node --experimental-specifier-resolution=node",
     "build:watch": "vite build --watch",
     "build": "vite build"
   },
   "dependencies": {
     "axios": "^1.2.0",
+    "localStorage": "^1.0.4",
     "vite": "^4.0.4"
   },
   "devDependencies": {
