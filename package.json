@@ -1,45 +1,45 @@
 {
-    "name": "mindsdb-js-sdk",
-    "license": "MIT",
-    "version": "1.0.0",
-    "homepage": "https://github.com/mindsdb/mindsdb_js_sdk#readme",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mindsdb/mindsdb_js_sdk.git"
-    },
-    "bugs": {
-        "url": "https://github.com/mindsdb/mindsdb_js_sdk/issues"
-    },
-    "keywords": [
-        "MindsDB",
-        "mindsdb_js_sdk",
-        "neural-network",
-        "machine-learning"
-    ],
-    "author": "MindsDB",
-    "main": "src/index.js",
-    "unpkg": "dist/mindsdb-sdk.js",
-    "module": "es/mindsdb-sdk.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "rollup -c"
-    },
-    "devDependencies": {
-        "@babel/cli": "^7.12.10",
-        "@babel/core": "^7.12.10",
-        "@babel/plugin-proposal-class-properties": "^7.12.1",
-        "@babel/plugin-transform-runtime": "^7.12.10",
-        "@babel/preset-env": "^7.12.11",
-        "@babel/runtime": "^7.13.9",
-        "rimraf": "^2.7.1",
-        "rollup": "^1.32.1",
-        "rollup-plugin-babel": "^4.4.0",
-        "rollup-plugin-commonjs": "^9.3.4",
-        "rollup-plugin-node-resolve": "^4.2.4",
-        "rollup-plugin-replace": "^2.2.0",
-        "rollup-plugin-terser": "^5.3.1"
-    },
-    "dependencies": {
-        "axios": "^1.2.0"
+  "name": "mindsdb-js-sdk",
+  "author": "MindsDB",
+  "license": "MIT",
+  "version": "1.0.12",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/mindsdb-js-sdk.umd.cjs",
+  "module": "./dist/mindsdb-js-sdk.js",
+  "exports": {
+    ".": {
+      "import": "./dist/mindsdb-js-sdk.js",
+      "require": "./dist/mindsdb-js-sdk.umd.cjs"
     }
+  },
+  "homepage": "https://github.com/mindsdb/mindsdb_js_sdk#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mindsdb/mindsdb_js_sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mindsdb/mindsdb_js_sdk/issues"
+  },
+  "keywords": [
+    "MindsDB",
+    "mindsdb_js_sdk",
+    "neural-network",
+    "machine-learning"
+  ],
+  "scripts": {
+    "dev:file": "node --experimental-specifier-resolution=node",
+    "build:watch": "vite build --watch",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "axios": "^1.2.0",
+    "localStorage": "^1.0.4",
+    "vite": "^4.0.4"
+  },
+  "devDependencies": {
+    "prettier": "2.6.2"
+  }
 }
