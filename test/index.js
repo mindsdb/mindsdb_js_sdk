@@ -1,9 +1,9 @@
 import MindsDB from '../lib/main.js';
 
 /*
-* @email  MindsDB user
-* @password  MindsDB password
-*/
+ * @email  MindsDB user
+ * @password  MindsDB password
+ */
 const connectData = {
   email: '',
   password: '',

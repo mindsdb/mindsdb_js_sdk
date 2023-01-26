@@ -2,7 +2,7 @@
   "name": "mindsdb-js-sdk",
   "author": "MindsDB",
   "license": "MIT",
-  "version": "1.0.12",
+  "version": "1.0.18",
   "type": "module",
   "files": [
     "dist"
