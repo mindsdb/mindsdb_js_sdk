@@ -66,8 +66,6 @@ const test = async () => {
     const getFiles = await MindsDB.getFiles();
     const setQuery = await MindsDB.setQuery("SELECT * FROM example_db.demo_data.home_rentals LIMIT 10;");
     
-    
-    
     console.log('=Get Account Status=>');
     console.log(connect);
     console.log('=Get Files=>');
