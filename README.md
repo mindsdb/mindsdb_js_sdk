@@ -1,3 +1,6 @@
+
+# :warning: Depricated repo, please use https://github.com/mindsdb/mindsdb-js-sdk :warning:
+
 # <a href='https://www.mindsdb.com/'><img src='https://assets.website-files.com/5c7e77a16fbaf30ffda0de72/5cc69a9fd9da3369c3848e5b_logo.png' height='40' alt='MindsDB' aria-label='mindsdb.com/' /></a>
 
 [![npm version](https://img.shields.io/badge/npm-v6.13.7-orange)](https://www.npmjs.com/package/mindsdb-js-sdk)
